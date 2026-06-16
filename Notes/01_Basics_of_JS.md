@@ -95,3 +95,13 @@ Because it supports:
 **Callback Queue** - Stores completed tasks.
 
 **Event Loop** - Coordinates everything.
+
+## Q.10 How can you link your JavaScript file to HTML file?
+
+There are total three different ways to write JS with HTML:-
+
+- **Internal Script** - We can write JS code by putting a *script tag* inside the *head tag* of our HTML file and can easily write the code inside the *script tag*.
+
+- **Inline Attributes** - We can attach short snippets of JS directly to an HTML element using event handlers like - *onclick*, *onmouseover*, or *onsubmit*.
+
+- **External JS File** - To link an external JavaScript file in HTML, use the *script tag* with the *src attribute* pointing to your JavaScript file path.
