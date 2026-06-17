@@ -28,21 +28,25 @@ JavaScript has 7 Primitive Data Types and 3 Non-Primitive Data Types.
 
 - **Null** - It is a value that deliberately assigned by the programmer to a variable to show that this variable is intentionally empty now.
 
-## Q.4 Why does typeof null return "object"?
+## Q.4 How can we check the data type of a value in JavaScript?
+
+We can check the type of data of a value by using `typeof()` operator.
+
+## Q.5 Why does typeof null return "object"?
 
 Due to historical bug in the JavaScript that remains for backward compatibility.
 
-## Q.5 What is the difference between Primitive and Reference Data Types?
+## Q.6 What is the difference between Primitive and Reference Data Types?
 
 - Primitive values are copied by value.
 - Reference values are copied by memory reference.
 
-## Q.6 What is BigInt?
+## Q.7 What is BigInt?
 
 A numeric type used for very large integers beyond Number limits.
 Ex :- `9007199254740991n`.
 
-## Q.7 What is Symbol?
+## Q.8 What is Symbol?
 
 A primitive data type that creates unique identifiers.
 Ex :- `Symbol("id")`.
