@@ -29,3 +29,15 @@ Because it is function scope and can lead to confusing behavior.
 ## Q.6 What is block scope?
 
 A variable declared inside `{ }` is visible only within that blocks when declared with `let` or `const`.
+
+## Q.7 What is Global Scope?
+
+A variable that is not declared inside any `{ }` or `function` can be used anywhere in our program, and it is called a Global Scoped variable.
+
+## Q.8 What is Hoisting in JavaScript?
+
+Hoisting is JavaScript's behavior of moving declarations to the top of their scope before execution.
+
+## Q.9 What is Temporal Dead Zone in JavaScript?
+
+Temporal dead Zone refers to the period between entering a scope and the actual declaration of a variable using let or const. During this period the variable remains in an _uninitialized_ state and accessing it will result in Reference Error.
