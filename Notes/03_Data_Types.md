@@ -4,7 +4,7 @@
 
 A data type defines the kind of value a variable can hold.
 
-# Q.2 How many data types are there in JavaScript?
+## Q.2 How many data types are there in JavaScript?
 
 JavaScript has 7 Primitive Data Types and 3 Non-Primitive Data Types.
 
