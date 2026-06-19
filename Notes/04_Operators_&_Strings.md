@@ -4,7 +4,7 @@
 
 Operators are symbols used to perform operations on values and variables.
 
-There are 8 type of Operators in JavaScript :-
+There are 6 type of Operators in JavaScript :-
 
 1. **Arithmetic Operators** - Used for mathematic calculations.
    - Addition `+`
@@ -75,5 +75,28 @@ They are powerful because they allow :-
 
 ## Q.5 What will be the output of `5 + "5"`?
 
-Its output will be O because one operand is a string, JavaScript converts the number to a string and concatenates.
+Its output will be `0` because one operand is a string, JavaScript converts the number to a string and concatenates.
 
+## Q.6 How to add Expressions inside template literals?
+
+We can place any valid JavaScript expression inside `${ }`
+
+Ex :-
+console.log(`Sum is ${a + b}`);
+
+## Q.7 What is string interpolation?
+
+It is inserting variables or expressions into a string using `${ }` inside template literals.
+
+## Q.8 Why are template literals better than normal strings?
+
+They are more readable, support expressions directly, and make multi-line strings easier.
+
+## Q.9 What is the difference between `++i` and `i++`?
+
+- `++i` - increments first and then returns the value.
+- `i++` - returns the current value first and then increment.
+
+## Q.10 What will be the output of `true + false` and why?
+
+The output of this operation will be `1` because `true` becomes `1` and `false` becomes `0` in numeric context.
