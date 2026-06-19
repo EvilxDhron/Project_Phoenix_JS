@@ -54,3 +54,119 @@ Test Data:
     Team A: 96, 108, 89
     Team B: 88, 91, 110
 */
+
+const A1Score = 96;
+const A2Score = 108;
+const A3Score = 89;
+
+const B1Score = 88;
+const B2Score = 91;
+const B3Score = 89;
+
+const teamA_Average = (A1Score + A2Score + A3Score) / 3;
+const teamB_Average = (B1Score + B2Score + B3Score) / 3;
+
+console.log(`The average score of Team A is ${teamA_Average}, and the average score of Team B is ${teamB_Average}. So, Does Team A average score higher than Team B average score?
+Ans = ${teamA_Average > teamB_Average ? "Yes" : "No"}`);
+
+/* A household consumed electricity during a month.
+
+Task:
+    1. Store the number of units consumed.
+    2. Assume the cost per unit is ₹7.5.
+    3. Calculate the total bill.
+    4. If the bill is greater than ₹5000, create a Boolean variable 'highBill' that becomes true.
+    5. Display all values using a template literal.
+
+Test Data:
+    Units Consumed = 720
+*/
+
+const perUnitCost = 7.5;
+const unitConsumed = 720;
+const totalBill = unitConsumed * perUnitCost;
+
+const highBill = totalBill > 5000;
+console.log(`Your Electricity Bill for this month is ₹${totalBill}.
+So, Is your Electricity Bill high this month?
+Ans = ${highBill ? "Yes" : "NO"}`);
+
+/* A group of friends had dinner at a restaurant.
+
+Task:
+    1. Store the total bill amount.
+    2. Store the tip percentage.
+    3. Calculate the tip amount.
+    4. Calculate the final amount to be paid.
+    5. Print all values using a template literal.
+
+Test Data:
+    Bill = ₹2750
+    Tip = 15%
+*/
+
+const totalResBill = 2750;
+const tip = 15;
+
+const tipAmount = (totalResBill / 100) * 15;
+const finalAmount = totalResBill + tipAmount;
+
+console.log(`Your total Bill is Rs.${finalAmount}.`);
+
+/* An employee receives a monthly salary.
+
+Task:
+1. Store the basic salary.
+2. Calculate HRA as 20% of salary.
+3. Calculate Bonus as 10% of salary.
+4. Calculate total salary.
+5. Print all values using template literals.
+
+Test Data:
+Basic Salary = ₹45000
+*/
+
+const basicSalary = 45000;
+const HRA = 20;
+const Bonus = 10;
+
+const totalSalary =
+  basicSalary + (basicSalary / 100) * HRA + (basicSalary / 100) * Bonus;
+
+console.log(`Your Basic Salary = Rs.${basicSalary}.
+Your HRA = Rs.${(basicSalary / 100) * HRA}.
+Your Bonus = Rs.${(basicSalary / 100) * Bonus}.
+Now, Your Total Salary is Rs.${totalSalary}.`);
+
+/* A person deposits money in a bank.
+
+Task:
+1. Store principal amount.
+2. Store rate of interest.
+3. Store time in years.
+4. Calculate Simple Interest.
+
+Formula:
+SI = (P × R × T) / 100
+
+5. Calculate total amount after interest.
+6. Print all details using template literals.
+
+Test Data:
+P = 50000
+R = 6
+T = 3
+*/
+
+const principalAmount = 50000;
+const rateOfInterest = 6;
+const timeInYears = 3;
+
+const SI = (principalAmount * rateOfInterest * timeInYears) / 100;
+
+const totalAfterSI = principalAmount + SI;
+
+console.log(`Your Principle Amount is Rs.${principalAmount}.
+Your rate of Interest is ${rateOfInterest} %.
+Your time in Years is Rs.${timeInYears} Years.
+Your total Amount to be paid is Rs.${totalAfterSI}.`);
