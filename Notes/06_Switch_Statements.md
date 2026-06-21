@@ -49,6 +49,14 @@ Syntax :-
         // code
     }
 
+## Q.5 What is fall-through in switch statements?
+
+When a break statement is missing, execution continues into the next case.
+
+## Q.6 What comparison operator does switch use internally?
+
+Switch uses strict equality (===) internally.
+
 ## Important Points to remember
 
 - Statement = Performs an action
