@@ -43,3 +43,113 @@ scoreDolphins = calcAverage(85, 54, 41);
 scoreKoalas = calcAverage(23, 34, 27);
 
 checkWinner(scoreDolphins, scoreKoalas);
+
+/* 
+Create a function checkResult that takes marks of 5 subjects.
+
+Rules:
+
+Calculate percentage.
+If percentage >= 40 → Pass
+Otherwise → Fail
+
+Example:
+
+checkResult(70, 80, 60, 50, 90);
+
+// Output:
+// Percentage: 70
+// Result: Pass 
+
+*/
+
+function checkResult(a, b, c, d, e) {
+  const percentage = ((a + b + c + d + e) / 500) * 100;
+  console.log(percentage);
+  if (percentage >= 40) {
+    console.log("Pass");
+  } else {
+    console.log("Fail");
+  }
+}
+
+checkResult(50, 50, 50, 50, 50);
+
+/* 
+
+Create a function:
+
+calculator(num1, num2, operator)
+
+Supported operators:
+
++
+-
+*
+/
+
+Example:
+
+calculator(10, 5, "*");
+
+// Output:
+// 50
+
+*/
+
+const calculator = (n1, n2, op) => {
+  switch (op) {
+    case "+":
+      console.log(n1 + n2);
+      break;
+
+    case "-":
+      console.log(n1 - n2);
+      break;
+
+    case "*":
+      console.log(n1 * n2);
+      break;
+
+    case "/":
+      console.log(n1 / n2);
+      break;
+
+    default:
+      console.log("Invalid Operation!!");
+  }
+};
+
+calculator(46, 2, "/");
+
+/* 
+
+Create:
+
+calculateBonus(salary, yearsOfExperience)
+
+Rules:
+
+10+ years → 20%
+5+ years → 10%
+Otherwise → 5%
+
+Example:
+
+calculateBonus(50000, 8);
+
+// Bonus = 5000 
+
+*/
+
+const calculateBonus = (sal, years) => {
+  if (years > 10) {
+    console.log(`Your Total Bonus is Rs.${(sal / 100) * 20}`);
+  } else if (years > 5) {
+    console.log(`Your Total Bonus is Rs.${(sal / 100) * 10}`);
+  } else {
+    console.log(`Your Total Bonus is Rs.${(sal / 100) * 5}`);
+  }
+};
+
+calculateBonus(50000, 6);
