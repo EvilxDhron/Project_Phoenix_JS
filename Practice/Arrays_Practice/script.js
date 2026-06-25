@@ -27,3 +27,67 @@ function calcTip(bill) {
 const bills = [125, 555, 44];
 const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])];
 const totals = [bills[0] + tips[0], bills[1] + tips[1], bills[2] + tips[2]];
+
+/*
+
+Sarah is building an online shopping cart.
+
+Your tasks:
+
+  Create an array called cart containing:
+
+  "Laptop", "Mouse"
+  Add "Keyboard" to the end of the cart.
+  Add "Gift Card" to the beginning of the cart.
+  Remove the last item and store it in a variable called removedItem.
+Print:
+  Final cart
+  Removed item
+  Number of items in the cart 
+
+*/
+
+const cart = ["Laptop", "Mouse"];
+
+cart.push("Keyboard");
+
+cart.unshift("Gift Card");
+
+const removedItem = cart.pop();
+
+console.log(cart, removedItem, cart.length);
+
+/* 
+
+A party organizer has the following guest list:
+
+  ["John", "Sarah", "Mike", "Emma"]
+
+Your tasks:
+
+  Store the guest list in an array called guests.
+  Check if "Mike" is invited using indexOf().
+  Check if "David" is invited using indexOf().
+  Save both results in variables.
+  Print a message showing the position of each guest.
+
+Bonus:
+
+  Print the total number of guests. 
+
+*/
+
+const guests = ["John", "Sarah", "Mike", "Emma"];
+
+let guest1;
+let guest2;
+
+if(guests.indexOf("Mike")) guest1 = guests.indexOf("Mike");
+
+if(guests.indexOf("David")) guest2 = guests.indexOf("David");
+
+console.log(guest1, guest2);
+
+console.log(guests.length);
+
+
