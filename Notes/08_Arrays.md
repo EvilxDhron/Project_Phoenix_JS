@@ -33,3 +33,11 @@ Arrays are used to store multiple related values efficiently and to make operati
 ## Q.5 What is the difference between `shift()` and `unshift()`?
 
 `shift()` removes the first element, and `unshift()` adds elements at the beginning.
+
+## Q.6 Why does JavaScript use Zero-Based Indexing?
+
+Zero-Based indexing simplifies memory address calculations because the first element can be accessed using an offset of 0 from the starting memory location.
+
+## Q.7 What is Shallow Copy?
+
+A shallow copy creates a new array but nested objects still share the same memory references.
