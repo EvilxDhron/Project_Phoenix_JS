@@ -36,3 +36,21 @@ Functions are called first-class citizens because they can be assigned to variab
 
 A Higher-Order function is a function that either takes one or more functions as arguments or returns a function as its result.
 
+## Q.11 Can function declarations be called before they appear in the file?
+
+Yes, because the function declaration is available during the memory creation phase (often described as being "hoisted").
+
+## Q.12 Can function expression be called before they are assigned?
+
+No. The variable exists, but it isn't initialized with the function until execution reaches that line.
+
+## Q.13 Which is faster?
+
+For almost all real-world code, there is no meaningful performance difference. Choose based on readability and the behavior you need, not micro-optimizations.
+
+## Q.14 Why do arrow functions exist?
+
+- to provide a shorter syntax.
+- to make callback-heavy code easier to read.
+- to capture the surrounding `this` value instead of creating their own.
+

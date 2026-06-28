@@ -100,3 +100,15 @@ They are more readable, support expressions directly, and make multi-line string
 ## Q.10 What will be the output of `true + false` and why?
 
 The output of this operation will be `1` because `true` becomes `1` and `false` becomes `0` in numeric context.
+
+## Q.11 Why Immutability is Useful in Strings?
+
+It makes programs more predictable because functions can't accidentally change string values. It also allows JavaScript engines to optimize memory usage in many situations.
+
+## Q.12 What is the difference between a primitive string and a `string` object?
+
+A primitive string has the type "string" and is lightweight. A `String` object has the type "object" and is created with `new String()`. Primitive strings are recommended because they avoid unexpected behavior and unnecessary object creation.
+
+### Note 
+
+Strings are like arrays because they have indexed characters and a `length` property, but they are not arrays and do not support array-specific methods like push().
