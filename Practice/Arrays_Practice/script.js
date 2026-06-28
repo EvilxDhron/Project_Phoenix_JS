@@ -91,3 +91,16 @@ console.log(guest1, guest2);
 console.log(guests.length);
 
 
+/*
+
+Find the Largest Number
+Input:
+[5, 10, 2, 99, 23] 
+
+*/
+
+const arr1 = [5, 10, 2, 99, 23];
+
+const maxNumber = Math.max(...arr1);
+
+console.log(maxNumber);
