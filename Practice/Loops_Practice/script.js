@@ -132,3 +132,36 @@ console.log(totals);
 
 calcAverage(totals);
 console.log(calcAverage(totals));
+
+/*
+
+Count how many numbers from 1 to 100 are divisible by 5.
+
+*/
+
+let count = 0;
+
+for(let i = 1; i <= 100; i++){
+  if(i % 5 === 0){
+    count++;
+  }
+}
+
+console.log(count);
+
+/*
+
+Count how many times the letter "a" appears in a string.
+
+*/
+
+const str = "appear";
+let appeared = 0;
+
+for(let i = 0; i < str.length; i++){
+  if(str[i] === "a") {appeared++}
+}
+
+console.log(appeared);
+
+// Actually I have litterly been surfing from (104) fever for almost 4 days that's why I'm not able to solve many questions at once but this is my commitment to myself that I'm not going to stop at any way and the most interesting part of all is that I'm coding all of this through my phone 📱.
