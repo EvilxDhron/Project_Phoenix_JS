@@ -141,8 +141,8 @@ Count how many numbers from 1 to 100 are divisible by 5.
 
 let count = 0;
 
-for(let i = 1; i <= 100; i++){
-  if(i % 5 === 0){
+for (let i = 1; i <= 100; i++) {
+  if (i % 5 === 0) {
     count++;
   }
 }
@@ -158,10 +158,50 @@ Count how many times the letter "a" appears in a string.
 const str = "appear";
 let appeared = 0;
 
-for(let i = 0; i < str.length; i++){
-  if(str[i] === "a") {appeared++}
+for (let i = 0; i < str.length; i++) {
+  if (str[i] === "a") {
+    appeared++;
+  }
 }
 
 console.log(appeared);
 
 // Actually I have litterly been surfing from (104) fever for almost 4 days that's why I'm not able to solve many questions at once but this is my commitment to myself that I'm not going to stop at any way and the most interesting part of all is that I'm coding all of this through my phone 📱.
+
+/*
+
+Calculate the sum of all numbers in an array without using built-in methods. 
+
+*/
+
+let myArr = [2, 4, 7, 9, 6, 10, 12, 25];
+
+function arrSum(arr) {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  }
+  return sum;
+}
+
+console.log(arrSum(myArr));
+
+/*
+
+Reverse-print the elements of an array. 
+
+*/
+
+const myArr2 = ["Uncle", "Aunty", "Neighbour", true, false, 56];
+
+const myReverser = function (arr) {
+  const newArr = [];
+
+  for (let i = arr.length - 1; i >= 0; i--) {
+    newArr.push(arr[i]);
+  }
+
+  return newArr;
+};
+
+console.log(myReverser(myArr2));
