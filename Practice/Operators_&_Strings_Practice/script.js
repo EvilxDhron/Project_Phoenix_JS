@@ -170,3 +170,96 @@ console.log(`Your Principle Amount is Rs.${principalAmount}.
 Your rate of Interest is ${rateOfInterest} %.
 Your time in Years is Rs.${timeInYears} Years.
 Your total Amount to be paid is Rs.${totalAfterSI}.`);
+
+/* 
+
+Count vowels in a word "Programming".
+
+*/
+
+const str = "Programming";
+
+const vowelCounter = function (str) {
+  let count = 0;
+  for (let i = 0; i < str.length; i++) {
+    switch (str[i]) {
+      case "a":
+      case "e":
+      case "i":
+      case "o":
+      case "u":
+        count++;
+        break;
+
+      default:
+    }
+  }
+
+  return count;
+};
+
+console.log(vowelCounter(str));
+
+/* 
+
+Reverse a string without built in methods.
+
+*/
+
+const str2 = "Hello World!";
+
+const reverser = function (str) {
+  let revStr = "";
+
+  for (let i = str.length - 1; i >= 0; i--) {
+    revStr += str[i];
+  }
+
+  return revStr;
+};
+
+console.log(reverser(str2));
+
+/*
+
+Check if a String is a Palindrome.
+
+*/
+
+const str3 = "Madam";
+
+const palinChecker = function (str) {
+  let reversedStr = "";
+
+  for (let i = 0; i < str.length; i++) {
+    reversedStr += str[i];
+  }
+
+  if (str === reversedStr) return "Palindrome";
+  return "Not a Palindrome";
+};
+
+console.log(palinChecker(str3));
+
+/*
+
+Count how many times a particular character appears.
+
+*/
+
+const str4 = "banana";
+const characters = {};
+
+const characterCounter = function (str) {
+  for (let i = 0; i < str.length; i++) {
+    if (characters[str[i]]) {
+      characters[str[i]] += 1;
+    } else {
+      characters[str[i]] = 1;
+    }
+  }
+
+  return characters;
+};
+
+console.log(characterCounter(str4));
