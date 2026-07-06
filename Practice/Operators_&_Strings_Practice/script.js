@@ -263,3 +263,33 @@ const characterCounter = function (str) {
 };
 
 console.log(characterCounter(str4));
+
+/*
+
+Find the first non-repeating character
+
+*/
+
+const str5 = "aabbcde";
+const frequencyObj = {};
+
+const firstNonRepeatingChar = function (str) {
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i];
+
+    if (frequencyObj[char]) {
+      frequencyObj[char] += 1;
+    } else {
+      frequencyObj[char] = 1;
+    }
+  }
+
+  for (let char in frequencyObj) {
+    // console.log(char);
+    if (frequencyObj[char] === 1) {
+      return char;
+    }
+  }
+};
+
+console.log(firstNonRepeatingChar(str5));
