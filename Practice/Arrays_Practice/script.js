@@ -82,14 +82,13 @@ const guests = ["John", "Sarah", "Mike", "Emma"];
 let guest1;
 let guest2;
 
-if(guests.indexOf("Mike")) guest1 = guests.indexOf("Mike");
+if (guests.indexOf("Mike")) guest1 = guests.indexOf("Mike");
 
-if(guests.indexOf("David")) guest2 = guests.indexOf("David");
+if (guests.indexOf("David")) guest2 = guests.indexOf("David");
 
 console.log(guest1, guest2);
 
 console.log(guests.length);
-
 
 /*
 
@@ -104,3 +103,94 @@ const arr1 = [5, 10, 2, 99, 23];
 const maxNumber = Math.max(...arr1);
 
 console.log(maxNumber);
+
+/*
+
+Given an array of forecasted maximum temperatures, the thermometer displays a string with these temperatures.
+
+Example: [17, 21, 23] will print "17°C in 1 days ... 21°C in 2 days ... 23°C in 3 days ..."
+
+Create a function 'printForecast' which takes in an array 'arr' and logs a string like the above to the console.
+
+Use the problem-solving framework: Understand the problem and break it up into sub-problems!
+
+TEST DATA 1: [17, 21, 23]
+TEST DATA 2: [12, 5, -5, 0, 4]
+
+
+1) Understanding the problem
+  — Array transformed to string, separated by ...
+  - What is the X days? Answer: index + 1
+
+2) Breaking up into sub-problems
+  - Transform array into string
+  - Transform each element to string with °C
+  - Strings needs to contain day (index + 1)
+  - Add ... between elements and start and end of string
+  - Log string to console
+
+*/
+
+const arr2 = [17, 21, 23];
+const arr3 = [12, 5, -5, 0, 4];
+
+const printForecast = function (arr) {
+  let arrStr = "";
+
+  for (let i of arr) {
+    arrStr += `${i}°C in ${arr.indexOf(i) + 1} days ... `;
+  }
+
+  return arrStr;
+};
+
+console.log("... " + printForecast(arr2));
+console.log("... " + printForecast(arr3));
+
+/*
+
+Let's say you're building a time tracking application for freelancers. At some point in building this app, you need a function that receives daily work hours for a certain week, and returns:
+
+  1. Total hours worked
+  2. Average daily hours
+  3. The day with the most hours worked
+  4. Number of days worked
+  5. Whether the week was full-time (worked 35 hours or more)
+  
+  TEST DATA: [7.5, 8, 6.5, 0, 8.5, 4, 0]
+
+*/
+
+const workHours = [7.5, 8, 6.5, 0, 8.5, 4, 0];
+
+const timeTracker = function (arr) {
+  let total = 0;
+  let average = 0;
+  let mostHoursWorkedDay = arr[0];
+  let numOfDay = 0;
+  let fullTimeWorked;
+
+  for (let i of arr) {
+    total += i;
+    if (mostHoursWorkedDay < i) {
+      mostHoursWorkedDay = i;
+    }
+    if (i !== 0) {
+      numOfDay++;
+    }
+  }
+
+  average = total / arr.length;
+
+  if (total >= 35) {
+    fullTimeWorked = true;
+  }
+
+  return `1. Total hours worked = ${total}
+2. Average daily hours = ${average}
+3. The day with the most hours worked = ${mostHoursWorkedDay}
+4. Number of days worked = ${numOfDay}
+5. Whether the week was full-time = ${fullTimeWorked ? "YES" : "No"}`;
+};
+
+console.log(timeTracker(workHours));
