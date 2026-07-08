@@ -293,3 +293,59 @@ const firstNonRepeatingChar = function (str) {
 };
 
 console.log(firstNonRepeatingChar(str5));
+
+/* 
+
+Remove duplicate characters from a string.
+
+*/
+
+const str6 = "programming";
+const freqObj = {};
+
+const duplicateRemover = function (str) {
+  let newStr = "";
+
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i];
+
+    if (freqObj[char]) {
+      freqObj[char] += 1;
+    } else {
+      freqObj[char] = 1;
+    }
+  }
+
+  for (let key in freqObj) {
+    newStr += key;
+  }
+
+  return newStr;
+};
+
+console.log(duplicateRemover(str6));
+
+/*
+
+Count uppercase and lowercase letters separately
+
+*/
+
+const str7 = "PrograMMer";
+let upperChar = 0;
+let lowerChar = 0;
+
+const casesCounter = function (str) {
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i];
+    if (char >= "A" && char <= "Z") {
+      upperChar++;
+    } else {
+      lowerChar++;
+    }
+  }
+
+  return [upperChar, lowerChar];
+};
+
+console.log(casesCounter(str7));
