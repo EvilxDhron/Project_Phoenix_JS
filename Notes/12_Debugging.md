@@ -2,7 +2,7 @@
 
 ## Q.1 What is Debugging?
 
-Debugging is the process of finding, understanding, analyzing, and fixing errors in a program.
+Debugging is the systematic process of identifying, reproducing, analyzing and fixing bugs in software. It involves understanding the root cause of an issue, applying a fix, and verifying that the fix works without introducing new problems.
 
 ## Q.2 What is a Bug and Why is it called a Bug?
 
@@ -34,3 +34,11 @@ JavaScript has built-in error objects.
 
 - EvalError
     Historical related to `eval()`. It is rarely encountered in modern JavaScript.
+
+## Q.5 What is the difference between a bug and an error?
+
+A bug is a mistake in the program's logic or implementation that causes incorrect behavior. An error is a condition detected by JavaScript, such as a "SyntaxError" or "TypeError", often reported by the engine during parsing or execution.
+
+## Q.6 What should you do first when debugging?
+
+The first step is to reproduce the issue consistently and carefully read the complete error message, including the error type, file name, line number, and stack trace. This provides the best clues for finding the root cause.
