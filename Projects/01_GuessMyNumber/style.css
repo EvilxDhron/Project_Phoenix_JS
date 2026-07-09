@@ -1,10 +1,122 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-html, body{
-    height: 100%;
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background: #393939;
+}
+
+header {
+  width: 100%;
+  height: 30vh;
+  /* background: yellow; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  .header-sec1 {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background: red; */
+    padding: 0 6vw;
+
+    button {
+      font-size: 20px;
+      text-transform: uppercase;
+      font-weight: 800;
+      padding: 10px 20px;
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: 800;
+      color: white;
+    }
+  }
+
+  h1 {
+    font-size: 60px;
+    margin-bottom: 45px;
+    color: white;
+  }
+}
+
+main {
+  width: 100%;
+  height: 70vh;
+  background: yellow;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  .line {
+    width: 100vw;
+    height: 10px;
+    background: white;
+  }
+
+  .numbox {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: red;
+    border: 4px solid black;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h3 {
+      font-size: 60px;
+    }
+  }
+
+  .main-sec2 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .sec1 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+
+      input {
+        /* padding: 25px 30px; */
+        width: 200px;
+        font-size: 80px;
+        text-align: center;
+      }
+
+      button {
+        width: 150px;
+        font-size: 20px;
+        text-transform: uppercase;
+        font-weight: 800;
+        padding: 10px 20px;
+      }
+    }
+
+    .sec2{
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        font-size: 18px;
+    }
+  }
 }
