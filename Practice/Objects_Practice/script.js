@@ -47,3 +47,80 @@ if (mark.calcBMI() > john.calcBMI()) {
     `${john.fullName}'s BMI (${john.calcBMI()}) is higher than ${mark.fullName}'s (${mark.calcBMI()})`,
   );
 }
+
+
+/*
+
+Add a property called year in a object with value 2022 and print it on the console.
+
+const car = {
+  brand: "Toyota",
+  model: "Camry"
+};
+
+*/
+
+const car = {
+  brand: "Toyota",
+  model: "Camry"
+};
+
+car.year = 2022;
+console.log(car.year);
+
+
+/*
+
+Remove the password property from the object.
+
+const user = {
+  username: "john",
+  password: "1234"
+};
+
+*/
+
+const user = {
+  username: "john",
+  password: "1234"
+};
+
+delete user.password;
+console.log(user);
+
+
+/*
+
+Create a method called add(a, b) that returns the sum.
+
+*/
+
+const calculate = {
+  add: function(a, b){
+     return a + b;
+  }
+}
+
+console.log(calculate(5, 6));
+
+
+/*
+
+Create a method that returns fullname of a user.
+
+const user2 = {
+  firstName: "Dhron",
+  lastName: "Yadav"
+}
+
+*/
+
+const user2 = {
+  firstName: "Dhron",
+  lastName: "Yadav",
+  fullName: function(){
+  return `${this.firstName} ${this.lastName}`;
+  }
+}
+
+console.log(user2.fullName);
