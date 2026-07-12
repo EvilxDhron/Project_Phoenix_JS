@@ -124,3 +124,63 @@ const user2 = {
 }
 
 console.log(user2.fullName);
+
+
+/*
+
+How do you check whether this object has an age property?
+
+const person = {
+  name: "Rahul"
+};
+
+*/
+
+const person = {
+  name: "Rahul"
+};
+
+console.log(Object.hasOwn(person, "age"));
+
+// OR
+
+console.log("age" in person);
+
+
+/*
+
+What will be printed?
+
+const car = {
+  brand: "BMW",
+  showBrand() {
+    return this.brand;
+  }
+};
+
+console.log(car.showBrand());
+
+*/
+
+// Output will be --> BMW
+
+
+/*
+
+How can you find the number of properties in this object?
+
+const obj = {
+  a: 1,
+  b: 2,
+  c: 3
+};
+
+*/
+
+const obj = {
+  a: 1,
+  b: 2,
+  c: 3
+};
+
+console.log(Object.keys(obj));
