@@ -194,3 +194,21 @@ const timeTracker = function (arr) {
 };
 
 console.log(timeTracker(workHours));
+
+
+/*
+
+Merge two arrays.
+
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+
+*/
+
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+
+const arr3 = [...arr1, ...arr2];
+console.log(arr3);
+
+// My health is literally so bad at this moment and also I don't have my laptop with me but still I can't skip any day of commit on Github 😑.
