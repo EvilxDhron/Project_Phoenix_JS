@@ -10,7 +10,8 @@ const highLowText = document.querySelector(".text1");
 let score = 20;
 const scoreText = document.querySelector(".text2");
 let highScore = document.querySelector(".text3");
-highScore.textContent = localStorage.getItem("newHighScore");
+let clickTimer = null;
+highScore.textContent = localStorage.getItem("newHighScore") ?? 0;
 
 function updateScore() {
   score--;
@@ -34,7 +35,7 @@ function checkTheNum(num) {
     hiddenNumBox.textContent = `${num}`;
     guessText.textContent = "Wow!! You Guessed it";
     updateScore();
-    setNewHighScore(num);
+    setNewHighScore(score);
     inputBox.value = "";
   } else if (userNum > hiddenNum) {
     highLowText.textContent = "Too High!!";
@@ -45,11 +46,19 @@ function checkTheNum(num) {
     updateScore();
     inputBox.value = "";
   }
-
-  console.log("function is running every time and it is good!");
 }
 
 againBtn.addEventListener("click", () => {
+  clearTimeout(clickTimer);
+
+  clickTimer = setTimeout(() => {
+    location.reload();
+  }, 250);
+});
+
+againBtn.addEventListener("dblclick", () => {
+  clearTimeout(clickTimer);
+  localStorage.clear();
   location.reload();
 });
 
@@ -58,6 +67,5 @@ inputBox.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     checkTheNum(value);
     value = "";
-    console.log("hello!!");
   }
 });
