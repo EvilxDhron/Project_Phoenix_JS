@@ -1,5 +1,7 @@
 "use strict";
 
+const body = document.querySelector("body");
+const numbox = document.querySelector(".numbox");
 const againBtn = document.querySelector(".againBTN");
 const guessText = document.querySelector(".guessText");
 const hiddenNum = Math.round(Math.random() * 20);
@@ -29,11 +31,19 @@ function setNewHighScore(newScore) {
   }
 }
 
+function updateText(num) {
+  hiddenNumBox.textContent = `${num}`;
+  guessText.textContent = "Wow!! You Guessed it";
+  body.style.backgroundColor = "Green";
+  numbox.style.backgroundColor = "White";
+  numbox.style.borderColor = "White";
+  hiddenNumBox.style.color = "Green";
+}
+
 function checkTheNum(num) {
   const userNum = Number(num);
   if (userNum === hiddenNum) {
-    hiddenNumBox.textContent = `${num}`;
-    guessText.textContent = "Wow!! You Guessed it";
+    updateText(num);
     updateScore();
     setNewHighScore(score);
     inputBox.value = "";
