@@ -42,10 +42,15 @@ function updateText(num) {
 
 function checkTheNum(num) {
   const userNum = Number(num);
-  if (userNum === hiddenNum) {
+
+  if (!num) {
+    guessText.textContent = "It's not a Number!! 😥";
+    highLowText.textContent = "Oops!! you did a mistake 😅";
+  } else if (userNum === hiddenNum) {
     updateText(num);
     updateScore();
     setNewHighScore(score);
+    highLowText.textContent = "🥳 We did it!!";
     inputBox.value = "";
   } else if (userNum > hiddenNum) {
     highLowText.textContent = "Too High!!";
@@ -77,5 +82,22 @@ inputBox.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     checkTheNum(value);
     value = "";
+  }
+  if (!score) {
+    guessText.textContent = "Game Over!! 😫";
+    highLowText.textContent = "Ooh No!! You Lost 😭";
+    inputBox.value = "";
+    return;
+  }
+});
+
+checkBtn.addEventListener("click", () => {
+  checkTheNum(inputBox.value);
+
+  if (!score) {
+    guessText.textContent = "Game Over!! 😫";
+    highLowText.textContent = "Ooh No!! You Lost 😭";
+    inputBox.value = "";
+    return;
   }
 });
