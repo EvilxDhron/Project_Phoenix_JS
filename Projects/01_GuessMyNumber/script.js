@@ -15,17 +15,26 @@ let highScore = document.querySelector(".text3");
 let clickTimer = null;
 highScore.textContent = Number(localStorage.getItem("newHighScore")) ?? 0;
 
+function showMessage(message = "😉 Start guessing the number...") {
+  highLowText.textContent = message;
+
+  if (Number(inputBox.value) !== hiddenNum) {
+    guessText.textContent = "Guess My Number!";
+  }
+
+  inputBox.value = "";
+}
+
 function resetUI() {
   hiddenNum = Math.trunc(Math.random() * 20) + 1;
   score = 20;
   scoreText.textContent = score;
-  guessText.textContent = "Guess My Number!";
   body.style.backgroundColor = "#393939";
   numbox.style.backgroundColor = "Red";
   numbox.style.borderColor = "Black";
   hiddenNumBox.style.color = "Black";
   hiddenNumBox.textContent = "?";
-  highLowText.textContent = "😉 Start guessing the number...";
+  showMessage();
   document.querySelector(".sec1").style.display = "flex";
   numbox.style.display = "flex";
   highScore.textContent = Number(localStorage.getItem("newHighScore")) ?? 0;
@@ -60,23 +69,17 @@ function checkTheNum(num) {
   const userNum = Number(num);
 
   if (!num) {
+    showMessage("Oops!! you did a mistake 😅");
     guessText.textContent = "It's not a Number!! 😥";
-    highLowText.textContent = "Oops!! you did a mistake 😅";
   } else if (userNum === hiddenNum) {
     updateText(num);
     updateScore();
     setNewHighScore(score);
-    highLowText.textContent = "🥳 We did it!!";
+    showMessage("🥳 We did it!!");
     document.querySelector(".sec1").style.display = "none";
-    inputBox.value = "";
-  } else if (userNum > hiddenNum) {
-    highLowText.textContent = "Too High!!";
+  } else {
+    showMessage(userNum > hiddenNum ? "Too High!!" : "Too Low!");
     updateScore();
-    inputBox.value = "";
-  } else if (userNum < hiddenNum) {
-    highLowText.textContent = "Too Low!!";
-    updateScore();
-    inputBox.value = "";
   }
 }
 
@@ -97,15 +100,12 @@ againBtn.addEventListener("dblclick", () => {
 });
 
 inputBox.addEventListener("keydown", (event) => {
-  let value = inputBox.value;
   if (event.key === "Enter") {
-    checkTheNum(value);
-    value = "";
+    checkTheNum(inputBox.value);
   }
   if (!score) {
     guessText.textContent = "Game Over!! 😫";
-    highLowText.textContent = "Ooh No!! You Lost 😭";
-    inputBox.value = "";
+    showMessage("Ooh No!! You Lost 😭");
     document.querySelector(".sec1").style.display = "none";
     numbox.style.display = "none";
 
@@ -118,8 +118,7 @@ checkBtn.addEventListener("click", () => {
 
   if (!score) {
     guessText.textContent = "Game Over!! 😫";
-    highLowText.textContent = "Ooh No!! You Lost 😭";
-    inputBox.value = "";
+    showMessage("Ooh No!! You Lost 😭");
     numbox.style.display = "none";
     document.querySelector(".sec1").style.display = "none";
 
