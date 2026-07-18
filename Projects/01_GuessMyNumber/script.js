@@ -4,7 +4,7 @@ const body = document.querySelector("body");
 const numbox = document.querySelector(".numbox");
 const againBtn = document.querySelector(".againBTN");
 const guessText = document.querySelector(".guessText");
-const hiddenNum = Math.round(Math.random() * 20);
+let hiddenNum = Math.trunc(Math.random() * 20) + 1;
 const hiddenNumBox = document.querySelector(".numboxText");
 const inputBox = document.querySelector("#num");
 const checkBtn = document.querySelector(".inputBtn");
@@ -13,7 +13,23 @@ let score = 20;
 const scoreText = document.querySelector(".text2");
 let highScore = document.querySelector(".text3");
 let clickTimer = null;
-highScore.textContent = localStorage.getItem("newHighScore") ?? 0;
+highScore.textContent = Number(localStorage.getItem("newHighScore")) ?? 0;
+
+function resetUI() {
+  hiddenNum = Math.trunc(Math.random() * 20) + 1;
+  score = 20;
+  scoreText.textContent = score;
+  guessText.textContent = "Guess My Number!";
+  body.style.backgroundColor = "#393939";
+  numbox.style.backgroundColor = "Red";
+  numbox.style.borderColor = "Black";
+  hiddenNumBox.style.color = "Black";
+  hiddenNumBox.textContent = "?";
+  highLowText.textContent = "😉 Start guessing the number...";
+  document.querySelector(".sec1").style.display = "flex";
+  numbox.style.display = "flex";
+  highScore.textContent = Number(localStorage.getItem("newHighScore")) ?? 0;
+}
 
 function updateScore() {
   score--;
@@ -51,6 +67,7 @@ function checkTheNum(num) {
     updateScore();
     setNewHighScore(score);
     highLowText.textContent = "🥳 We did it!!";
+    document.querySelector(".sec1").style.display = "none";
     inputBox.value = "";
   } else if (userNum > hiddenNum) {
     highLowText.textContent = "Too High!!";
@@ -67,14 +84,16 @@ againBtn.addEventListener("click", () => {
   clearTimeout(clickTimer);
 
   clickTimer = setTimeout(() => {
-    location.reload();
+    // location.reload();
+    resetUI();
   }, 250);
 });
 
 againBtn.addEventListener("dblclick", () => {
   clearTimeout(clickTimer);
-  localStorage.clear();
-  location.reload();
+  localStorage.removeItem("newHighScore");
+  // location.reload();
+  resetUI();
 });
 
 inputBox.addEventListener("keydown", (event) => {
@@ -87,6 +106,9 @@ inputBox.addEventListener("keydown", (event) => {
     guessText.textContent = "Game Over!! 😫";
     highLowText.textContent = "Ooh No!! You Lost 😭";
     inputBox.value = "";
+    document.querySelector(".sec1").style.display = "none";
+    numbox.style.display = "none";
+
     return;
   }
 });
@@ -98,6 +120,9 @@ checkBtn.addEventListener("click", () => {
     guessText.textContent = "Game Over!! 😫";
     highLowText.textContent = "Ooh No!! You Lost 😭";
     inputBox.value = "";
+    numbox.style.display = "none";
+    document.querySelector(".sec1").style.display = "none";
+
     return;
   }
 });
