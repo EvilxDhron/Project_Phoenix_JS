@@ -57,7 +57,7 @@ function setNewHighScore(newScore) {
 }
 
 function updateText(num) {
-  hiddenNumBox.textContent = `${num}`;
+  showMessage(`${num}`);
   guessText.textContent = "Wow!! You Guessed it";
   body.style.backgroundColor = "Green";
   numbox.style.backgroundColor = "White";
@@ -104,8 +104,8 @@ inputBox.addEventListener("keydown", (event) => {
     checkTheNum(inputBox.value);
   }
   if (!score) {
-    guessText.textContent = "Game Over!! 😫";
     showMessage("Ooh No!! You Lost 😭");
+    guessText.textContent = "Game Over!! 😫";
     document.querySelector(".sec1").style.display = "none";
     numbox.style.display = "none";
 
@@ -117,8 +117,8 @@ checkBtn.addEventListener("click", () => {
   checkTheNum(inputBox.value);
 
   if (!score) {
-    guessText.textContent = "Game Over!! 😫";
     showMessage("Ooh No!! You Lost 😭");
+    guessText.textContent = "Game Over!! 😫";
     numbox.style.display = "none";
     document.querySelector(".sec1").style.display = "none";
 
