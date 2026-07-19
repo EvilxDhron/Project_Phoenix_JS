@@ -2,122 +2,179 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins", Arial, sans-serif;
 }
 
 html,
 body {
-  height: 100%;
   width: 100%;
-  background: #393939;
+  min-height: 100%;
+  background: linear-gradient(135deg, #1f1f1f, #3d3d3d);
+  color: white;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
 }
 
 header {
   width: 100%;
-  height: 30vh;
-  /* background: yellow; */
+  min-height: 30vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  padding: 2rem 6vw;
 
   .header-sec1 {
-    width: 100%;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    /* background: red; */
-    padding: 0 6vw;
+    align-items: center;
 
     button {
-      font-size: 20px;
-      text-transform: uppercase;
-      font-weight: 800;
-      padding: 10px 20px;
+      background: white;
+      color: black;
+      padding: 0.9rem 1.8rem;
+      font-size: 1rem;
+      font-weight: bold;
     }
 
     p {
-      font-size: 18px;
-      font-weight: 800;
-      color: white;
+      font-size: 1rem;
     }
   }
 
   h1 {
-    font-size: 60px;
-    margin-bottom: 45px;
-    color: white;
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 4rem);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 }
 
 main {
-  width: 100%;
-  height: 70vh;
-  background: yellow;
+  min-height: 70vh;
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  position: relative;
 
   .line {
-    width: 100vw;
-    height: 10px;
+    height: 8px;
     background: white;
+    width: 100%;
   }
 
   .numbox {
     position: absolute;
-    width: 120px;
-    height: 120px;
-    background: red;
-    border: 4px solid black;
-    top: 0%;
     left: 50%;
+    top: 0;
     transform: translate(-50%, -50%);
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    background: #ff3d3d;
+    border: 4px solid white;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 
     h3 {
-      font-size: 60px;
+      font-size: 4rem;
     }
   }
 
   .main-sec2 {
-    width: 100%;
-    height: 100%;
+    flex: 1;
     display: flex;
+    justify-content: space-evenly;
     align-items: center;
-    justify-content: space-around;
+    padding: 5rem 6vw 2rem;
+    gap: 3rem;
 
     .sec1 {
       display: flex;
       flex-direction: column;
+      gap: 1.5rem;
       align-items: center;
-      gap: 20px;
 
       input {
-        padding: 15px 20px;
-        width: 100%;
-        max-width: 200px;
-        font-size: 80px;
+        width: 180px;
+        height: 110px;
+        font-size: 4rem;
         text-align: center;
+        border-radius: 15px;
+        border: 3px solid white;
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+        outline: none;
+      }
+
+      input:focus {
+        border-color: #00ff95;
       }
 
       button {
-        width: 150px;
-        font-size: 20px;
-        text-transform: uppercase;
-        font-weight: 800;
-        padding: 10px 20px;
+        background: white;
+        color: black;
+        width: 180px;
+        padding: 1rem;
+        font-size: 1rem;
+        font-weight: bold;
       }
     }
 
     .sec2 {
       display: flex;
       flex-direction: column;
-      gap: 40px;
-      font-size: 18px;
+      gap: 1.5rem;
+      font-size: 1.3rem;
+      line-height: 1.7;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2.2rem;
+  }
+
+  .header-sec1 {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  main {
+    .numbox {
+      width: 110px;
+      height: 110px;
+
+      h3 {
+        font-size: 3rem;
+      }
+    }
+
+    .main-sec2 {
+      flex-direction: column;
+      text-align: center;
+      padding-top: 6rem;
+
+      .sec2 {
+        font-size: 1.1rem;
+      }
+
+      .sec1 input {
+        width: 150px;
+        height: 90px;
+        font-size: 3rem;
+      }
     }
   }
 }

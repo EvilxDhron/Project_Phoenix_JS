@@ -29,10 +29,10 @@ function resetUI() {
   hiddenNum = Math.trunc(Math.random() * 20) + 1;
   score = 20;
   scoreText.textContent = score;
-  body.style.backgroundColor = "#393939";
-  numbox.style.backgroundColor = "Red";
-  numbox.style.borderColor = "Black";
-  hiddenNumBox.style.color = "Black";
+  body.style.background = "linear-gradient(135deg, #1f1f1f, #3d3d3d)";
+  numbox.style.backgroundColor = "#ff3d3d";
+  numbox.style.borderColor = "White";
+  hiddenNumBox.style.color = "White";
   hiddenNumBox.textContent = "?";
   showMessage();
   document.querySelector(".sec1").style.display = "flex";
@@ -59,7 +59,7 @@ function setNewHighScore(newScore) {
 function updateText(num) {
   showMessage("🥳 We did it!!");
   guessText.textContent = "Wow!! You Guessed it";
-  body.style.backgroundColor = "Green";
+  body.style.background = "linear-gradient(135deg, #0575e6, #00f260)";
   numbox.style.backgroundColor = "White";
   numbox.style.borderColor = "White";
   hiddenNumBox.style.color = "Green";
