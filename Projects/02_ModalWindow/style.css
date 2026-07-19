@@ -59,6 +59,12 @@ button:hover {
   box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
 }
 
+button:focus,
+button:active {
+  outline: none;
+  box-shadow: none;
+}
+
 .closebtn {
   position: absolute;
   top: 0;
@@ -78,6 +84,7 @@ button:hover {
   height: 100%;
   background-color: rgba(255, 255, 255, 0);
   backdrop-filter: blur(8px);
+  z-index: 9;
 }
 
 .hidden {
@@ -98,5 +105,10 @@ button:hover {
 
   button {
     width: fit-content;
+  }
+
+  .modal {
+    width: 60%;
+    position: absolute;
   }
 }
