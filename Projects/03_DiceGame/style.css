@@ -1,10 +1,146 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-html,body{
-    width: 100%;
-    height: 100%;
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-image: url(./Assets/gradient-1784540626499.png);
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+header {
+  position: absolute;
+  top: 0.5%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  h1 {
+    color: white;
+    font-size: 4rem;
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-style: normal;
+    background-color: rgba(6, 6, 6, 0.075);
+    padding: 0 15px;
+    line-height: 1.4;
+    border-radius: 15px;
+    /* text-shadow:
+      -2px -2px 0 #000,
+      2px -2px 0 #000,
+      -2px 2px 0 #000,
+      2px 2px 0 #000; */
+  }
+}
+
+main {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player {
+  width: 500px;
+  height: 600px;
+  background-color: rgba(253, 252, 252, 0.292);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10%;
+}
+
+.part1 {
+  margin-top: 1.5%;
+  text-align: center;
+  line-height: 2;
+  padding: 0 2rem;
+
+  h2 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 3rem;
+    color: white;
+    text-transform: uppercase;
+  }
+}
+
+img {
+  width: 150px;
+  margin-bottom: 2rem;
+}
+
+.diceImg {
+  width: 80px;
+  transition: all linear 0.3s;
+}
+
+.diceImg:hover {
+  transform: rotate(90deg);
+}
+
+.part2 {
+  padding: 6px 20px;
+  margin-bottom: 30px;
+  text-align: center;
+  line-height: 1.5;
+  background-color: rgba(253, 252, 252, 0);
+  backdrop-filter: blur(8px);
+  border-radius: 12%;
+
+  h3 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 2.2rem;
+    color: black;
+  }
+}
+
+.center {
+  padding: 2rem 10px;
+  width: 200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+button {
+  display: block;
+  border: none;
+  font-size: 1.2rem;
+  padding: 10px 25px;
+  background-color: whitesmoke;
+  border-radius: 50px;
+  font-weight: 700;
+  transition: all ease-in-out 0.3s;
+}
+
+button:hover {
+  background-color: white;
+  transform: translateY(-6%);
+}
+
+.playbtns {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2rem;
 }
