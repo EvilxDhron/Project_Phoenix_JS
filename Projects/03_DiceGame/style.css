@@ -63,6 +63,10 @@ main {
   border-radius: 10%;
 }
 
+.active-player {
+  background-color: rgba(253, 252, 252, 0.608);
+}
+
 .part1 {
   margin-top: 1.5%;
   text-align: center;

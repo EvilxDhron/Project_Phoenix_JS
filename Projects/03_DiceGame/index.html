@@ -23,40 +23,41 @@
       <h1>Roll the Dice</h1>
     </header>
     <main>
-      <section class="player">
+      <section class="player1 player">
         <div class="part1">
           <h2>Player 1</h2>
-          <h2>0</h2>
+          <h2 id="player1Score">0</h2>
         </div>
         <img src="./Assets/animal.png" alt="" />
         <div class="part2">
           <div class="currentbox">
             <h3>Current</h3>
-            <h3>0</h3>
+            <h3 id="player1Current">0</h3>
           </div>
         </div>
       </section>
       <section class="center">
-        <button>New Game</button>
-        <img class="diceImg" src="./Assets/dice.png" alt="#" />
+        <button id="newGameBtn">New Game</button>
+        <img class="diceImg" src="./Assets/1dice.png" alt="#" />
         <div class="playbtns">
-          <button>Roll Dice</button>
-          <button>Hold</button>
+          <button id="rollDiceBtn">Roll Dice</button>
+          <button id="holdBtn">Hold</button>
         </div>
       </section>
-      <section class="player">
+      <section class="player2 player">
         <div class="part1">
           <h2>Player 2</h2>
-          <h2>0</h2>
+          <h2 id="player2Score">0</h2>
         </div>
         <img src="./Assets/stripes.png" alt="" />
         <div class="part2">
           <div class="currentbox">
             <h3>Current</h3>
-            <h3>0</h3>
+            <h3 id="player2Current">0</h3>
           </div>
         </div>
       </section>
     </main>
+    <script src="script.js"></script>
   </body>
 </html>
