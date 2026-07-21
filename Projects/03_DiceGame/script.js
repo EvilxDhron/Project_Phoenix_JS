@@ -10,6 +10,7 @@ const player2Score = document.querySelector("#player2Score");
 const player1Current = document.querySelector("#player1Current");
 const player2Current = document.querySelector("#player2Current");
 const diceImg = document.querySelector(".diceImg");
+const mainText = document.querySelector("h1");
 
 // Initial Values
 let activePlayer = true;
@@ -23,6 +24,7 @@ function resetGame() {
   let activePlayer = true;
   player1.classList.add("active-player");
   diceImg.src = `./Assets/initialImg.png`;
+  mainText.textContent = "Roll the Dice";
 }
 
 function changeColors() {
@@ -74,16 +76,28 @@ function checkDice(dice, num) {
   }
 }
 
+const checkWinner = () => {
+  if (player1Score.textContent >= 10) {
+    mainText.textContent = "Player 1 won the Game 🥳";
+  } else if (player2Score.textContent >= 10) {
+    mainText.textContent = "Player 2 won the Game 🥳";
+  }
+};
+
 rollDiceBtn.addEventListener("click", () => {
-  const num = Math.trunc(Math.random() * 6) + 1;
-  diceImg.src = `./Assets/${num}dice.png`;
-  checkDice(diceImg.src, num);
+  if (!(player1Score.textContent >= 10 || player2Score.textContent >= 10)) {
+    const num = Math.trunc(Math.random() * 6) + 1;
+    diceImg.src = `./Assets/${num}dice.png`;
+    checkDice(diceImg.src, num);
+    checkWinner();
+  }
 });
 
 holdBtn.addEventListener("click", () => {
-  updateTotalScores();
+  if (!(player1Score.textContent >= 10 || player2Score.textContent >= 10)) {
+    updateTotalScores();
+    checkWinner();
+  }
 });
 
-newGameBtn.addEventListener("click", () => {
-  resetGame();
-});
+newGameBtn.addEventListener("click", resetGame);
