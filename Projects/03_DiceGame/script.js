@@ -12,6 +12,10 @@ const player2Current = document.querySelector("#player2Current");
 const diceImg = document.querySelector(".diceImg");
 const mainText = document.querySelector("h1");
 
+const players = [player1, player2];
+const currentElements = [player1Current, player2Current];
+const scoreElements = [player1Score, player2Score];
+
 // Initial Values
 const WINNING_SCORE = 100;
 player1.classList.add("active-player");
@@ -28,54 +32,35 @@ function resetGame() {
   game.currentScore = 0;
   game.activePlayer = 0;
   game.playing = true;
-  player1Current.textContent = game.currentScore;
-  player1Score.textContent = game.scores[0];
-  player2Current.textContent = game.currentScore;
-  player2Score.textContent = game.scores[1];
-  player1.classList.add("active-player");
+  currentElements[0].textContent = game.currentScore;
+  currentElements[1].textContent = game.currentScore;
+  scoreElements[0].textContent = game.scores[0];
+  scoreElements[1].textContent = game.scores[1];
+  players[0].classList.add("active-player");
+  players[1].classList.remove("active-player");
   diceImg.src = `./Assets/initialImg.png`;
   mainText.textContent = "Roll the Dice";
 }
 
 function changeColors() {
   if (!game.playing) return;
-
-  if (!game.activePlayer) {
-    player1.classList.add("active-player");
-    player2.classList.remove("active-player");
-  } else {
-    player2.classList.add("active-player");
-    player1.classList.remove("active-player");
-  }
+  players[game.activePlayer].classList.add("active-player");
+  players[1 - game.activePlayer].classList.remove("active-player");
 }
 
 function updateCurrentScores(num) {
   game.currentScore += num;
-  if (!game.activePlayer) {
-    player1Current.textContent = game.currentScore;
-  } else {
-    player2Current.textContent = game.currentScore;
-  }
+  currentElements[game.activePlayer].textContent = game.currentScore;
 }
 
 function updateTotalScores() {
-  if (!game.activePlayer) {
-    game.scores[game.activePlayer] += game.currentScore;
-    player1Score.textContent = game.scores[game.activePlayer];
-    game.currentScore = 0;
-    player1Current.textContent = game.currentScore;
-    game.activePlayer = 1 - game.activePlayer;
-    checkWinner();
-    changeColors();
-  } else {
-    game.scores[game.activePlayer] += game.currentScore;
-    player2Score.textContent = game.scores[game.activePlayer];
-    game.currentScore = 0;
-    player2Current.textContent = game.currentScore;
-    game.activePlayer = 1 - game.activePlayer;
-    checkWinner();
-    changeColors();
-  }
+  game.scores[game.activePlayer] += game.currentScore;
+  scoreElements[game.activePlayer].textContent = game.scores[game.activePlayer];
+  game.currentScore = 0;
+  currentElements[game.activePlayer].textContent = game.currentScore;
+  checkWinner();
+  game.activePlayer = 1 - game.activePlayer;
+  changeColors();
 }
 
 function checkDice(num) {
@@ -84,19 +69,15 @@ function checkDice(num) {
     updateCurrentScores(num);
   } else {
     game.currentScore = 0;
-    if (!game.activePlayer) player1Current.textContent = game.currentScore;
-    if (game.activePlayer) player2Current.textContent = game.currentScore;
+    currentElements[game.activePlayer].textContent = game.currentScore;
     game.activePlayer = 1 - game.activePlayer;
     changeColors();
   }
 }
 
 const checkWinner = () => {
-  if (game.scores[0] >= WINNING_SCORE) {
-    mainText.textContent = "Player 1 won the Game🥳";
-    game.playing = false;
-  } else if (game.scores[1] >= WINNING_SCORE) {
-    mainText.textContent = "Player 2 won the Game🥳";
+  if (game.scores[0] >= WINNING_SCORE || game.scores[1] >= WINNING_SCORE) {
+    mainText.textContent = `Player ${game.activePlayer ? 2 : 1} won the Game🥳`;
     game.playing = false;
   }
 };
