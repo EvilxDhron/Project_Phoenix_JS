@@ -13,22 +13,34 @@ const diceImg = document.querySelector(".diceImg");
 const mainText = document.querySelector("h1");
 
 // Initial Values
-let activePlayer = true;
+const WINNING_SCORE = 100;
 player1.classList.add("active-player");
 
+const game = {
+  scores: [0, 0],
+  currentScore: 0,
+  activePlayer: 0,
+  playing: true,
+};
+
 function resetGame() {
-  player1Current.textContent = 0;
-  player1Score.textContent = 0;
-  player2Current.textContent = 0;
-  player2Score.textContent = 0;
-  let activePlayer = true;
+  game.scores = [0, 0];
+  game.currentScore = 0;
+  game.activePlayer = 0;
+  game.playing = true;
+  player1Current.textContent = game.currentScore;
+  player1Score.textContent = game.scores[0];
+  player2Current.textContent = game.currentScore;
+  player2Score.textContent = game.scores[1];
   player1.classList.add("active-player");
   diceImg.src = `./Assets/initialImg.png`;
   mainText.textContent = "Roll the Dice";
 }
 
 function changeColors() {
-  if (activePlayer) {
+  if (!game.playing) return;
+
+  if (!game.activePlayer) {
     player1.classList.add("active-player");
     player2.classList.remove("active-player");
   } else {
@@ -38,66 +50,69 @@ function changeColors() {
 }
 
 function updateCurrentScores(num) {
-  if (activePlayer) {
-    player1Current.textContent = Number(player1Current.textContent) + num;
+  game.currentScore += num;
+  if (!game.activePlayer) {
+    player1Current.textContent = game.currentScore;
   } else {
-    player2Current.textContent = Number(player2Current.textContent) + num;
+    player2Current.textContent = game.currentScore;
   }
 }
 
 function updateTotalScores() {
-  if (activePlayer) {
-    player1Score.textContent =
-      Number(player1Score.textContent) + Number(player1Current.textContent);
-    player1Current.textContent = 0;
-    activePlayer = !activePlayer;
+  if (!game.activePlayer) {
+    game.scores[game.activePlayer] += game.currentScore;
+    player1Score.textContent = game.scores[game.activePlayer];
+    game.currentScore = 0;
+    player1Current.textContent = game.currentScore;
+    game.activePlayer = 1 - game.activePlayer;
+    checkWinner();
     changeColors();
   } else {
-    player2Score.textContent =
-      Number(player2Score.textContent) + Number(player2Current.textContent);
-    player2Current.textContent = 0;
-    activePlayer = !activePlayer;
+    game.scores[game.activePlayer] += game.currentScore;
+    player2Score.textContent = game.scores[game.activePlayer];
+    game.currentScore = 0;
+    player2Current.textContent = game.currentScore;
+    game.activePlayer = 1 - game.activePlayer;
+    checkWinner();
     changeColors();
   }
 }
 
-function checkDice(dice, num) {
-  if (!dice.includes("1dice")) {
+function checkDice(num) {
+  if (num !== 1) {
     changeColors();
     updateCurrentScores(num);
   } else {
-    if (activePlayer) {
-      player1Current.textContent = 0;
-    } else {
-      player2Current.textContent = 0;
-    }
-    activePlayer = !activePlayer;
+    game.currentScore = 0;
+    if (!game.activePlayer) player1Current.textContent = game.currentScore;
+    if (game.activePlayer) player2Current.textContent = game.currentScore;
+    game.activePlayer = 1 - game.activePlayer;
     changeColors();
   }
 }
 
 const checkWinner = () => {
-  if (player1Score.textContent >= 10) {
-    mainText.textContent = "Player 1 won the Game 🥳";
-  } else if (player2Score.textContent >= 10) {
-    mainText.textContent = "Player 2 won the Game 🥳";
+  if (game.scores[0] >= WINNING_SCORE) {
+    mainText.textContent = "Player 1 won the Game🥳";
+    game.playing = false;
+  } else if (game.scores[1] >= WINNING_SCORE) {
+    mainText.textContent = "Player 2 won the Game🥳";
+    game.playing = false;
   }
 };
 
 rollDiceBtn.addEventListener("click", () => {
-  if (!(player1Score.textContent >= 10 || player2Score.textContent >= 10)) {
-    const num = Math.trunc(Math.random() * 6) + 1;
-    diceImg.src = `./Assets/${num}dice.png`;
-    checkDice(diceImg.src, num);
-    checkWinner();
-  }
+  if (!game.playing) return;
+
+  const num = Math.trunc(Math.random() * 6) + 1;
+  diceImg.src = `./Assets/${num}dice.png`;
+  checkDice(num);
 });
 
 holdBtn.addEventListener("click", () => {
-  if (!(player1Score.textContent >= 10 || player2Score.textContent >= 10)) {
-    updateTotalScores();
-    checkWinner();
-  }
+  if (!game.playing) return;
+
+  updateTotalScores();
 });
 
 newGameBtn.addEventListener("click", resetGame);
