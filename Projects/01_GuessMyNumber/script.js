@@ -11,13 +11,16 @@ const checkBtn = document.querySelector(".inputBtn");
 const highLowText = document.querySelector(".text1");
 const scoreText = document.querySelector(".text2");
 const highScore = document.querySelector(".text3");
+const inputSection = document.querySelector(".sec1");
 highScore.textContent = localStorage.getItem("newHighScore") || 0;
 
-// Initial Values
+// Initial Values / Game State
 
-let hiddenNum = Math.trunc(Math.random() * 20) + 1;
-let score = 20;
-let clickTimer = null;
+const game = {
+  hiddenNum: Math.trunc(Math.random() * 20) + 1,
+  score: 20,
+  clickTimer: null,
+};
 
 // Game UI Functions
 
@@ -27,21 +30,21 @@ function resetGameUI() {
   numboxUIChange();
   hiddenNumUIChange();
   showMessage();
+  guessUIupdate();
+  resetInput();
   setSectionDisplay();
   highScore.textContent = localStorage.getItem("newHighScore") || 0;
 }
 
 function showMessage(message = "😉 Start guessing the number...") {
   highLowText.textContent = message;
+}
 
-  if (Number(inputBox.value) !== hiddenNum) {
-    guessText.textContent = "Guess My Number!";
-  }
-
+function resetInput() {
   inputBox.value = "";
 }
 
-function guessUIupdate(text) {
+function guessUIupdate(text = "Guess My Number!") {
   guessText.textContent = text;
 }
 
@@ -81,10 +84,10 @@ function showWinnerUI(num) {
 }
 
 function setSectionDisplay(display = "flex") {
-  document.querySelector(".sec1").style.display = display;
+  inputSection.style.display = display;
 }
 
-function showGmeOverUI() {
+function showGameOverUI() {
   showMessage("Ooh No!! You Lost 😭");
   guessUIupdate("Game Over!! 😫");
   setSectionDisplay("none");
@@ -94,8 +97,8 @@ function showGmeOverUI() {
 // Game Logics
 
 function resetGameState() {
-  hiddenNum = Math.trunc(Math.random() * 20) + 1;
-  score = 20;
+  game.hiddenNum = Math.trunc(Math.random() * 20) + 1;
+  game.score = 20;
   resetGameUI();
 }
 
@@ -110,23 +113,26 @@ function setNewHighScore(newScore) {
   }
 }
 
-function checkTheNum(num) {
+function handleGuess(num) {
   const userNum = Number(num);
 
   if (num.trim() === "") {
     showMessage("Oops!! you did a mistake 😅");
+    resetInput();
     guessUIupdate("It's not a Number!! 😥");
-  } else if (userNum === hiddenNum) {
-    setNewHighScore(score);
-    showWinnerUI(num);
+  } else if (userNum === game.hiddenNum) {
+    setNewHighScore(game.score);
+    showWinnerUI(game.hiddenNum);
     setSectionDisplay("none");
   } else {
-    showMessage(userNum > hiddenNum ? "Too High!!" : "Too Low!");
-    score--;
-    scoreUIUpdate(score);
+    showMessage(userNum > game.hiddenNum ? "Too High!!" : "Too Low!");
+    guessUIupdate();
+    resetInput();
+    game.score--;
+    scoreUIUpdate(game.score);
 
     if (score === 0) {
-      showGmeOverUI();
+      showGameOverUI();
       return;
     }
   }
@@ -135,25 +141,25 @@ function checkTheNum(num) {
 // Game Events
 
 againBtn.addEventListener("click", () => {
-  clearTimeout(clickTimer);
+  clearTimeout(game.clickTimer);
 
-  clickTimer = setTimeout(() => {
+  game.clickTimer = setTimeout(() => {
     resetGameState();
   }, 250);
 });
 
 againBtn.addEventListener("dblclick", () => {
-  clearTimeout(clickTimer);
+  clearTimeout(game.clickTimer);
   localStorage.removeItem("newHighScore");
   resetGameState();
 });
 
 inputBox.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
-    checkTheNum(inputBox.value);
+    handleGuess(inputBox.value);
   }
 });
 
 checkBtn.addEventListener("click", () => {
-  checkTheNum(inputBox.value);
+  handleGuess(inputBox.value);
 });
