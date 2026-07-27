@@ -349,3 +349,96 @@ const casesCounter = function (str) {
 };
 
 console.log(casesCounter(str7));
+
+/* 
+Convert LowerCase letters to UpperCase and vice-versa.
+*/
+
+function charCaseChanger(str = "JavaScript") {
+  let newStr = "";
+  for (let char of str) {
+    if (char >= "a" && char <= "z") {
+      newStr += String.fromCharCode(char.charCodeAt() - 32);
+    } else if (char >= "A" && char <= "Z") {
+      newStr += String.fromCharCode(char.charCodeAt() + 32);
+    } else {
+      newStr += char;
+    }
+  }
+  return newStr;
+}
+
+/* 
+Check if two strings are Anagrams.
+*/
+
+// Solution 1
+
+function checkAnagrams(str1 = "iceman", str2 = "cinema") {
+  if (str1.length !== str2.length) {
+    return false;
+  }
+
+  const strObjects = [{}, {}];
+  const strArray = [str1, str2];
+  for (let i = 0; i < 2; i++) {
+    for (let char of strArray[i]) {
+      strObjects[i][char] = (strObjects[i][char] || 0) + 1;
+    }
+  }
+  for (let char in strObjects[0]) {
+    if (strObjects[1][char]) {
+      if (strObjects[1][char] === strObjects[0][char]) {
+        continue;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+  return true;
+}
+
+// Solution 2
+
+function checkAnagrams2(str1 = "iceman", str2 = "cinema") {
+  if (str1.length !== str2.length) {
+    return false;
+  }
+  let strObj = {};
+
+  for (let char of str1) {
+    strObj[char] = (strObj[char] || 0) + 1;
+  }
+
+  // Decreasing the frequency count of first string obj to check for Anagram.
+  for (let char of str2) {
+    if (!strObj[char]) {
+      return false;
+    } else {
+      strObj[char] -= 1;
+    }
+  }
+  return true;
+}
+
+/* 
+Find the longest word in a sentence.
+*/
+
+function longestWordChecker(sentence = "I'm a JavaScript Developer") {
+  const words = sentence.split(" ");
+  let longest = {
+    length: 0,
+    word: null,
+  };
+
+  for (let word of words) {
+    if (word.length > longest.length) {
+      longest.length = word.length;
+      longest.word = word;
+    }
+  }
+  return longest.word;
+}
