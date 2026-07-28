@@ -442,3 +442,25 @@ function longestWordChecker(sentence = "I'm a JavaScript Developer") {
   }
   return longest.word;
 }
+
+/* 
+Find how many times a substring appears.
+*/
+
+function substringCounter(str = "hello hello hello", subStr = "hello") {
+  let count = 0;
+
+  for (let c = 0; c < str.length; c++) {
+    if (str[c] === subStr[0]) {
+      for (let i = c; i < str.length; i++) {
+        if (str[i] === subStr[i - c]) {
+          count++;
+        } else {
+          break;
+        }
+      }
+    }
+  }
+
+  return Math.floor(count / subStr.length);
+}
