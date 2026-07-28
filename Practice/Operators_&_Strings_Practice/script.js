@@ -447,6 +447,8 @@ function longestWordChecker(sentence = "I'm a JavaScript Developer") {
 Find how many times a substring appears.
 */
 
+// Solution 1
+
 function substringCounter(str = "hello hello hello", subStr = "hello") {
   let count = 0;
 
@@ -463,4 +465,80 @@ function substringCounter(str = "hello hello hello", subStr = "hello") {
   }
 
   return Math.floor(count / subStr.length);
+}
+
+// Solution 2
+
+// with a little improvement and better namings
+
+function substringCounter2(str, subStr) {
+  let count = 0;
+
+  for (let start = 0; start < str.length; start++) {
+    let isMatch = true;
+    for (let subStart = 0; subStart < subStr.length; subStart++) {
+      if (str[start + subStart] !== subStr[subStart]) {
+        isMatch = false;
+        break;
+      }
+    }
+    if (isMatch) {
+      count++;
+    }
+  }
+
+  return count;
+}
+
+/* 
+Remove duplicate characters from a string.
+*/
+
+function duplicateRemover(str = "Programming") {
+  let newStr = "";
+  for (let char of str) {
+    if (!newStr.includes(char)) {
+      newStr += char;
+    }
+  }
+  return newStr;
+}
+
+/* 
+Compress a string like aaabbc → a3b2c1.
+*/
+
+// Solution 1
+
+function stringCompressor(str = "aaabbc") {
+  let compressStr = "";
+  const strObj = {};
+
+  for (let char of str) {
+    strObj[char] = (strObj[char] || 0) + 1;
+  }
+
+  for (let key in strObj) {
+    compressStr += key;
+    compressStr += strObj[key];
+  }
+  return compressStr;
+}
+
+// Solution 2 --> More improved version
+
+function stringCompressor2(str) {
+  let compressStr = "";
+  let count = 1;
+
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === str[i + 1]) {
+      count++;
+    } else {
+      compressStr += str[i] + count;
+      count = 1;
+    }
+  }
+
+  return compressStr;
 }
