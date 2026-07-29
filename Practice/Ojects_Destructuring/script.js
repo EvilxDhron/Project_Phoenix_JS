@@ -270,3 +270,62 @@ const [{thirdParty: {goodreads: {rating: bookRating}}}] = books;
 function printBookInfo({title, author: [author], year = 'unknown'}){
     console.log(`${title} by ${author}, ${year}`);
 }
+
+/* 
+  Q.7 Skip books and extract nested values without using books[2].title directly, destructure the array so that you get:
+
+    const title_3 = "Computer Systems: A Programmer's Perspective";
+    const rating_3 = 4.44;
+*/
+
+const [ , , {title: title_3, thirdParty: {goodreads: {rating: rating_3}}}] = books;
+
+/* 
+  Q.8 The fifth book has
+
+    programmingLanguage: null
+
+  Destructure it so that the variable becomes
+
+    language_5 = "Not Specified"
+*/
+
+let [ , , , , {programmingLanguage: language_5}] = books;
+language_5 = language_5 ?? "Not Specified";
+
+
+/* 
+  Q.9 From the fourth book, extract
+
+    author1
+    author2
+    author3
+
+    keyword1
+    keyword2
+    otherKeywords
+*/
+
+const [ , , , {author: [author1, author2, author3], keywords: [keyword1, keyword2, ...otherKeywords]}] = books;
+
+/* 
+  Q.10 Using one destructuring statement, extract from the first book:
+
+    bookTitle_0
+    mainAuthor
+    coAuthor
+
+    publisher
+
+    edition
+
+    firstKeyword
+    remainingKeywords
+
+    rating
+    fiveStars
+
+    isHighlighted
+*/
+
+const [{title: bookTitle_0, author: [mainAuthor, coAuthor], publisher, edition, keywords: [firstKeyword, ...remainingKeywords], thirdParty: {goodreads: {rating, fiveStarRatingCount: fiveStars}}, highlighted: isHighlighted}] = books;
