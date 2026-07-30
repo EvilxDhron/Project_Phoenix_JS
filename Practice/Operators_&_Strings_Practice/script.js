@@ -542,3 +542,49 @@ function stringCompressor2(str) {
 
   return compressStr;
 }
+
+/* 
+    Check if a string only contains digits.
+*/
+
+function strDigitChecker(str) {
+  if (str === "") return false;
+  for (let char of str) {
+    if (char < "0" || char > "9") {
+      return false;
+    }
+  }
+  return true;
+}
+
+/* 
+Find the longest substring without repeating characters.
+*/
+
+// Incorrect Solution, I think it's not my type right now 😅.
+function longSubstrFinder(str) {
+  let length = 1;
+  let length2 = 1;
+  let unique = "";
+
+  for (let char = 0; char < str.length; char++) {
+    if (str[char] !== str[char + 1]) {
+      if (unique === "") {
+        unique += str[char];
+      }
+
+      for (let i = 0; i < unique.length; i++) {
+        if (!unique.includes(str[char])) {
+          length2++;
+          unique += str[char];
+        }
+      }
+    } else {
+      length = Math.max(length, length2);
+      unique = unique.length >= length ? unique : "";
+      length2 = 1;
+    }
+  }
+
+  return length;
+}
