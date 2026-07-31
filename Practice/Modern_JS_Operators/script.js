@@ -318,3 +318,65 @@ function highlightedbooks(books) {
     books[i].highlighted &&= !(books[i].thirdParty.goodreads.rating < 4.2);
   }
 }
+
+/* 
+  Q.11 Create a new object from the first book but change
+
+  edition: 5
+
+  without modifying the original object.
+
+  Use spread syntax.
+*/
+
+const newBook = { ...books[0], edition: 5 };
+
+/* 
+  Q.12 Some books don't have edition. Loop through books and set edition = 1, only if it doesn't exist.
+*/
+
+function checkEdition(books) {
+  for (let i = 0; i < books.length; i++) {
+    books[i].edition ??= 1;
+  }
+}
+
+/* 
+  Q.13 Print only books that contain JavaScript.
+*/
+
+function javascriptBooks(books) {
+  for (let i = 0; i < books.length; i++) {
+    books[i].programmingLanguage &&
+      books[i].programmingLanguage.includes("JavaScript") &&
+      console.log(books[i].title);
+  }
+}
+
+/* 
+  Q.14 Print
+
+  `Algorithms is highlighted`
+
+  only for highlighted books.
+*/
+
+function isHighlighted(books) {
+  for (let i = 0; i < books.length; i++) {
+    books[i].highlighted && console.log(`${books[i].title} is highlighted.`);
+  }
+}
+
+/*  
+  Q.15 Print the Goodreads rating of every book. If Goodreads doesn't exist, print "No rating"
+*/
+
+function printRatings(books){
+  for (let i = 0; i < books.length; i++){
+    console.log(
+      books[i].thirdParty.goodreads
+        ? `${books[i].title} has ${books[i].thirdParty.goodreads.rating} ratings.`
+        : "No ratings.",
+    );
+  }
+}
