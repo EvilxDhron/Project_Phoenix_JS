@@ -463,6 +463,37 @@ const newBook2 = {
     Exam
 */
 
-function getFirstKeyword(book){
-  return book.keywords?.[0]
+function getFirstKeyword(book) {
+  return book.keywords?.[0];
 }
+
+/* 
+  Q.22 Below is the entries variable that stores an empty array. Use the for-of loop together with the Object.keys() method to loop over the thirdParty.goodreads property (array) of the first book object from the books array. For each key, push a new array that contains that key to the entries array.
+*/
+const entries = [];
+
+function goodreadEntries(book) {
+  for (let key of Object.keys(book.thirdParty.goodreads)) {
+    entries.push([key]);
+  }
+  return entries;
+}
+
+/* 
+  Q.23 The Object.values() method returns an array, which means you can call the Array's entries() method on it, for example, Object.entries(books[0].thirdParty.goodreads).entries(). The Array's entries() method returns [index, value] arrays for each element in the array.
+
+  Push each value to the appropriate inner array in the entries array (use index from entries()).
+*/
+
+function goodreadEntries2(book) {
+  for (const [index, value] of Object.values(book.thirdParty.goodreads).entries()) {
+    entries[index].push(value);
+  }
+}
+
+
+/* 
+  Q.24 Use the Object.entries() method on the thirdParty.goodreads property of the first book from the books array. Assign the returned value to the variable called entries2.
+*/
+
+const entries2 = Object.entries(books[0].thirdParty.goodreads);
