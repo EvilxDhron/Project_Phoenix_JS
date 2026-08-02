@@ -600,3 +600,213 @@ for (const player of game.scored) {
   scorers[player] = (scorers[player] || 0) + 1;
 }
 console.log(scorers);
+
+// Tournament for Practice
+
+const tournament = {
+  name: "Champions Cup 2040",
+  location: "London",
+  matches: [
+    {
+      homeTeam: "Real Madrid",
+      awayTeam: "Manchester City",
+      score: "3:2",
+      scorers: ["Vinicius", "Haaland", "Bellingham", "Foden", "Vinicius"],
+      attendance: 74250,
+      referee: "Michael Oliver",
+      odds: {
+        home: 2.1,
+        draw: 3.4,
+        away: 2.8,
+      },
+    },
+    {
+      homeTeam: "Barcelona",
+      awayTeam: "Bayern Munich",
+      score: "1:1",
+      scorers: ["Lewandowski", "Musiala"],
+      attendance: 68100,
+      referee: "Daniele Orsato",
+      odds: {
+        home: 2.5,
+        draw: 3.2,
+        away: 2.7,
+      },
+    },
+    {
+      homeTeam: "Liverpool",
+      awayTeam: "PSG",
+      score: "2:0",
+      scorers: ["Salah", "Nunez"],
+      attendance: 60300,
+      referee: null,
+      odds: {
+        home: 1.9,
+        draw: 3.6,
+        away: 3.8,
+      },
+    },
+  ],
+
+  topScorers: {
+    Vinicius: 9,
+    Haaland: 12,
+    Salah: 8,
+    Lewandowski: 6,
+    Musiala: 7,
+  },
+
+  awards: {
+    goldenBoot: "Haaland",
+    bestYoungPlayer: "Musiala",
+    fairPlay: null,
+  },
+};
+
+/* 
+  Q.1 Loop through every match and print:
+
+    Match 1: Real Madrid vs Manchester City (3:2)
+    Match 2: Barcelona vs Bayern Munich (1:1) 
+
+*/
+
+// for finding ratio
+function getScoreRatio(a, b) {
+  // Multiply by 10 (for 1 decimal like 1.3 or 5.6)
+  a *= 10;
+  b *= 10;
+
+  // To find biggest common divisor
+  function gcd(c, d) {
+    while (d) {
+      [c, d] = [d, c % d];
+    }
+    return c;
+  }
+
+  // stores the highest common divisor
+  const c = gcd(a, b);
+
+  // divide both numbers with the highest common divisor to find the ratio.
+  return `${a / c}:${b / c}`;
+}
+
+// const allMatches =
+
+for (const [index, match] of tournament.matches.entries()) {
+  console.log(
+    `Match ${index + 1}: ${match.homeTeam} Vs ${match.awayTeam} ${getScoreRatio(match.odds.home, match.odds.away)}`,
+  );
+}
+
+/* 
+  Q.2 Loop through every scorer of every match and print:
+
+    Goal 1: Vinicius
+    Goal 2: Haaland
+*/
+
+for (const match of tournament.matches) {
+  for (const [index, scorer] of match.scorers.entries()) {
+    console.log(`Goal ${index + 1}: ${scorer}`);
+  }
+}
+
+/* 
+  Q..3 Calculate the total attendance of the tournament.
+
+    Expected output:
+
+    Total attendance: 202650
+*/
+let totalAttendance = 0;
+for(let match of tournament.matches){
+  totalAttendance += match.attendance;
+}
+console.log(totalAttendance);
+
+/* 
+  Q.4 Calculate the average attendance.
+*/
+
+const averageAttendance = totalAttendance / tournament.matches.length;
+
+/* 
+  Q.5 Create an object called goalCounts.
+
+    It should contain every player that scored in the tournament.
+*/
+
+const goalCounts = {};
+for (const match of tournament.matches){
+  for(const scorer of match.scorers){
+    goalCounts[scorer] = (goalCounts[scorer] || 0) + 1;
+  }
+}
+
+/* 
+  Q.6 Print all players in topScorers like this:
+
+    Vinicius scored 9 goals
+    Haaland scored 12 goals
+*/
+
+for(const [scorer, score] of Object.entries(tournament.topScorers)){
+  console.log(`${scorer} scored ${score} goals.`);
+}
+
+/* 
+  Q.7 Find the player with the highest number of goals.
+
+    Expected output:
+
+    Top scorer: Haaland (12)
+*/
+
+let highScore = tournament.topScorers.Vinicius;
+let highScorer = "Vinicius";
+for(const [scorer, score] of Object.entries(tournament.topScorers)){
+  if(highScore < score){
+    highScore = score;
+    highScorer = scorer;
+  }
+}
+
+console.log(`Top scorer: ${highScorer} (${highScore})`);
+
+/* 
+  Q.8 Some matches don't have a referee.
+
+    Print:
+
+    Referee: Michael Oliver
+    Referee: Daniele Orsato
+    Referee: Referee not assigned
+*/
+
+for (const match of tournament.matches){
+  console.log(`Referee: ${match.referee || "Referee not assigned"}`);
+}
+
+/* 
+  Q.9 Create a new object called teams.
+
+    It should count how many matches each team played.
+
+    Example:
+
+    {
+      "Real Madrid": 1,
+      "Manchester City": 1,
+      "Barcelona": 1,
+      ...
+    }
+*/
+
+const teams = {};
+for(const match of tournament.matches){
+  teams[match.homeTeam] = (teams[match.homeTeam] || 0) + 1;
+  teams[match.awayTeam] = (teams[match.awayTeam] || 0) + 1;
+}
+console.log(teams);
