@@ -494,7 +494,7 @@ function substringCounter2(str, subStr) {
 Remove duplicate characters from a string.
 */
 
-function duplicateRemover(str = "Programming") {
+function duplicateRemover5(str = "Programming") {
   let newStr = "";
   for (let char of str) {
     if (!newStr.includes(char)) {
@@ -588,3 +588,291 @@ function longSubstrFinder(str) {
 
   return length;
 }
+
+const books = [
+  {
+    title: "Algorithms",
+    author: ["Robert Sedgewick", "Kevin Wayne"],
+    publisher: "Addison-Wesley Professional",
+    publicationDate: "2011-03-24",
+    edition: 4,
+    keywords: [
+      "computer science",
+      "programming",
+      "algorithms",
+      "data structures",
+      "java",
+      "math",
+      "software",
+      "engineering",
+    ],
+    pages: 976,
+    format: "hardcover",
+    ISBN: "9780321573513",
+    language: "English",
+    programmingLanguage: "Java",
+    onlineContent: true,
+    thirdParty: {
+      goodreads: {
+        rating: 4.41,
+        ratingsCount: 1733,
+        reviewsCount: 63,
+        fiveStarRatingCount: 976,
+        oneStarRatingCount: 13,
+      },
+    },
+    highlighted: true,
+  },
+  {
+    title: "Structure and Interpretation of Computer Programs",
+    author: [
+      "Harold Abelson",
+      "Gerald Jay Sussman",
+      "Julie Sussman (Contributor)",
+    ],
+    publisher: "The MIT Press",
+    publicationDate: "2022-04-12",
+    edition: 2,
+    keywords: [
+      "computer science",
+      "programming",
+      "javascript",
+      "software",
+      "engineering",
+    ],
+    pages: 640,
+    format: "paperback",
+    ISBN: "9780262543231",
+    language: "English",
+    programmingLanguage: "JavaScript",
+    onlineContent: false,
+    thirdParty: {
+      goodreads: {
+        rating: 4.36,
+        ratingsCount: 14,
+        reviewsCount: 3,
+        fiveStarRatingCount: 8,
+        oneStarRatingCount: 0,
+      },
+    },
+    highlighted: true,
+  },
+  {
+    title: "Computer Systems: A Programmer's Perspective",
+    author: ["Randal E. Bryant", "David Richard O'Hallaron"],
+    publisher: "Prentice Hall",
+    publicationDate: "2002-01-01",
+    edition: 1,
+    keywords: [
+      "computer science",
+      "computer systems",
+      "programming",
+      "software",
+      "C",
+      "engineering",
+    ],
+    pages: 978,
+    format: "hardcover",
+    ISBN: "9780130340740",
+    language: "English",
+    programmingLanguage: "C",
+    onlineContent: false,
+    thirdParty: {
+      goodreads: {
+        rating: 4.44,
+        ratingsCount: 1010,
+        reviewsCount: 57,
+        fiveStarRatingCount: 638,
+        oneStarRatingCount: 16,
+      },
+    },
+    highlighted: true,
+  },
+  {
+    title: "Operating System Concepts",
+    author: ["Abraham Silberschatz", "Peter B. Galvin", "Greg Gagne"],
+    publisher: "John Wiley & Sons",
+    publicationDate: "2004-12-14",
+    edition: 10,
+    keywords: [
+      "computer science",
+      "operating systems",
+      "programming",
+      "software",
+      "C",
+      "Java",
+      "engineering",
+    ],
+    pages: 921,
+    format: "hardcover",
+    ISBN: "9780471694663",
+    language: "English",
+    programmingLanguage: "C, Java",
+    onlineContent: false,
+    thirdParty: {
+      goodreads: {
+        rating: 3.9,
+        ratingsCount: 2131,
+        reviewsCount: 114,
+        fiveStarRatingCount: 728,
+        oneStarRatingCount: 65,
+      },
+    },
+  },
+  {
+    title: "Engineering Mathematics",
+    author: ["K.A. Stroud", "Dexter J. Booth"],
+    publisher: "Palgrave",
+    publicationDate: "2007-01-01",
+    edition: 14,
+    keywords: ["mathematics", "engineering"],
+    pages: 1288,
+    format: "paperback",
+    ISBN: "9781403942463",
+    language: "English",
+    programmingLanguage: null,
+    onlineContent: true,
+    thirdParty: {
+      goodreads: {
+        rating: 4.35,
+        ratingsCount: 370,
+        reviewsCount: 18,
+        fiveStarRatingCount: 211,
+        oneStarRatingCount: 6,
+      },
+    },
+    highlighted: true,
+  },
+  {
+    title: "The Personal MBA: Master the Art of Business",
+    author: "Josh Kaufman",
+    publisher: "Portfolio",
+    publicationDate: "2010-12-30",
+    keywords: ["business"],
+    pages: 416,
+    format: "hardcover",
+    ISBN: "9781591843528",
+    language: "English",
+    thirdParty: {
+      goodreads: {
+        rating: 4.11,
+        ratingsCount: 40119,
+        reviewsCount: 1351,
+        fiveStarRatingCount: 18033,
+        oneStarRatingCount: 1090,
+      },
+    },
+  },
+  {
+    title: "Crafting Interpreters",
+    author: "Robert Nystrom",
+    publisher: "Genever Benning",
+    publicationDate: "2021-07-28",
+    keywords: [
+      "computer science",
+      "compilers",
+      "engineering",
+      "interpreters",
+      "software",
+      "engineering",
+    ],
+    pages: 865,
+    format: "paperback",
+    ISBN: "9780990582939",
+    language: "English",
+    thirdParty: {
+      goodreads: {
+        rating: 4.7,
+        ratingsCount: 253,
+        reviewsCount: 23,
+        fiveStarRatingCount: 193,
+        oneStarRatingCount: 0,
+      },
+    },
+  },
+  {
+    title: "Deep Work: Rules for Focused Success in a Distracted World",
+    author: "Cal Newport",
+    publisher: "Grand Central Publishing",
+    publicationDate: "2016-01-05",
+    edition: 1,
+    keywords: ["work", "focus", "personal development", "business"],
+    pages: 296,
+    format: "hardcover",
+    ISBN: "9781455586691",
+    language: "English",
+    thirdParty: {
+      goodreads: {
+        rating: 4.19,
+        ratingsCount: 144584,
+        reviewsCount: 11598,
+        fiveStarRatingCount: 63405,
+        oneStarRatingCount: 1808,
+      },
+    },
+    highlighted: true,
+  },
+];
+
+/* 
+  Q.1 Take the ISBN property of the first book from the books array, and log to the console characters at index 6, 4, 9 and 8. Use bracket notation to access individual characters.
+*/
+
+for (const i of [6, 4, 9, 8]) {
+  console.log(i, books[0].ISBN[i]);
+}
+
+/* 
+  Q.2 Below is the quote variable that stores a string. Find the index of the word 'chess', and log it to the console.
+*/
+
+const quote =
+  "A computer once beat me at chess, but it was no match for me at kick boxing";
+
+console.log(quote.indexOf("chess"));
+
+/* 
+  Q.3 Extract the word "boxing" from the same quote string, and log it to the console.
+*/
+
+console.log(quote.slice(quote.indexOf("boxing")));
+console.log(quote.slice(quote.lastIndexOf(" ") + 1));
+
+/* 
+  Q.4 Some authors are noted as "(Contributor)", for example "Julie Sussman (Contributor)". Create a function called isContributor that takes an author's name as an argument, and returns either true (if he's a contributor) of false (if he's not a contributor). The string "(Contributor)" is always the last part of the author's name string.
+*/
+
+function isContributor(author) {
+  return author.includes("Contributor");
+}
+function isContributor2(author) {
+  return author.lastIndexOf("(Contributor)") !== -1;
+}
+
+isContributor("Julie Sussman (Contributor)");
+
+/* 
+  Q.5 Write a function called normalizeAuthorName that takes an author's name (string) as an argument, and returns the same string, but the first name and last name are capitalized, and the "(Contributor)" part is removed (if exists).
+
+  You can be sure that the author's name always consists of two words separated by a space, and possibly ends with "(Contributor)". The string may also contain trailing spaces.
+*/
+
+/* function normalizeAuthorName(author) {
+  author = author.trim();
+  const firstName = author.slice(0, author.indexOf(" "));
+
+  let lastName = "";
+  if (author.indexOf(" ") === author.lastIndexOf(" ")) {
+    lastName = author.slice(author.indexOf(" ") + 1, author.length);
+  } else {
+    lastName = author.slice(author.indexOf(" ") + 1, author.lastIndexOf(" "));
+  }
+
+  const capitalizedFirstName =
+    firstName[0].toUpperCase() + firstName.slice(1).toLowerCase();
+  const capitalizedLastName =
+    lastName[0].toUpperCase() + lastName.slice(1).toLowerCase();
+
+  return capitalizedFirstName + " " + capitalizedLastName;
+}
+ */
