@@ -857,7 +857,9 @@ isContributor("Julie Sussman (Contributor)");
   You can be sure that the author's name always consists of two words separated by a space, and possibly ends with "(Contributor)". The string may also contain trailing spaces.
 */
 
-/* function normalizeAuthorName(author) {
+// Friend's Solution
+
+function normalizeAuthorName(author) {
   author = author.trim();
   const firstName = author.slice(0, author.indexOf(" "));
 
@@ -875,4 +877,16 @@ isContributor("Julie Sussman (Contributor)");
 
   return capitalizedFirstName + " " + capitalizedLastName;
 }
- */
+
+
+// My Solution
+
+function normalizeAuthorName2(author){
+  author = author.trim().toLowerCase();
+
+  const firstName = author[0].toUpperCase() + author.slice(1, author.indexOf(' '));
+
+  const lastName = author[author.indexOf(" ")+1].toUpperCase() + author.slice(author.indexOf(' ') + 2, author.includes('contributor')? author.lastIndexOf(' ') : author.length);
+
+  return `${firstName} ${lastName}`;
+}
