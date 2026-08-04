@@ -289,7 +289,7 @@ bookMap.set("pages", 464);
     Q.9 Get the title and author values from bookMap, and log to the console a string formatted like that: "${title} by ${author}".
 */
 
-console.log(`${bookMap.get('title')} by ${bookMap.get('author')}`);
+console.log(`${bookMap.get("title")} by ${bookMap.get("author")}`);
 
 /* 
     Q.10 Get the size of bookMap, and log it to the console.
@@ -301,7 +301,7 @@ console.log(bookMap.size);
     Q.11 Check if bookMap has the author key. and if so, log "The author of the book is known" to the console.
 */
 
-bookMap.has('author') && console.log('The author of the book is known');
+bookMap.has("author") && console.log("The author of the book is known");
 
 /* 
     Q.12 Convert the first book object from the books array into a Map, and assign it to a firstBookMap variable.
@@ -313,6 +313,52 @@ const firstBookMap = new Map(Object.entries(books[0]));
     Q.13 Use the for-of loop to iterate over firstBookMap, and log to the console keys that have numbers as values.
 */
 
-for(const [index, value] of firstBookMap.entries()){
-    typeof value === 'number' && console.log(index);
+for (const [index, value] of firstBookMap.entries()) {
+  typeof value === "number" && console.log(index);
+}
+
+/* 
+  Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
+
+  1. Create an array 'events' of the different game events that happened (no duplicates)
+  2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+  3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+  4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+  [FIRST HALF] 17: ⚽ GOAL 
+
+  GOOD LUCK 😊
+
+*/
+
+// Football Betting App
+const gameEvents = new Map([
+  [17, "⚽ GOAL"],
+  [36, "🔄️ Substitution"],
+  [47, "⚽ GOAL"],
+  [61, "🔄️ Substitution"],
+  [64, "🟡 Yellow Card"],
+  [69, "🧧 Red Card"],
+  [70, "🔄️ Substitution"],
+  [72, "🔄️ Substitution"],
+  [76, "⚽ GOAL"],
+  [80, "⚽ GOAL"],
+  [92, "🟡 Yellow Card"],
+]);
+
+// Answer 1
+const events = [...new Set(gameEvents.values())];
+
+// Answer 2
+gameEvents.delete(64);
+
+// Answer 3
+const time = [...gameEvents.keys()].pop();
+console.log(
+  `An event happened, on average, every ${time / gameEvents.size} minutes`,
+);
+
+// Answer 4
+for (const [time, event] of gameEvents) {
+  const half = time <= 45 ? `FIRST` : `SECOND`;
+  console.log(`[${half} HALF] ${time}: ${event}`);
 }
