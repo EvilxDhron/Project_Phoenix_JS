@@ -878,15 +878,55 @@ function normalizeAuthorName(author) {
   return capitalizedFirstName + " " + capitalizedLastName;
 }
 
-
 // My Solution
 
-function normalizeAuthorName2(author){
+function normalizeAuthorName2(author) {
   author = author.trim().toLowerCase();
 
-  const firstName = author[0].toUpperCase() + author.slice(1, author.indexOf(' '));
+  const firstName =
+    author[0].toUpperCase() + author.slice(1, author.indexOf(" "));
 
-  const lastName = author[author.indexOf(" ")+1].toUpperCase() + author.slice(author.indexOf(' ') + 2, author.includes('contributor')? author.lastIndexOf(' ') : author.length);
+  const lastName =
+    author[author.indexOf(" ") + 1].toUpperCase() +
+    author.slice(
+      author.indexOf(" ") + 2,
+      author.includes("contributor") ? author.lastIndexOf(" ") : author.length,
+    );
 
   return `${firstName} ${lastName}`;
+}
+
+/* 
+  Q.6 Take the title of the second book (books[1]) from the books array, and replace the word "Programs" with "Software". Assign the new string to the newBookTitle variable.
+*/
+
+const newBookTitle = books[1].title.replace("Programs", "Software");
+
+/* 
+  Q.7 Write a function called logBookTheme that takes book's title (string), and logs to the console:
+
+  "This book is about computers" if the title starts with the word "computer",
+
+  "This book is about algorithms and data structures" if the title includes both the "algorithms" and "structures" words,
+
+  and, "This book is about some systems, but definitely not about operating systems" if the title ends with the word "system" or "systems", but doesn't include the word "operating".
+*/
+
+function logBookTheme(title) {
+  title = title.toLowerCase();
+  let message = "";
+
+  if (title.startsWith("computer")) {
+    message = "computers";
+  } else if (title.includes("algorithms") && title.includes("structures")) {
+    message = "algorithms and data structures";
+  } else if (
+    !title.includes("operating") &&
+    (title.endsWith("system") || title.endsWith("systems"))
+  ) {
+    message = "some systems, but definitely not about operating systems";
+  }
+  if (message) {
+    console.log(`This book is about ${message}`);
+  }
 }
