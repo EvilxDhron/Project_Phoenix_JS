@@ -28,5 +28,30 @@
             </div>
         </nav>
     </header>
+    <main>
+        <section class="items-container">
+            <div class="part1">
+                <div class="sec1first">
+                <h2>Current Balance</h2>
+                <p>As of 10/08/2026</p>
+            </div>
+            <div class="sec1second"><h1>2500000€<h1></div>
+            </div>
+            <div class="part2"></div>
+            <div class="part3">
+                <h2>Transfer Money</h2>
+                <div class="transInputs">
+                    <input type="text" id="transUser" name="transUser" maxlength="4"
+                    oninput="this.value = this.value.slice(0, 4);"/>
+                    <label for="transUser">Transfer To</label>
+                    <input type="number" id="transAmt" name="transAmt" class="no-arrows"/>
+                    <label for="transAmt">Amount</label>
+                    <button id="navBtn"><img src="./Assets/right-arrow.png"/></button>
+                </div>
+            </div>
+            <div class="part4"></div>
+            <div class="part5"></div>
+        </section>
+    </main>
 </body>
 </html>
