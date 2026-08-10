@@ -4,9 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bankist App</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
     <!-- Project Bankist Application. -->
+
+    <header>
+        <nav>
+            <div class="navSec1">Good Morning, Dhron Yadav</div>
+
+            <div class="navSec2">
+                <img src="./Assets/circle.png"/>
+            </div>
+            
+            <div class="navSec3">
+                <input type="text" id="user" name="user" placeholder="user" maxlength="4"
+                oninput="this.value = this.value.slice(0, 4);"/>
+
+                <input type="number" id="pin" class="no-arrows" name="pin" placeholder="pin" maxlength="4"
+                oninput="this.value = this.value.slice(0, 4);"/>
+
+                <button id="navBtn"><img src="./Assets/right-arrow.png"/></button>
+            </div>
+        </nav>
+    </header>
 </body>
 </html>
