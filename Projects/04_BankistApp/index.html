@@ -49,8 +49,25 @@
                     <button id="navBtn"><img src="./Assets/right-arrow.png"/></button>
                 </div>
             </div>
-            <div class="part4"></div>
-            <div class="part5"></div>
+            <div class="part4">
+                <h2>Request Loan</h2>
+                <div class="transInputs">
+                    <input type="number" id="transAmt" name="transAmt" class="no-arrows"/>
+                    <label for="transAmt">Amount</label>
+                    <button id="navBtn"><img src="./Assets/right-arrow.png"/></button>
+                </div>
+            </div>
+            <div class="part5">
+                <h2>Close Account</h2>
+                <div class="transInputs">
+                    <input type="text" id="transUser" name="transUser" maxlength="4"
+                    oninput="this.value = this.value.slice(0, 4);"/>
+                    <label for="transUser">Confirm User</label>
+                    <input type="number" id="transAmt" name="transAmt" class="no-arrows" oninput="this.value = this.value.slice(0, 4);"/>
+                    <label for="transAmt">Confirm Pin</label>
+                    <button id="navBtn"><img src="./Assets/right-arrow.png"/></button>
+                </div>
+            </div>
         </section>
     </main>
 </body>
