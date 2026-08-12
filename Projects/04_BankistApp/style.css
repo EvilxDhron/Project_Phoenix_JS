@@ -102,13 +102,14 @@ main {
     height: 90%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(auto, 1fr);
     grid-row-gap: 1rem;
     grid-template-areas:
       "a a a a a"
       "b b b c c"
       "b b b d d"
-      "b b b e e";
+      "b b b e e"
+      "f f f g g";
   }
 
   .part1 {
@@ -133,7 +134,7 @@ main {
     margin-right: 2rem;
     background-color:#eaeaea;
     border-radius: 12px;
-    overflow: hidden;
+    overflow: auto;
 
     .line{
       width: 100%;
@@ -308,5 +309,39 @@ main {
         border: none;
       }
     }
+  }
+
+  .part6{
+    grid-area: f;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 2.2rem;
+
+    span{
+      font-size: 1.5rem;
+      font-weight: lighter;
+      color:#0BDA51;
+    }
+
+    .amtstatus:nth-child(2) span{
+      color: red;
+    }
+
+
+    button{
+      width: 4rem;
+      padding: 0.4rem 2rem;
+      display: flex;
+      justify-content: center;
+
+      img{
+        width: 10px;
+      }
+    }
+  }
+  .part7{
+    grid-area: g;
+    padding-top: 0.7rem;
+    text-align: right;
   }
 }
