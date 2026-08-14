@@ -31,7 +31,7 @@
     </header>
     <main>
         <section class="items-container">
-            <div class="part1">
+            <div class="balancePart">
                 <div class="sec1first">
                 <h2>Current Balance</h2>
                 <p>As of <span class="balanceDate">10/08/2026</span></p>
@@ -39,16 +39,16 @@
             <div class="sec1second"><h1 class="totalBalance">2500000€<h1></div>
             </div>
             <div class="transactions">
-                <div class="elem">
-                    <div class="elempart1">
+                <div class="trans">
+                    <div class="showStatus">
                         <div class="status status_Deposit"> 1 Deposit</div>
                         <div class="status_date">12/08/2026</div>
                     </div>
                     <div class="status_Amount">26000,00€</div>
                 </div>
                 <div class="line"></div>
-                <div class="elem">
-                    <div class="elempart1">
+                <div class="trans">
+                    <div class="showStatus">
                         <div class="status status_Withdraw">2 Withdraw</div>
                         <div class="status_date">12/08/2026</div>
                     </div>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="line"></div>
             </div>
-            <div class="part3">
+            <div class="transfer">
                 <h2>Transfer Money</h2>
                 <div class="transInputs">
                     <input type="text" id="transUser" name="transUser" maxlength="4"
@@ -64,35 +64,35 @@
                     <label for="transUser">Transfer To</label>
                     <input type="number" id="transAmt" name="transAmt" class="no-arrows"/>
                     <label for="transAmt">Amount</label>
-                    <button id="navBtn"><img src="./Assets/right-arrow.png"/></button>
+                    <button id="transBtn"><img src="./Assets/right-arrow.png"/></button>
                 </div>
             </div>
-            <div class="part4">
+            <div class="loan">
                 <h2>Request Loan</h2>
-                <div class="transInputs">
-                    <input type="number" id="transAmt" name="transAmt" class="no-arrows"/>
-                    <label for="transAmt">Amount</label>
-                    <button id="navBtn"><img src="./Assets/right-arrow.png"/></button>
+                <div class="loanInputs">
+                    <input type="number" id="loanAmt" name="loanAmt" class="no-arrows"/>
+                    <label for="loanAmt">Amount</label>
+                    <button id="loanBtn"><img src="./Assets/right-arrow.png"/></button>
                 </div>
             </div>
-            <div class="part5">
+            <div class="close">
                 <h2>Close Account</h2>
-                <div class="transInputs">
-                    <input type="text" id="transUser" name="transUser" maxlength="4"
+                <div class="closeInputs">
+                    <input type="text" id="closeUser" name="closeUser" maxlength="4"
                     oninput="this.value = this.value.slice(0, 4);"/>
-                    <label for="transUser">Confirm User</label>
-                    <input type="number" id="transAmt" name="transAmt" class="no-arrows" oninput="this.value = this.value.slice(0, 4);"/>
-                    <label for="transAmt">Confirm Pin</label>
-                    <button id="navBtn"><img src="./Assets/right-arrow.png"/></button>
+                    <label for="closeUser">Confirm User</label>
+                    <input type="number" id="closeAmt" name="closeAmt" class="no-arrows" oninput="this.value = this.value.slice(0, 4);"/>
+                    <label for="closeAmt">Confirm Pin</label>
+                    <button id="closeBtn"><img src="./Assets/right-arrow.png"/></button>
                 </div>
             </div>
-            <div class="part6">
-                <div class="amtstatus">IN&nbsp; <span>27000,00€</span></div>
-                <div class="amtstatus">IN &nbsp;<span>27000,00€</span></div>
-                <div class="amtstatus">IN &nbsp;<span>27000,00€</span></div>
+            <div class="summary">
+                <div class="amtstatus">IN&nbsp; <span class="sumAmtDeposit">27000,00€</span></div>
+                <div class="amtstatus">OUT &nbsp;<span class="sumAmtWithdraw">27000,00€</span></div>
+                <div class="amtstatus">INTEREST &nbsp;<span class="sumAmtInterest">27000,00€</span></div>
                 <button><img src="./Assets/down-arrow.png" alt="#"/>sort</button>
             </div>
-            <div class="part7"><h5>You will be logged out in <span>12:00</span></h5></div>
+            <div class="logoutTime"><h5>You will be logged out in <span class="logoutTimer">12:00</span></h5></div>
         </section>
     </main>
     <script type="module" src="script.js"></script>
