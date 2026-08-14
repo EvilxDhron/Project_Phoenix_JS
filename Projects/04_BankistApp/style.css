@@ -94,10 +94,9 @@ nav {
 
 main {
   width: 100%;
-  /* overflow: auto; */
   display: flex;
   justify-content: center;
-  /* background-color: azure; */
+  opacity: 0;
 
   .items-container {
     width: 70%;
@@ -137,7 +136,7 @@ main {
     background-color:#eaeaea;
     border-radius: 12px;
     overflow: auto;
-    min-height: 480px;
+    height: 480px;
 
     .line{
       width: 100%;

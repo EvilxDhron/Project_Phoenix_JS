@@ -73,8 +73,66 @@ const closeUserIdInput = document.querySelector(".closeUser");
 const closeUserPinInput = document.querySelector("#closePin");
 
 ////// Buttons
-const navSubmitBtn = document.querySelector(".#navBtn");
+const navSubmitBtn = document.querySelector("#navBtn");
 const transferUserBtn = document.querySelector("#transBtn");
 const loanBtn = document.querySelector("#loanBtn");
 const closeUserBtn = document.querySelector("#closeBtn");
 const sortTransactionBtn = document.querySelector("#sortBtn");
+
+const main = document.querySelector('main');
+const transactionContainer = document.querySelector('.transactions');
+
+const showTransactions = function(transactions){
+  transactionContainer.innerHTML = '';
+  transactions.forEach((amount, index)=>{
+    let type = amount > 0 ? 'Deposit' : 'Withdraw';
+    const transElement = `<div class="trans">
+                              <div class="showStatus">
+                                  <div class="status status_${type}"> ${index + 1} ${type}</div>
+                                  <div class="status_date">12/08/2026</div>
+                              </div>
+                              <div class="status_Amount">${amount}€</div>
+                          </div>
+                          <div class="line"></div>`;
+
+    transactionContainer.insertAdjacentHTML('afterbegin', transElement);
+  })
+}
+
+const checkUser = ()=>{
+  const userID = userIdInput.value.trim().toLowerCase();
+  const userPIN = Number(userPinInput.value);
+  userIdInput.value = '';
+  userPinInput.value = '';
+  for(let user of accounts){
+    let [first, second] = user.owner.split(' ');
+    let l1 = first[0].toLowerCase(), l2 = second[0].toLowerCase();
+    if(`${l1}${l2}` === userID && userPIN === user.pin){
+      showTransactions(user.movements);
+      updateCurrentBalance(user.movements);
+      main.style.opacity = `100%`;
+      return;
+    }
+  } 
+}
+
+const updateCurrentBalance = function(transactions){
+  let deposits = 0, withdraws = 0, total;
+  for(let trans of transactions){
+    if(trans > 0) deposits += trans;
+    withdraws += trans;
+  }
+  total = deposits - withdraws;
+  currentBalanceTotal.textContent = `${total}€`;
+  updateSummary(deposits, withdraws);
+}
+
+const updateSummary = function(amt1, amt2){
+  totalAmountIN.textContent = `${amt1}€`;
+  totalAmountOUT.textContent = `${amt2}€`;
+}
+
+navSubmitBtn.addEventListener('click', function(){
+  checkUser();
+  console.log("chala chala chala!!!");
+})
