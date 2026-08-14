@@ -81,8 +81,8 @@
                     <input type="text" id="closeUser" name="closeUser" maxlength="4"
                     oninput="this.value = this.value.slice(0, 4);"/>
                     <label for="closeUser">Confirm User</label>
-                    <input type="number" id="closeAmt" name="closeAmt" class="no-arrows" oninput="this.value = this.value.slice(0, 4);"/>
-                    <label for="closeAmt">Confirm Pin</label>
+                    <input type="number" id="closePin" name="closePin" class="no-arrows" oninput="this.value = this.value.slice(0, 4);"/>
+                    <label for="closePin">Confirm Pin</label>
                     <button id="closeBtn"><img src="./Assets/right-arrow.png"/></button>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                 <div class="amtstatus">IN&nbsp; <span class="sumAmtDeposit">27000,00€</span></div>
                 <div class="amtstatus">OUT &nbsp;<span class="sumAmtWithdraw">27000,00€</span></div>
                 <div class="amtstatus">INTEREST &nbsp;<span class="sumAmtInterest">27000,00€</span></div>
-                <button><img src="./Assets/down-arrow.png" alt="#"/>sort</button>
+                <button id="sortBtn"><img src="./Assets/down-arrow.png" alt="#"/>sort</button>
             </div>
             <div class="logoutTime"><h5>You will be logged out in <span class="logoutTimer">12:00</span></h5></div>
         </section>
