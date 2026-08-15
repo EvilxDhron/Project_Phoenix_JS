@@ -212,3 +212,48 @@ const arr3 = [...arr1, ...arr2];
 console.log(arr3);
 
 // My health is literally so bad at this moment and also I don't have my laptop with me but still I can't skip any day of commit on Github 😑.
+
+///////////////////////////////////////////////
+////////// Find the largest number ///////////
+/////////////////////////////////////////////
+
+/* 
+
+Example:-
+
+  Input:
+  [8, 2, 15, 4, 9]
+
+  Output:
+  15
+
+*/
+
+console.log([8, 2, 15, 4, 9].reduce((acc, val) => acc > val ? acc : val), largeArr[0]);
+
+//////////////////////////////////////////////////////
+////////// Find the Second Largest Number ///////////
+////////////////////////////////////////////////////
+
+/* 
+
+Example:-
+
+  Input:
+  [10,7,15,9]
+
+  Output:
+  10
+
+*/
+
+const largeArr = [10, 7, 15, 9];
+let firstLarge = largeArr[0]
+let secondLarge = largeArr[1];
+largeArr.slice(2).forEach((val) => {
+  if (val > firstLarge) {
+    secondLarge = firstLarge;
+    firstLarge = val;
+  } else if (val > secondLarge) secondLarge = val;
+});
+console.log(secondLarge);
