@@ -195,7 +195,6 @@ const timeTracker = function (arr) {
 
 console.log(timeTracker(workHours));
 
-
 /*
 
 Merge two arrays.
@@ -205,11 +204,11 @@ const arr2 = [4, 5, 6];
 
 */
 
-const arr1 = [1, 2, 3];
-const arr2 = [4, 5, 6];
+const arr11 = [1, 2, 3];
+const arr22 = [4, 5, 6];
 
-const arr3 = [...arr1, ...arr2];
-console.log(arr3);
+const arr33 = [...arr11, ...arr22];
+console.log(arr33);
 
 // My health is literally so bad at this moment and also I don't have my laptop with me but still I can't skip any day of commit on Github 😑.
 
@@ -229,7 +228,12 @@ Example:-
 
 */
 
-console.log([8, 2, 15, 4, 9].reduce((acc, val) => acc > val ? acc : val), largeArr[0]);
+const largeArr2 = [8, 2, 15, 4, 9];  
+
+console.log(
+  largeArr2.reduce((acc, val) => (acc > val ? acc : val)),
+  largeArr2[0],
+);
 
 //////////////////////////////////////////////////////
 ////////// Find the Second Largest Number ///////////
@@ -248,7 +252,7 @@ Example:-
 */
 
 const largeArr = [10, 7, 15, 9];
-let firstLarge = largeArr[0]
+let firstLarge = largeArr[0];
 let secondLarge = largeArr[1];
 largeArr.slice(2).forEach((val) => {
   if (val > firstLarge) {
@@ -257,3 +261,52 @@ largeArr.slice(2).forEach((val) => {
   } else if (val > secondLarge) secondLarge = val;
 });
 console.log(secondLarge);
+
+//////////////////////////////////////////////////////
+////////// Move All Zeroes to the End ///////////
+////////////////////////////////////////////////////
+
+/* 
+
+Example:-
+
+  Input:
+  [0,5,0,3,2,0]
+
+  Output:
+  [5,3,2,0,0,0]
+
+*/
+
+/// Solution 1
+
+function moveZeros(arr) {
+  const newArr = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (!(arr[i] === 0)) {
+      newArr.push(arr[i]);
+    }
+  }
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === 0) {
+      newArr.push(arr[i]);
+    }
+  }
+  return newArr;
+}
+console.log(moveZeros([0, 5, 0, 3, 2, 0]));
+
+///Solution 2
+
+function moveZeros2(arr){
+  let index = 0;
+  for(let i = 0; i < arr.length; i++){
+    if(arr[i] !== 0){
+      [arr[index], arr[i]] = [arr[i], arr[index]];
+      index++;
+    }
+  }
+  return arr;
+}
+console.log(moveZeros2([0, 5, 0, 3, 2, 0]));
