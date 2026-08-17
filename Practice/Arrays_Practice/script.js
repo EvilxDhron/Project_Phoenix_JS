@@ -310,3 +310,56 @@ function moveZeros2(arr){
   return arr;
 }
 console.log(moveZeros2([0, 5, 0, 3, 2, 0]));
+
+//////////////////////////////////////////////////////
+////////// Find whether an Element exists ///////////
+////////////////////////////////////////////////////
+
+/* 
+
+Example:-
+
+  Input:
+  [5,8,3,10] -> Target 8
+
+  Output:
+  true
+
+*/
+
+
+function findNum(nums, target){
+  for(let i = 0; i < nums.length; i++){
+    if(nums[i] === target) return true;
+  }
+  return false;
+}
+
+//////////////////////////////////////////////////////
+//////////            Two Sum             ///////////
+////////////////////////////////////////////////////
+
+/* 
+
+Example:-
+
+  Input:
+  [2,7,11,15] -> Target 9
+
+  Output:
+  2 + 7 = 9
+
+*/
+
+function twoSum(arr, target){
+  let neededNum;
+  for(let [i, num] of arr.entries()){
+    neededNum = target - num;
+    for(let j = i + 1; j < arr.length; j++){
+      if(neededNum === arr[j]){
+        console.log(`${num} + ${arr[j]} = ${target}`);
+        return;
+      }
+    }
+  }
+}
