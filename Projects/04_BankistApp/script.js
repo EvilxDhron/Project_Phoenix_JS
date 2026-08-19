@@ -99,6 +99,34 @@ const showTransactions = function(transactions){
   })
 }
 
+const eurToUsd = 1.1;
+
+const transactionsToUsd = function(transactions){
+  return transactions.map(num => Math.trunc(num * eurToUsd));
+}
+
+const createUserNames = function(accounts){
+  for(let acc of accounts){
+    acc.user = acc.owner.toLowerCase().split(' ').map(name => name[0]).join('');
+  }
+}
+
+const deposits = function(arr){
+  return arr.filter(deposit => deposit > 0);
+}
+
+const withdraws = function(arr){
+  return arr.filter(deposit => deposit < 0);
+}
+
+const showCurrentBalance = function(transactions){
+  const totalBalance =  transactions.reduce((acc, tran) => acc += tran,0);
+  currentBalanceTotal.textContent = `${totalBalance}€`;
+}
+
+
+/* 
+
 const checkUser = ()=>{
   const userID = userIdInput.value.trim().toLowerCase();
   const userPIN = Number(userPinInput.value);
@@ -135,4 +163,6 @@ const updateSummary = function(amt1, amt2){
 navSubmitBtn.addEventListener('click', function(){
   checkUser();
   console.log("chala chala chala!!!");
-})
+}) 
+  
+*/
