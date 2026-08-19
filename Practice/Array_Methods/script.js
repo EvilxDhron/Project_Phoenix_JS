@@ -195,3 +195,56 @@ Example:-
 console.log(['John', 'Alice', 'Bob', 'Sam'].reduce((acc,num)=> acc + 1, 0));
 //// OR
 console.log(["John", "Alice", "Bob", "Sam"].length);
+
+//// Q.13 map() — Add "₹" before every price:
+
+/* 
+
+Example:-
+
+  Input:
+  let prices = [100, 250, 500];
+
+  Output:
+  ["₹100", "₹250", "₹500"]
+
+*/
+
+console.log([100, 250, 500].map(num => `₹${num}`));
+
+//// Q.14 filter() — Get numbers divisible by 5:
+
+/* 
+
+Example:-
+
+  Input:
+  [10, 12, 15, 22, 25, 31, 40]
+
+  Output:
+  [10, 15, 25, 40]
+
+*/
+
+console.log([10, 12, 15, 22, 25, 31, 40].filter(num => num % 5 === 0));
+
+//// Q.15 reduce() — Find the largest number:
+
+/* 
+
+Example:-
+
+  Input:
+  [10, 25, 7, 42, 18]
+
+  Output:
+  42
+
+*/
+
+let numbers = [10, 25, 7, 42, 18];
+
+console.log(numbers.reduce((acc, num) => {
+  if(acc < num) acc = num;
+  return acc;
+}, numbers[0]));
