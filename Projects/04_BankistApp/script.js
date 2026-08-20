@@ -124,6 +124,20 @@ const showCurrentBalance = function(transactions){
   currentBalanceTotal.textContent = `${totalBalance}€`;
 }
 
+const showSummary = function(transactions){
+  totalAmountIN.textContent = transactions.filter(trans => trans > 0).reduce((acc, trans) => acc + trans, 0);
+
+  totalAmountOUT.textContent = Math.abs(transactions.filter(trans => trans < 0).reduce((acc, trans) => acc + trans, 0));
+
+  totalAmountInterest.textContent = transactions.filter(trans => trans > 0).map(trans => trans * 1.1/100).reduce((acc, trans) => {
+    console.log(trans);
+     if (trans >= 1) return acc + trans;
+     return acc;
+  }, 0).toFixed(2);
+}
+showSummary(account1.movements);
+
+
 
 /* 
 

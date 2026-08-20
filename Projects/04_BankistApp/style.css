@@ -96,7 +96,7 @@ main {
   width: 100%;
   display: flex;
   justify-content: center;
-  opacity: 0;
+  /* opacity: 0; */
 
   .items-container {
     width: 70%;
