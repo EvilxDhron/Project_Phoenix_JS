@@ -72,7 +72,6 @@ function toCamelCase2() {
   textArea.value = "";
 }
 
-
 //------ Now This button is being used for next challenge ---------//
 // btn.addEventListener("click", toCamelCase2);
 
@@ -146,27 +145,32 @@ GOOD LUCK 😀
 
 */
 
-
 const poll = {
   question: "What is your favorite programming language?",
   options: ["0: JavaScript", "1: Python", "2: Rust", "3: C++"],
   answers: new Array(4).fill(0),
   registerNewAnswer() {
-    const input = Number(prompt(`${this.question}\n${this.options.join('\n')}\n(Write option numbers)`));
-    typeof input === 'number' && input < this.answers.length && this.answers[input]++;
+    const input = Number(
+      prompt(
+        `${this.question}\n${this.options.join("\n")}\n(Write option numbers)`,
+      ),
+    );
+    typeof input === "number" &&
+      input < this.answers.length &&
+      this.answers[input]++;
     this.displayResults();
-    this.displayResults('string');
+    this.displayResults("string");
   },
-  displayResults(type = 'array'){
-    type === 'array' && console.log(this.answers);
-    type === 'string' && console.log(`Poll results are ${this.answers.join(", ")}`);
-  }
+  displayResults(type = "array") {
+    type === "array" && console.log(this.answers);
+    type === "string" &&
+      console.log(`Poll results are ${this.answers.join(", ")}`);
+  },
 };
 
 btn.addEventListener("click", poll.registerNewAnswer.bind(poll));
-poll.displayResults.call({answers: [5, 2, 3]});
-poll.displayResults.call({answers: [1, 5, 3, 9, 6, 1]}, 'string');
-
+poll.displayResults.call({ answers: [5, 2, 3] });
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, "string");
 
 // Coding Challenge #1 --- Arrays ---
 
@@ -190,18 +194,50 @@ GOOD LUCK 😀
 
 */
 
-
-function checkDogs(dogsJulia, dogsKate){
-const dogsJuliaCopy = dogsJulia.slice(1, 3);
+function checkDogs(dogsJulia, dogsKate) {
+  const dogsJuliaCopy = dogsJulia.slice(1, 3);
 
   const correctData = [...dogsJuliaCopy, ...dogsKate];
-  correctData.forEach((dog, num)=>{
+  correctData.forEach((dog, num) => {
     const dogInfo =
       dog >= 3
         ? `${num + 1} is an adult, and is ${dog} years old`
         : `${num + 1} is still a puppy 🐶`;
     console.log(`Dog number ${dogInfo}`);
-  })
+  });
 }
 checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
 checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+
+// Coding Challenge Array Methods
+
+/*
+
+1. Calculate the dog age in human years using the following formula: if the dog is <= 2 years old, humanAge = 2 * dogAge. If the dog is > 2 years old, humanAge = 16 + dogAge * 4.
+
+2. Exclude all dogs that are less than 18 human years old (which is the same as keeping dogs that are at Least 18 years old).
+
+3. Calculate the average human age of all adult dogs (you should already know from other challenges how we calculate averages.
+
+4. Run the function for both test datasets
+
+  TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]  
+  TEST DATA 1: [16, 6, 10, 5, 6, 1, 4]
+
+  GOOD LUCK
+
+*/
+
+function calcDogAge(dogAges) {
+  const humanAges = dogAges
+    .map((age) => {
+      if (age <= 2) return 2 * age;
+      else return 16 + age * 4;
+    })
+    .filter((age) => age >= 18);
+
+  const humanAgeAverage =
+    humanAges.reduce((acc, age) => acc + age, 0) / humanAges.length;
+
+  return [humanAges, humanAgeAverage];
+}
