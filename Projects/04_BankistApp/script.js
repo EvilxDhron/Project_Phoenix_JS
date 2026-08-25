@@ -82,6 +82,8 @@ const sortTransactionBtn = document.querySelector("#sortBtn");
 const main = document.querySelector('main');
 const transactionContainer = document.querySelector('.transactions');
 
+let currentUser;
+
 const showTransactions = function(transactions){
   transactionContainer.innerHTML = '';
   transactions.forEach((amount, index)=>{
@@ -110,6 +112,7 @@ const createUserNames = function(accounts){
     acc.user = acc.owner.toLowerCase().split(' ').map(name => name[0]).join('');
   }
 }
+createUserNames(accounts);
 
 const deposits = function(arr){
   return arr.filter(deposit => deposit > 0);
@@ -136,3 +139,16 @@ const showSummary = function(transactions){
   }, 0).toFixed(2);
 }
 showSummary(account1.movements);
+
+function changeCurrentUser(user, pin){
+  accounts.find(acc =>{
+    if(acc.user === user && acc.pin === pin){
+      currentUser = acc;
+      console.log(currentUser);
+    }
+  })
+}
+
+navSubmitBtn.addEventListener('click', ()=>{
+  changeCurrentUser(userIdInput.value, Number(userPinInput.value));
+})
