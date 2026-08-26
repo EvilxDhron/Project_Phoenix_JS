@@ -79,15 +79,15 @@ const loanBtn = document.querySelector("#loanBtn");
 const closeUserBtn = document.querySelector("#closeBtn");
 const sortTransactionBtn = document.querySelector("#sortBtn");
 
-const main = document.querySelector('main');
-const transactionContainer = document.querySelector('.transactions');
+const main = document.querySelector("main");
+const transactionContainer = document.querySelector(".transactions");
 
 let currentUser;
 
-const showTransactions = function(transactions){
-  transactionContainer.innerHTML = '';
-  transactions.forEach((amount, index)=>{
-    let type = amount > 0 ? 'Deposit' : 'Withdraw';
+const showTransactions = function (transactions) {
+  transactionContainer.innerHTML = "";
+  transactions.forEach((amount, index) => {
+    let type = amount > 0 ? "Deposit" : "Withdraw";
     const transElement = `<div class="trans">
                               <div class="showStatus">
                                   <div class="status status_${type}"> ${index + 1} ${type}</div>
@@ -97,58 +97,81 @@ const showTransactions = function(transactions){
                           </div>
                           <div class="line"></div>`;
 
-    transactionContainer.insertAdjacentHTML('afterbegin', transElement);
-  })
-}
+    transactionContainer.insertAdjacentHTML("afterbegin", transElement);
+  });
+};
 
 const eurToUsd = 1.1;
 
-const transactionsToUsd = function(transactions){
-  return transactions.map(num => Math.trunc(num * eurToUsd));
-}
+const transactionsToUsd = function (transactions) {
+  return transactions.map((num) => Math.trunc(num * eurToUsd));
+};
 
-const createUserNames = function(accounts){
-  for(let acc of accounts){
-    acc.user = acc.owner.toLowerCase().split(' ').map(name => name[0]).join('');
+const createUserNames = function (accounts) {
+  for (let acc of accounts) {
+    acc.user = acc.owner
+      .toLowerCase()
+      .split(" ")
+      .map((name) => name[0])
+      .join("");
   }
-}
+};
 createUserNames(accounts);
 
-const deposits = function(arr){
-  return arr.filter(deposit => deposit > 0);
-}
+const deposits = function (arr) {
+  return arr.filter((deposit) => deposit > 0);
+};
 
-const withdraws = function(arr){
-  return arr.filter(deposit => deposit < 0);
-}
+const withdraws = function (arr) {
+  return arr.filter((deposit) => deposit < 0);
+};
 
-const showCurrentBalance = function(transactions){
-  const totalBalance =  transactions.reduce((acc, tran) => acc += tran,0);
+const showCurrentBalance = function (transactions) {
+  const totalBalance = transactions.reduce((acc, tran) => (acc += tran), 0);
   currentBalanceTotal.textContent = `${totalBalance}€`;
+};
+
+const showSummary = function (transactions) {
+  totalAmountIN.textContent = transactions
+    .filter((trans) => trans > 0)
+    .reduce((acc, trans) => acc + trans, 0);
+
+  totalAmountOUT.textContent = Math.abs(
+    transactions
+      .filter((trans) => trans < 0)
+      .reduce((acc, trans) => acc + trans, 0),
+  );
+
+  totalAmountInterest.textContent = transactions
+    .filter((trans) => trans > 0)
+    .map((trans) => (trans * 1.1) / 100)
+    .reduce((acc, trans) => {
+      console.log(trans);
+      if (trans >= 1) return acc + trans;
+      return acc;
+    }, 0)
+    .toFixed(2);
+};
+
+function changeCurrentUser(user, pin) {
+  currentUser = accounts.find(acc => acc.user === user && acc.pin === pin);
+  return currentUser;
 }
 
-const showSummary = function(transactions){
-  totalAmountIN.textContent = transactions.filter(trans => trans > 0).reduce((acc, trans) => acc + trans, 0);
+const updateUI = (account) => {
+  showTransactions(account.movements);
+  showCurrentBalance(account.movements);
+  showSummary(account.movements);
+  main.style.opacity = "1";
+  main.style.scale = "1";
+};
 
-  totalAmountOUT.textContent = Math.abs(transactions.filter(trans => trans < 0).reduce((acc, trans) => acc + trans, 0));
+const clearInputs = () => {
+  userIdInput.value = "";
+  userPinInput.value = "";
+};
 
-  totalAmountInterest.textContent = transactions.filter(trans => trans > 0).map(trans => trans * 1.1/100).reduce((acc, trans) => {
-    console.log(trans);
-     if (trans >= 1) return acc + trans;
-     return acc;
-  }, 0).toFixed(2);
-}
-showSummary(account1.movements);
-
-function changeCurrentUser(user, pin){
-  accounts.find(acc =>{
-    if(acc.user === user && acc.pin === pin){
-      currentUser = acc;
-      console.log(currentUser);
-    }
-  })
-}
-
-navSubmitBtn.addEventListener('click', ()=>{
-  changeCurrentUser(userIdInput.value, Number(userPinInput.value));
-})
+navSubmitBtn.addEventListener("click", () => {
+  updateUI(changeCurrentUser(userIdInput.value, Number(userPinInput.value)));
+  clearInputs();
+});
