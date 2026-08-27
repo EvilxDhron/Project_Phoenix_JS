@@ -131,20 +131,20 @@ const showCurrentBalance = function (transactions) {
   currentBalanceTotal.textContent = `${totalBalance}€`;
 };
 
-const showSummary = function (transactions) {
-  totalAmountIN.textContent = transactions
+const showSummary = function (account) {
+  totalAmountIN.textContent = account.movements
     .filter((trans) => trans > 0)
     .reduce((acc, trans) => acc + trans, 0);
 
   totalAmountOUT.textContent = Math.abs(
-    transactions
+    account.movements
       .filter((trans) => trans < 0)
       .reduce((acc, trans) => acc + trans, 0),
   );
 
-  totalAmountInterest.textContent = transactions
+  totalAmountInterest.textContent = account.movements
     .filter((trans) => trans > 0)
-    .map((trans) => (trans * 1.1) / 100)
+    .map((trans) => (trans * account.interestRate) / 100)
     .reduce((acc, trans) => {
       console.log(trans);
       if (trans >= 1) return acc + trans;
@@ -161,14 +161,13 @@ function changeCurrentUser(user, pin) {
 const updateUI = (account) => {
   showTransactions(account.movements);
   showCurrentBalance(account.movements);
-  showSummary(account.movements);
-  main.style.opacity = "1";
-  main.style.scale = "1";
+  showSummary(account);
+  greeting.textContent = `Welcome back, ${account.owner}`;
+  main.style.opacity = main.style.scale = "1";
 };
 
 const clearInputs = () => {
-  userIdInput.value = "";
-  userPinInput.value = "";
+  userIdInput.value = userPinInput.value = "";
 };
 
 navSubmitBtn.addEventListener("click", () => {
