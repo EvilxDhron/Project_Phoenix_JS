@@ -126,9 +126,9 @@ const withdraws = function (arr) {
   return arr.filter((deposit) => deposit < 0);
 };
 
-const showCurrentBalance = function (transactions) {
-  const totalBalance = transactions.reduce((acc, tran) => (acc += tran), 0);
-  currentBalanceTotal.textContent = `${totalBalance}€`;
+const showCurrentBalance = function (account) {
+  account.balance = account.movements.reduce((acc, tran) => (acc += tran), 0);
+  currentBalanceTotal.textContent = `${account.balance}€`;
 };
 
 const showSummary = function (account) {
@@ -146,7 +146,6 @@ const showSummary = function (account) {
     .filter((trans) => trans > 0)
     .map((trans) => (trans * account.interestRate) / 100)
     .reduce((acc, trans) => {
-      console.log(trans);
       if (trans >= 1) return acc + trans;
       return acc;
     }, 0)
@@ -155,22 +154,44 @@ const showSummary = function (account) {
 
 function changeCurrentUser(user, pin) {
   currentUser = accounts.find(acc => acc.user === user && acc.pin === pin);
-  return currentUser;
+  if(currentUser) return currentUser;
+  window.alert("🚫 Wrong Username or Password!");
 }
 
 const updateUI = (account) => {
+  if(!account) return;
   showTransactions(account.movements);
-  showCurrentBalance(account.movements);
+  showCurrentBalance(account);
   showSummary(account);
   greeting.textContent = `Welcome back, ${account.owner}`;
   main.style.opacity = main.style.scale = "1";
 };
 
-const clearInputs = () => {
-  userIdInput.value = userPinInput.value = "";
+const clearInputs = (value1, value2) => {
+  value1.value = value2.value = "";
+};
+
+const transferMoney = (user, amount) => {
+  if (
+    user &&
+    user !== currentUser &&
+    amount > 0 &&
+    currentUser.balance >= amount
+  ) {
+    currentUser.movements.push(-amount);
+    user.movements.push(amount);
+  }
 };
 
 navSubmitBtn.addEventListener("click", () => {
   updateUI(changeCurrentUser(userIdInput.value, Number(userPinInput.value)));
-  clearInputs();
+  clearInputs(userIdInput, userPinInput);
 });
+
+transferUserBtn.addEventListener('click', ()=>{
+  const account = accounts.find(acc => acc.user === transferUserInput.value)
+  const amount = Number(transferUserAmt.value);
+  transferMoney(account, amount)
+  clearInputs(transferUserInput, transferUserAmt);
+  updateUI(currentUser);
+})
