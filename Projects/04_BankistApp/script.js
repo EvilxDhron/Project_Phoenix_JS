@@ -69,7 +69,7 @@ const userPinInput = document.querySelector("#pin");
 const transferUserInput = document.querySelector("#transUser");
 const transferUserAmt = document.querySelector("#transAmt");
 const loanAmtInput = document.querySelector("#loanAmt");
-const closeUserIdInput = document.querySelector(".closeUser");
+const closeUserIdInput = document.querySelector("#closeUser");
 const closeUserPinInput = document.querySelector("#closePin");
 
 ////// Buttons
@@ -153,13 +153,13 @@ const showSummary = function (account) {
 };
 
 function changeCurrentUser(user, pin) {
-  currentUser = accounts.find(acc => acc.user === user && acc.pin === pin);
-  if(currentUser) return currentUser;
+  currentUser = accounts.find((acc) => acc.user === user && acc.pin === pin);
+  if (currentUser) return currentUser;
   window.alert("🚫 Wrong Username or Password!");
 }
 
 const updateUI = (account) => {
-  if(!account) return;
+  if (!account) return;
   showTransactions(account.movements);
   showCurrentBalance(account);
   showSummary(account);
@@ -183,15 +183,35 @@ const transferMoney = (user, amount) => {
   }
 };
 
+const deleteUser = (user, pin)=>{
+  console.log(user, pin);
+if (
+  user === currentUser.user &&
+  pin === currentUser.pin
+) {
+  const index = accounts.findIndex((acc) => acc.user === currentUser.user);
+  accounts.splice(index, 1);
+  greeting.textContent = `Log in to get started!`;
+  main.style.opacity = "0";
+  main.style.scale = "0.9";
+  console.log(accounts);
+}
+}
+
 navSubmitBtn.addEventListener("click", () => {
   updateUI(changeCurrentUser(userIdInput.value, Number(userPinInput.value)));
   clearInputs(userIdInput, userPinInput);
 });
 
-transferUserBtn.addEventListener('click', ()=>{
-  const account = accounts.find(acc => acc.user === transferUserInput.value)
+transferUserBtn.addEventListener("click", () => {
+  const account = accounts.find((acc) => acc.user === transferUserInput.value);
   const amount = Number(transferUserAmt.value);
-  transferMoney(account, amount)
+  transferMoney(account, amount);
   clearInputs(transferUserInput, transferUserAmt);
   updateUI(currentUser);
-})
+});
+
+closeUserBtn.addEventListener("click", () => {
+  deleteUser(closeUserIdInput.value, Number(closeUserPinInput.value));
+  clearInputs(closeUserIdInput, closeUserPinInput);
+});
