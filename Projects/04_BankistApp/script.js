@@ -83,10 +83,16 @@ const main = document.querySelector("main");
 const transactionContainer = document.querySelector(".transactions");
 
 let currentUser;
+let sorted = false;
 
-const showTransactions = function (transactions) {
+const showTransactions = function (transactions, sort = false) {
+  const trans = sort
+    ? transactions.slice().sort((a, b) => a - b)
+    : transactions;
+    console.log(trans, sort);
+
   transactionContainer.innerHTML = "";
-  transactions.forEach((amount, index) => {
+  trans.forEach((amount, index) => {
     let type = amount > 0 ? "Deposit" : "Withdraw";
     const transElement = `<div class="trans">
                               <div class="showStatus">
@@ -183,20 +189,17 @@ const transferMoney = (user, amount) => {
   }
 };
 
-const deleteUser = (user, pin)=>{
+const deleteUser = (user, pin) => {
   console.log(user, pin);
-if (
-  user === currentUser.user &&
-  pin === currentUser.pin
-) {
-  const index = accounts.findIndex((acc) => acc.user === currentUser.user);
-  accounts.splice(index, 1);
-  greeting.textContent = `Log in to get started!`;
-  main.style.opacity = "0";
-  main.style.scale = "0.9";
-  console.log(accounts);
-}
-}
+  if (user === currentUser.user && pin === currentUser.pin) {
+    const index = accounts.findIndex((acc) => acc.user === currentUser.user);
+    accounts.splice(index, 1);
+    greeting.textContent = `Log in to get started!`;
+    main.style.opacity = "0";
+    main.style.scale = "0.9";
+    console.log(accounts);
+  }
+};
 
 navSubmitBtn.addEventListener("click", () => {
   updateUI(changeCurrentUser(userIdInput.value, Number(userPinInput.value)));
@@ -214,4 +217,9 @@ transferUserBtn.addEventListener("click", () => {
 closeUserBtn.addEventListener("click", () => {
   deleteUser(closeUserIdInput.value, Number(closeUserPinInput.value));
   clearInputs(closeUserIdInput, closeUserPinInput);
+});
+
+sortTransactionBtn.addEventListener("click", () => {
+  showTransactions(currentUser.movements, !sorted)
+  sorted = !sorted;
 });
