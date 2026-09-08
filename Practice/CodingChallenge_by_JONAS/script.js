@@ -351,3 +351,43 @@ console.log(allActivities);
 
 const allActivities2 = breeds.flatMap((dogData) => dogData.activities);
 console.log(allActivities2);
+
+// Solution 4
+const uniqueActivities = [
+  ...new Set(breeds.flatMap((dogData) => dogData.activities)),
+];
+console.log(uniqueActivities);
+
+// Solution 5
+const swimmingAdjacent = [
+  ...new Set(
+    breeds
+      .filter((dogData) => dogData.activities.includes("swimming"))
+      .flatMap((dogData) => dogData.activities)
+      .filter((activity) => activity !== "swimming"),
+  ),
+];
+console.log(swimmingAdjacent);
+
+// Solution 6
+console.log(
+  breeds
+    .flatMap((dogData) => dogData.averageWeight)
+    .every((weight) => weight >= 10),
+);
+
+// Solution 7
+console.log(
+  breeds
+    .map((dogData) => dogData.activities)
+    .some((activities) => activities.length >= 3),
+);
+
+// Bonus Solution 8
+console.log(
+  Math.max(
+    ...breeds
+      .filter((dogData) => dogData.activities.includes("fetch"))
+      .map((dogData) => dogData.averageWeight),
+  ),
+);
