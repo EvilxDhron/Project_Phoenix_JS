@@ -89,7 +89,6 @@ const showTransactions = function (transactions, sort = false) {
   const trans = sort
     ? transactions.slice().sort((a, b) => a - b)
     : transactions;
-    console.log(trans, sort);
 
   transactionContainer.innerHTML = "";
   trans.forEach((amount, index) => {
@@ -223,3 +222,16 @@ sortTransactionBtn.addEventListener("click", () => {
   showTransactions(currentUser.movements, !sorted)
   sorted = !sorted;
 });
+
+loanBtn.addEventListener('click',()=>{
+  const amount = Number(loanAmtInput.value);
+
+  if(currentUser.movements.some(trans => trans >= amount * 0.1)){
+    currentUser.movements.push(amount);
+  }else{
+    window.alert("You are not eligible!");
+  }
+
+  updateUI(currentUser);
+  loanAmtInput.value = '';
+})
