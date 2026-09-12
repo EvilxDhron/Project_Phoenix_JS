@@ -463,6 +463,24 @@ console.log(
 );
 
 // Solution No.3
-const ownersTooMuch = dogs.filter(dog => dog.curFood > dog.recFood).flatMap(dog => dog.owners);
-const ownersTooLittle = dogs.filter(dog => dog.curFood < dog.recFood).flatMap(dog => dog.owners);
+const ownersTooMuch = dogs
+  .filter((dog) => dog.curFood > dog.recFood)
+  .flatMap((dog) => dog.owners);
+const ownersTooLittle = dogs
+  .filter((dog) => dog.curFood < dog.recFood)
+  .flatMap((dog) => dog.owners);
 console.log(ownersTooMuch, ownersTooLittle);
+
+// Solution No.4
+console.log(`${ownersTooMuch.join(" and ")}'s dogs are eating too much.`);
+console.log(`${ownersTooLittle.join(" and ")}'s dogs are eating too little.`);
+
+// Solution No.5
+console.log(dogs.some((dog) => dog.curFood === dog.recFood));
+
+// Solution No.6
+console.log(
+  dogs.every(
+    (dog) => dog.curFood < dog.recFood * 1.1 && dog.curFood > dog.recFood * 0.9,
+  ),
+);
