@@ -484,3 +484,23 @@ console.log(
     (dog) => dog.curFood < dog.recFood * 1.1 && dog.curFood > dog.recFood * 0.9,
   ),
 );
+
+// Solution No.7
+const okayDogs = dogs.filter(dog => dog.curFood < dog.recFood * 1.1 && dog.curFood > dog.recFood * 0.9);
+console.log(okayDogs);
+
+// Solution No.8
+const dogsGroup = Object.groupBy(dogs, dog => {
+  if(dog.curFood < dog.recFood * 1.1 && dog.curFood > dog.recFood * 0.9) return 'exact';
+  if(dog.curFood < dog.recFood) return 'too little';
+  if(dog.curFood > dog.recFood) return 'too much';
+});
+console.log(dogsGroup);
+
+// Solution No.9
+const groupByOwners = Object.groupBy(dogs, dog => `${dog.owners.length}`);
+console.log(groupByOwners);
+
+// Solution No.10
+const DogsSorted = dogs.toSorted((a,b) => a.recFood - b.recFood);
+console.log(DogsSorted);
