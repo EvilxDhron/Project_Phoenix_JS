@@ -98,7 +98,7 @@ const showTransactions = function (transactions, sort = false) {
                                   <div class="status status_${type}"> ${index + 1} ${type}</div>
                                   <div class="status_date">12/08/2026</div>
                               </div>
-                              <div class="status_Amount">${amount}€</div>
+                              <div class="status_Amount">${amount.toFixed(2)}€</div>
                           </div>
                           <div class="line"></div>`;
 
@@ -133,19 +133,19 @@ const withdraws = function (arr) {
 
 const showCurrentBalance = function (account) {
   account.balance = account.movements.reduce((acc, tran) => (acc += tran), 0);
-  currentBalanceTotal.textContent = `${account.balance}€`;
+  currentBalanceTotal.textContent = `${account.balance.toFixed(2)}€`;
 };
 
 const showSummary = function (account) {
   totalAmountIN.textContent = account.movements
     .filter((trans) => trans > 0)
-    .reduce((acc, trans) => acc + trans, 0);
+    .reduce((acc, trans) => acc + trans, 0).toFixed(2);
 
   totalAmountOUT.textContent = Math.abs(
     account.movements
       .filter((trans) => trans < 0)
       .reduce((acc, trans) => acc + trans, 0),
-  );
+  ).toFixed(2);
 
   totalAmountInterest.textContent = account.movements
     .filter((trans) => trans > 0)
@@ -224,7 +224,7 @@ sortTransactionBtn.addEventListener("click", () => {
 });
 
 loanBtn.addEventListener('click',()=>{
-  const amount = Number(loanAmtInput.value);
+  const amount = Math.floor(loanAmtInput.value);
 
   if(currentUser.movements.some(trans => trans >= amount * 0.1)){
     currentUser.movements.push(amount);
