@@ -133,20 +133,25 @@ const transactionContainer = document.querySelector(".transactions");
 let currentUser;
 let sorted = false;
 
-const showTransactions = function (transactions, sort = false) {
+const showTransactions = function (acc, sort = false) {
+
+  const combinedMoves = acc.movements.map((move, i) => {
+    return {movement: move, moveDate: acc.movementsDates[i]};
+  });
+
   const trans = sort
-    ? transactions.slice().sort((a, b) => a - b)
-    : transactions;
+    ? combinedMoves.slice().sort((a, b) => a.movement - b.movement)
+    : combinedMoves;
 
   transactionContainer.innerHTML = "";
   trans.forEach((amount, index) => {
-    let type = amount > 0 ? "Deposit" : "Withdraw";
+    let type = amount.movement > 0 ? "Deposit" : "Withdraw";
     const transElement = `<div class="trans">
                               <div class="showStatus">
                                   <div class="status status_${type}"> ${index + 1} ${type}</div>
-                                  <div class="status_date">12/08/2026</div>
+                                  <div class="status_date">${showCurrentDate(amount.moveDate)}</div>
                               </div>
-                              <div class="status_Amount">${amount.toFixed(2)}€</div>
+                              <div class="status_Amount">${amount.movement.toFixed(2)}€</div>
                           </div>
                           <div class="line"></div>`;
 
@@ -184,6 +189,17 @@ const showCurrentBalance = function (account) {
   currentBalanceTotal.textContent = `${account.balance.toFixed(2)}€`;
 };
 
+
+const showCurrentDate = (str = '')=> {
+  let today;
+  if(!str) { today = new Date()}
+  else {today = new Date(str)};
+  const date = `${today.getDate()}`.padStart(2,0);
+  const month = `${today.getMonth() + 1}`.padStart(2,0);
+  const year = today.getFullYear();
+  return `${date}/${month}/${year}`;
+};
+
 const showSummary = function (account) {
   totalAmountIN.textContent = account.movements
     .filter((trans) => trans > 0)
@@ -213,11 +229,12 @@ function changeCurrentUser(user, pin) {
 
 const updateUI = (account) => {
   if (!account) return;
-  showTransactions(account.movements);
+  showTransactions(account);
   showCurrentBalance(account);
   showSummary(account);
   greeting.textContent = `Welcome back, ${account.owner}`;
   main.style.opacity = main.style.scale = "1";
+  currentBalanceDate.textContent = showCurrentDate();
 };
 
 const clearInputs = (value1, value2) => {
@@ -232,7 +249,9 @@ const transferMoney = (user, amount) => {
     currentUser.balance >= amount
   ) {
     currentUser.movements.push(-amount);
+    currentUser.movementsDates.push(new Date().toISOString());
     user.movements.push(amount);
+    user.movementsDates.push(new Date().toISOString());
   }
 };
 
@@ -267,7 +286,7 @@ closeUserBtn.addEventListener("click", () => {
 });
 
 sortTransactionBtn.addEventListener("click", () => {
-  showTransactions(currentUser.movements, !sorted)
+  showTransactions(currentUser, !sorted)
   sorted = !sorted;
 });
 
@@ -276,6 +295,7 @@ loanBtn.addEventListener('click',()=>{
 
   if(currentUser.movements.some(trans => trans >= amount * 0.1)){
     currentUser.movements.push(amount);
+    currentUser.movementsDates.push(new Date().toISOString());
   }else{
     window.alert("You are not eligible!");
   }
