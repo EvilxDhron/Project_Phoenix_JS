@@ -10,14 +10,14 @@ const account1 = {
   interestRate: 1.2, // %
   pin: 1111,
   movementsDates: [
-    "2019-11-18T21:31:17.178Z",
-    "2019-12-23T07:42:02.383Z",
-    "2020-01-28T09:15:04.904Z",
-    "2020-04-01T10:17:24.185Z",
-    "2020-05-08T14:11:59.604Z",
-    "2020-05-27T17:01:17.194Z",
-    "2020-07-11T23:36:17.929Z",
-    "2020-07-12T10:51:36.790Z",
+    "2026-11-18T21:31:17.178Z",
+    "2026-12-23T07:42:02.383Z",
+    "2026-01-28T09:15:04.904Z",
+    "2026-04-01T10:17:24.185Z",
+    "2026-05-08T14:11:59.604Z",
+    "2026-05-27T17:01:17.194Z",
+    "2026-09-11T23:36:17.929Z",
+    "2026-09-14T10:51:36.790Z",
   ],
   currency: "EUR",
   locale: "pt-PT", // de-DE
@@ -134,9 +134,8 @@ let currentUser;
 let sorted = false;
 
 const showTransactions = function (acc, sort = false) {
-
   const combinedMoves = acc.movements.map((move, i) => {
-    return {movement: move, moveDate: acc.movementsDates[i]};
+    return { movement: move, moveDate: acc.movementsDates[i] };
   });
 
   const trans = sort
@@ -189,13 +188,29 @@ const showCurrentBalance = function (account) {
   currentBalanceTotal.textContent = `${account.balance.toFixed(2)}€`;
 };
 
+const calcDays = (date1, date2) => {
+  return Math.floor(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
+};
 
-const showCurrentDate = (str = '')=> {
+console.log(calcDays(new Date(), new Date("2026-09-15T00:12:36.492Z")));
+
+const showCurrentDate = (str = "") => {
   let today;
-  if(!str) { today = new Date()}
-  else {today = new Date(str)};
-  const date = `${today.getDate()}`.padStart(2,0);
-  const month = `${today.getMonth() + 1}`.padStart(2,0);
+  if (!str) {
+    today = new Date();
+  } else {
+    today = new Date(str);
+  }
+  const daysPassed = calcDays(new Date(), today);
+
+  if (str) {
+    if (daysPassed === 0) return "Today";
+    if (daysPassed === 1) return "Yesterday";
+    if (daysPassed < 7) return `${daysPassed} days ago`;
+  }
+
+  const date = `${today.getDate()}`.padStart(2, 0);
+  const month = `${today.getMonth() + 1}`.padStart(2, 0);
   const year = today.getFullYear();
   return `${date}/${month}/${year}`;
 };
@@ -203,7 +218,8 @@ const showCurrentDate = (str = '')=> {
 const showSummary = function (account) {
   totalAmountIN.textContent = account.movements
     .filter((trans) => trans > 0)
-    .reduce((acc, trans) => acc + trans, 0).toFixed(2);
+    .reduce((acc, trans) => acc + trans, 0)
+    .toFixed(2);
 
   totalAmountOUT.textContent = Math.abs(
     account.movements
@@ -236,6 +252,9 @@ const updateUI = (account) => {
   main.style.opacity = main.style.scale = "1";
   currentBalanceDate.textContent = showCurrentDate();
 };
+
+currentUser = accounts[0];
+updateUI(currentUser);
 
 const clearInputs = (value1, value2) => {
   value1.value = value2.value = "";
@@ -286,20 +305,20 @@ closeUserBtn.addEventListener("click", () => {
 });
 
 sortTransactionBtn.addEventListener("click", () => {
-  showTransactions(currentUser, !sorted)
+  showTransactions(currentUser, !sorted);
   sorted = !sorted;
 });
 
-loanBtn.addEventListener('click',()=>{
+loanBtn.addEventListener("click", () => {
   const amount = Math.floor(loanAmtInput.value);
 
-  if(currentUser.movements.some(trans => trans >= amount * 0.1)){
+  if (currentUser.movements.some((trans) => trans >= amount * 0.1)) {
     currentUser.movements.push(amount);
     currentUser.movementsDates.push(new Date().toISOString());
-  }else{
+  } else {
     window.alert("You are not eligible!");
   }
 
   updateUI(currentUser);
-  loanAmtInput.value = '';
-})
+  loanAmtInput.value = "";
+});
