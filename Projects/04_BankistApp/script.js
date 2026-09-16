@@ -39,7 +39,7 @@ const account2 = {
     "2020-07-26T12:01:20.894Z",
   ],
   currency: "USD",
-  locale: "en-US",
+  locale: "en-UK",
 };
 
 const account3 = {
@@ -66,7 +66,7 @@ const account4 = {
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1,
   pin: 4444,
-  movementsDates2: [
+  movementsDates: [
     "2022-01-08T10:15:27.436Z",
     "2022-02-24T16:42:19.725Z",
     "2022-04-11T07:38:54.183Z",
@@ -148,7 +148,7 @@ const showTransactions = function (acc, sort = false) {
     const transElement = `<div class="trans">
                               <div class="showStatus">
                                   <div class="status status_${type}"> ${index + 1} ${type}</div>
-                                  <div class="status_date">${showCurrentDate(amount.moveDate)}</div>
+                                  <div class="status_date">${showCurrentDate(amount.moveDate, acc.locale)}</div>
                               </div>
                               <div class="status_Amount">${amount.movement.toFixed(2)}€</div>
                           </div>
@@ -192,9 +192,10 @@ const calcDays = (date1, date2) => {
   return Math.floor(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
 };
 
-console.log(calcDays(new Date(), new Date("2026-09-15T00:12:36.492Z")));
+// Actual Working of Difference between dates - Operation on Milliseconds.
+/* console.log(calcDays(new Date(), new Date("2026-09-15T00:12:36.492Z"))); */
 
-const showCurrentDate = (str = "") => {
+const showCurrentDate = (str = "", locale) => {
   let today;
   if (!str) {
     today = new Date();
@@ -209,10 +210,16 @@ const showCurrentDate = (str = "") => {
     if (daysPassed < 7) return `${daysPassed} days ago`;
   }
 
-  const date = `${today.getDate()}`.padStart(2, 0);
+  // Previous code for Date Formatting
+
+/*   const date = `${today.getDate()}`.padStart(2, 0);
   const month = `${today.getMonth() + 1}`.padStart(2, 0);
   const year = today.getFullYear();
-  return `${date}/${month}/${year}`;
+  console.log(Intl.DateTimeFormat('en-UK').format(new Date()));
+  return `${date}/${month}/${year}`; */
+
+  // Internationalization of Dates👇
+  return Intl.DateTimeFormat(locale).format(today);
 };
 
 const showSummary = function (account) {
@@ -250,11 +257,8 @@ const updateUI = (account) => {
   showSummary(account);
   greeting.textContent = `Welcome back, ${account.owner}`;
   main.style.opacity = main.style.scale = "1";
-  currentBalanceDate.textContent = showCurrentDate();
+  currentBalanceDate.textContent = showCurrentDate("",currentUser.locale);
 };
-
-currentUser = accounts[0];
-updateUI(currentUser);
 
 const clearInputs = (value1, value2) => {
   value1.value = value2.value = "";
