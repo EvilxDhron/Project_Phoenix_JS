@@ -6,7 +6,7 @@
 // Data
 const account1 = {
   owner: "Jonas Schmedtmann",
-  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  movements: [200, 450, -400, 30000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
   pin: 1111,
   movementsDates: [
@@ -39,7 +39,7 @@ const account2 = {
     "2020-07-26T12:01:20.894Z",
   ],
   currency: "USD",
-  locale: "en-UK",
+  locale: "en-US",
 };
 
 const account3 = {
@@ -80,7 +80,26 @@ const account4 = {
   locale: "pt-PT",
 };
 
-const accounts = [account1, account2, account3, account4];
+const account5 = {
+  owner: "Dhron Yadav",
+  movements: [43000, 1960000, -70000, 500, 90, 423451,563334, -93749],
+  interestRate: 1,
+  pin: 5555,
+  movementsDates: [
+    "2022-01-08T10:15:27.436Z",
+    "2022-02-24T16:42:19.725Z",
+    "2022-04-11T07:38:54.183Z",
+    "2022-05-19T12:26:41.957Z",
+    "2022-07-03T14:53:08.364Z",
+    "2022-08-17T09:31:25.618Z",
+    "2022-10-29T17:12:43.875Z",
+    "2022-12-15T11:47:32.529Z",
+  ],
+  currency: "USD",
+  locale: "en-US",
+};
+
+const accounts = [account1, account2, account3, account4, account5];
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -150,7 +169,7 @@ const showTransactions = function (acc, sort = false) {
                                   <div class="status status_${type}"> ${index + 1} ${type}</div>
                                   <div class="status_date">${showCurrentDate(amount.moveDate, acc.locale)}</div>
                               </div>
-                              <div class="status_Amount">${amount.movement.toFixed(2)}€</div>
+                              <div class="status_Amount">${formatCurrency(acc.locale, amount.movement, acc.currency)}</div>
                           </div>
                           <div class="line"></div>`;
 
@@ -185,12 +204,23 @@ const withdraws = function (arr) {
 
 const showCurrentBalance = function (account) {
   account.balance = account.movements.reduce((acc, tran) => (acc += tran), 0);
-  currentBalanceTotal.textContent = `${account.balance.toFixed(2)}€`;
+  // currentBalanceTotal.textContent = `${account.balance.toFixed(2)}€`;
+  currentBalanceTotal.textContent = formatCurrency(account.locale, account.balance, account.currency);
 };
 
 const calcDays = (date1, date2) => {
   return Math.floor(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
 };
+
+const formatCurrency = (locale, amount, currency) => {
+  const options = {
+    style: "currency",
+    currency: currency,
+  };
+  // Internationalization of Numbers(to currency)👇 - using Web API
+  return new Intl.NumberFormat(locale, options).format(amount);
+};
+// console.log(formatCurrency('en-UK', 23928023, 'EUR'));
 
 // Actual Working of Difference between dates - Operation on Milliseconds.
 /* console.log(calcDays(new Date(), new Date("2026-09-15T00:12:36.492Z"))); */
@@ -218,30 +248,38 @@ const showCurrentDate = (str = "", locale) => {
   console.log(Intl.DateTimeFormat('en-UK').format(new Date()));
   return `${date}/${month}/${year}`; */
 
-  // Internationalization of Dates👇
-  return Intl.DateTimeFormat(locale).format(today);
+  const options = {
+    day: 'numeric',
+    month: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  }
+
+  // Internationalization of Dates👇 - using Web API
+  return Intl.DateTimeFormat(locale, str ? "": options).format(today);
 };
 
 const showSummary = function (account) {
-  totalAmountIN.textContent = account.movements
+  totalAmountIN.textContent = formatCurrency(account.locale ,account.movements
     .filter((trans) => trans > 0)
-    .reduce((acc, trans) => acc + trans, 0)
-    .toFixed(2);
+    .reduce((acc, trans) => acc + trans, 0), account.currency);
 
-  totalAmountOUT.textContent = Math.abs(
+    // .toFixed(2);
+
+  totalAmountOUT.textContent = formatCurrency(account.locale ,Math.abs(
     account.movements
       .filter((trans) => trans < 0)
       .reduce((acc, trans) => acc + trans, 0),
-  ).toFixed(2);
+  ), account.currency);
 
-  totalAmountInterest.textContent = account.movements
+  totalAmountInterest.textContent = formatCurrency(account.locale ,account.movements
     .filter((trans) => trans > 0)
     .map((trans) => (trans * account.interestRate) / 100)
     .reduce((acc, trans) => {
       if (trans >= 1) return acc + trans;
       return acc;
-    }, 0)
-    .toFixed(2);
+    }, 0), account.currency);
 };
 
 function changeCurrentUser(user, pin) {
