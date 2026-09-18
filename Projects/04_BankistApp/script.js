@@ -324,7 +324,13 @@ const startLogOutTimer = function () {
 
     logoutTimer.textContent = `${min}:${sec}`;
 
-    if (time === 0) clearInterval(timer);
+    if (time === 0) {
+      clearInterval(timer);
+      currentUser = null;
+      greeting.textContent = `Log in to get started!`;
+      main.style.opacity = "0";
+      main.style.scale = 0.9
+    }
     time--;
   }, 1000);
 
