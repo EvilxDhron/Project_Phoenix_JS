@@ -82,7 +82,7 @@ const account4 = {
 
 const account5 = {
   owner: "Dhron Yadav",
-  movements: [43000, 1960000, -70000, 500, 90, 423451,563334, -93749],
+  movements: [43000, 1960000, -70000, 500, 90, 423451, 563334, -93749],
   interestRate: 1,
   pin: 5555,
   movementsDates: [
@@ -149,7 +149,7 @@ const sortTransactionBtn = document.querySelector("#sortBtn");
 const main = document.querySelector("main");
 const transactionContainer = document.querySelector(".transactions");
 
-let currentUser;
+let currentUser, timer;
 let sorted = false;
 
 const showTransactions = function (acc, sort = false) {
@@ -205,7 +205,11 @@ const withdraws = function (arr) {
 const showCurrentBalance = function (account) {
   account.balance = account.movements.reduce((acc, tran) => (acc += tran), 0);
   // currentBalanceTotal.textContent = `${account.balance.toFixed(2)}€`;
-  currentBalanceTotal.textContent = formatCurrency(account.locale, account.balance, account.currency);
+  currentBalanceTotal.textContent = formatCurrency(
+    account.locale,
+    account.balance,
+    account.currency,
+  );
 };
 
 const calcDays = (date1, date2) => {
@@ -242,44 +246,56 @@ const showCurrentDate = (str = "", locale) => {
 
   // Previous code for Date Formatting
 
-/*   const date = `${today.getDate()}`.padStart(2, 0);
+  /*   const date = `${today.getDate()}`.padStart(2, 0);
   const month = `${today.getMonth() + 1}`.padStart(2, 0);
   const year = today.getFullYear();
   console.log(Intl.DateTimeFormat('en-UK').format(new Date()));
   return `${date}/${month}/${year}`; */
 
   const options = {
-    day: 'numeric',
-    month: 'numeric',
-    year: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-  }
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  };
 
   // Internationalization of Dates👇 - using Web API
-  return Intl.DateTimeFormat(locale, str ? "": options).format(today);
+  return Intl.DateTimeFormat(locale, str ? "" : options).format(today);
 };
 
 const showSummary = function (account) {
-  totalAmountIN.textContent = formatCurrency(account.locale ,account.movements
-    .filter((trans) => trans > 0)
-    .reduce((acc, trans) => acc + trans, 0), account.currency);
-
-    // .toFixed(2);
-
-  totalAmountOUT.textContent = formatCurrency(account.locale ,Math.abs(
+  totalAmountIN.textContent = formatCurrency(
+    account.locale,
     account.movements
-      .filter((trans) => trans < 0)
+      .filter((trans) => trans > 0)
       .reduce((acc, trans) => acc + trans, 0),
-  ), account.currency);
+    account.currency,
+  );
 
-  totalAmountInterest.textContent = formatCurrency(account.locale ,account.movements
-    .filter((trans) => trans > 0)
-    .map((trans) => (trans * account.interestRate) / 100)
-    .reduce((acc, trans) => {
-      if (trans >= 1) return acc + trans;
-      return acc;
-    }, 0), account.currency);
+  // .toFixed(2);
+
+  totalAmountOUT.textContent = formatCurrency(
+    account.locale,
+    Math.abs(
+      account.movements
+        .filter((trans) => trans < 0)
+        .reduce((acc, trans) => acc + trans, 0),
+    ),
+    account.currency,
+  );
+
+  totalAmountInterest.textContent = formatCurrency(
+    account.locale,
+    account.movements
+      .filter((trans) => trans > 0)
+      .map((trans) => (trans * account.interestRate) / 100)
+      .reduce((acc, trans) => {
+        if (trans >= 1) return acc + trans;
+        return acc;
+      }, 0),
+    account.currency,
+  );
 };
 
 function changeCurrentUser(user, pin) {
@@ -295,7 +311,24 @@ const updateUI = (account) => {
   showSummary(account);
   greeting.textContent = `Welcome back, ${account.owner}`;
   main.style.opacity = main.style.scale = "1";
-  currentBalanceDate.textContent = showCurrentDate("",currentUser.locale);
+  currentBalanceDate.textContent = showCurrentDate("", currentUser.locale);
+};
+
+const startLogOutTimer = function () {
+  let time = 300;
+  logoutTimer.textContent = "05:00";
+
+  let timer = setInterval(() => {
+    let min = String(Math.trunc(time / 60)).padStart(2, 0);
+    let sec = String(time % 60).padStart(2, 0);
+
+    logoutTimer.textContent = `${min}:${sec}`;
+
+    if (time === 0) clearInterval(timer);
+    time--;
+  }, 1000);
+
+  return timer;
 };
 
 const clearInputs = (value1, value2) => {
@@ -331,6 +364,8 @@ const deleteUser = (user, pin) => {
 navSubmitBtn.addEventListener("click", () => {
   updateUI(changeCurrentUser(userIdInput.value, Number(userPinInput.value)));
   clearInputs(userIdInput, userPinInput);
+  if (timer) clearInterval(timer);
+  timer = startLogOutTimer();
 });
 
 transferUserBtn.addEventListener("click", () => {
@@ -339,6 +374,8 @@ transferUserBtn.addEventListener("click", () => {
   transferMoney(account, amount);
   clearInputs(transferUserInput, transferUserAmt);
   updateUI(currentUser);
+  if (timer) clearInterval(timer);
+  timer = startLogOutTimer();
 });
 
 closeUserBtn.addEventListener("click", () => {
@@ -349,6 +386,8 @@ closeUserBtn.addEventListener("click", () => {
 sortTransactionBtn.addEventListener("click", () => {
   showTransactions(currentUser, !sorted);
   sorted = !sorted;
+  if (timer) clearInterval(timer);
+  timer = startLogOutTimer();
 });
 
 loanBtn.addEventListener("click", () => {
@@ -363,4 +402,6 @@ loanBtn.addEventListener("click", () => {
 
   updateUI(currentUser);
   loanAmtInput.value = "";
+  if (timer) clearInterval(timer);
+  timer = startLogOutTimer();
 });
