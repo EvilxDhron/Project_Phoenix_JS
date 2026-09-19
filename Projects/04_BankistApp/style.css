@@ -92,6 +92,10 @@ nav {
   }
 }
 
+.hideMain{
+  display: none;
+}
+
 main {
   width: 100%;
   display: flex;

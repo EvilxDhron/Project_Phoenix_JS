@@ -300,10 +300,11 @@ const showSummary = function (account) {
 
 function changeCurrentUser(user, pin) {
   currentUser = accounts.find((acc) => acc.user === user && acc.pin === pin);
-  if (!currentUser){
+  if (!currentUser) {
     window.alert("🚫 Wrong Username or Password!");
     return false;
-  } 
+  }
+  return currentUser;
 }
 
 const updateUI = (account) => {
@@ -311,13 +312,27 @@ const updateUI = (account) => {
   showTransactions(account);
   showCurrentBalance(account);
   showSummary(account);
-  greeting.textContent = `Welcome back, ${account.owner}`;
-  main.style.opacity = main.style.scale = "1";
-  currentBalanceDate.textContent = showCurrentDate("", currentUser.locale);
+  main.classList.remove("hideMain");
+  setTimeout(() => {
+    greeting.textContent = `Welcome back, ${account.owner}`;
+    main.style.opacity = main.style.scale = "1";
+    currentBalanceDate.textContent = showCurrentDate("", currentUser.locale);
+  }, 450);
+};
+
+const resetUI = () => {
+  clearInterval(timer);
+  currentUser = null;
+  main.style.opacity = "0";
+  main.style.scale = 0.9;
+  setTimeout(() => {
+    greeting.textContent = `Log in to get started!`;
+    main.classList.add("hideMain");
+  }, 450);
 };
 
 const startLogOutTimer = function () {
-  let time = 300;
+  let time = 30;
   logoutTimer.textContent = "05:00";
 
   let timer = setInterval(() => {
@@ -327,17 +342,18 @@ const startLogOutTimer = function () {
     logoutTimer.textContent = `${min}:${sec}`;
 
     if (time === 0) {
-      clearInterval(timer);
-      currentUser = null;
-      greeting.textContent = `Log in to get started!`;
-      main.style.opacity = "0";
-      main.style.scale = 0.9;
+      resetUI();
     }
     time--;
   }, 1000);
 
   return timer;
 };
+
+const updateTimer = () => {
+  if (timer) clearInterval(timer);
+  return startLogOutTimer();
+}
 
 const clearInputs = (value1, value2) => {
   value1.value = value2.value = "";
@@ -362,18 +378,14 @@ const deleteUser = (user, pin) => {
   if (user === currentUser.user && pin === currentUser.pin) {
     const index = accounts.findIndex((acc) => acc.user === currentUser.user);
     accounts.splice(index, 1);
-    greeting.textContent = `Log in to get started!`;
-    main.style.opacity = "0";
-    main.style.scale = "0.9";
-    console.log(accounts);
+    resetUI();
   }
 };
 
 navSubmitBtn.addEventListener("click", () => {
   if (changeCurrentUser(userIdInput.value, Number(userPinInput.value))) {
     updateUI(currentUser);
-    if (timer) clearInterval(timer);
-    timer = startLogOutTimer();
+    timer = updateTimer();
   }
 
   clearInputs(userIdInput, userPinInput);
@@ -385,8 +397,7 @@ transferUserBtn.addEventListener("click", () => {
   transferMoney(account, amount);
   clearInputs(transferUserInput, transferUserAmt);
   updateUI(currentUser);
-  if (timer) clearInterval(timer);
-  timer = startLogOutTimer();
+  timer = updateTimer();
 });
 
 closeUserBtn.addEventListener("click", () => {
@@ -397,8 +408,7 @@ closeUserBtn.addEventListener("click", () => {
 sortTransactionBtn.addEventListener("click", () => {
   showTransactions(currentUser, !sorted);
   sorted = !sorted;
-  if (timer) clearInterval(timer);
-  timer = startLogOutTimer();
+  timer = updateTimer();
 });
 
 loanBtn.addEventListener("click", () => {
@@ -413,6 +423,5 @@ loanBtn.addEventListener("click", () => {
 
   updateUI(currentUser);
   loanAmtInput.value = "";
-  if (timer) clearInterval(timer);
-  timer = startLogOutTimer();
+  timer = updateTimer();
 });
