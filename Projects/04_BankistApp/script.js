@@ -300,8 +300,10 @@ const showSummary = function (account) {
 
 function changeCurrentUser(user, pin) {
   currentUser = accounts.find((acc) => acc.user === user && acc.pin === pin);
-  if (currentUser) return currentUser;
-  window.alert("🚫 Wrong Username or Password!");
+  if (!currentUser){
+    window.alert("🚫 Wrong Username or Password!");
+    return false;
+  } 
 }
 
 const updateUI = (account) => {
@@ -329,7 +331,7 @@ const startLogOutTimer = function () {
       currentUser = null;
       greeting.textContent = `Log in to get started!`;
       main.style.opacity = "0";
-      main.style.scale = 0.9
+      main.style.scale = 0.9;
     }
     time--;
   }, 1000);
@@ -368,10 +370,13 @@ const deleteUser = (user, pin) => {
 };
 
 navSubmitBtn.addEventListener("click", () => {
-  updateUI(changeCurrentUser(userIdInput.value, Number(userPinInput.value)));
+  if (changeCurrentUser(userIdInput.value, Number(userPinInput.value))) {
+    updateUI(currentUser);
+    if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
+  }
+
   clearInputs(userIdInput, userPinInput);
-  if (timer) clearInterval(timer);
-  timer = startLogOutTimer();
 });
 
 transferUserBtn.addEventListener("click", () => {
