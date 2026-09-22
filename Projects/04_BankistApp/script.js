@@ -355,9 +355,9 @@ const updateTimer = () => {
   if (timer) {
     clearInterval(timer);
     timer = null;
-  };
+  }
   return startLogOutTimer();
-}
+};
 
 const clearInputs = (value1, value2) => {
   value1.value = value2.value = "";
@@ -383,8 +383,8 @@ const deleteUser = (user, pin) => {
     const index = accounts.findIndex((acc) => acc.user === currentUser.user);
     accounts.splice(index, 1);
     resetUI();
-  }else{
-    window.alert('🚫 Wrong Credentials⁉️');
+  } else {
+    window.alert("🚫 Wrong Credentials⁉️");
   }
 };
 
@@ -420,6 +420,10 @@ sortTransactionBtn.addEventListener("click", () => {
 loanBtn.addEventListener("click", () => {
   const amount = Math.floor(loanAmtInput.value);
 
+  if (!(typeof amount === "number") || !(amount > 0)) {
+    loanAmtInput.value = "";
+    return window.alert("⚠️ Enter a valid amount⁉️");
+  }
   if (currentUser.movements.some((trans) => trans >= amount * 0.1)) {
     currentUser.movements.push(amount);
     currentUser.movementsDates.push(new Date().toISOString());
