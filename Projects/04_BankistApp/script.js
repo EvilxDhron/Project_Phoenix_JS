@@ -101,20 +101,6 @@ const account5 = {
 
 const accounts = [account1, account2, account3, account4, account5];
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
-
-const currencies = new Map([
-  ["USD", "United States dollar"],
-  ["EUR", "Euro"],
-  ["GBP", "Pound sterling"],
-]);
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-/////////////////////////////////////////////////
-
 /////--- DOM Elements ---/////
 
 ////// State
@@ -177,12 +163,6 @@ const showTransactions = function (acc, sort = false) {
   });
 };
 
-const eurToUsd = 1.1;
-
-const transactionsToUsd = function (transactions) {
-  return transactions.map((num) => Math.trunc(num * eurToUsd));
-};
-
 const createUserNames = function (accounts) {
   for (let acc of accounts) {
     acc.user = acc.owner
@@ -193,14 +173,6 @@ const createUserNames = function (accounts) {
   }
 };
 createUserNames(accounts);
-
-const deposits = function (arr) {
-  return arr.filter((deposit) => deposit > 0);
-};
-
-const withdraws = function (arr) {
-  return arr.filter((deposit) => deposit < 0);
-};
 
 const showCurrentBalance = function (account) {
   account.balance = account.movements.reduce((acc, tran) => (acc += tran), 0);
@@ -272,8 +244,6 @@ const showSummary = function (account) {
       .reduce((acc, trans) => acc + trans, 0),
     account.currency,
   );
-
-  // .toFixed(2);
 
   totalAmountOUT.textContent = formatCurrency(
     account.locale,
@@ -347,8 +317,6 @@ const startLogOutTimer = function () {
     }
     time--;
   }, 1000);
-
-  // return timer;
 };
 
 const updateTimer = () => {
