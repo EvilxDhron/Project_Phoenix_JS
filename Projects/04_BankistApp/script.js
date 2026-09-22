@@ -322,6 +322,7 @@ const updateUI = (account) => {
 
 const resetUI = () => {
   clearInterval(timer);
+  timer = null;
   currentUser = null;
   main.style.opacity = "0";
   main.style.scale = 0.9;
@@ -332,10 +333,10 @@ const resetUI = () => {
 };
 
 const startLogOutTimer = function () {
-  let time = 30;
+  let time = 300;
   logoutTimer.textContent = "05:00";
 
-  let timer = setInterval(() => {
+  timer = setInterval(() => {
     let min = String(Math.trunc(time / 60)).padStart(2, 0);
     let sec = String(time % 60).padStart(2, 0);
 
@@ -347,11 +348,14 @@ const startLogOutTimer = function () {
     time--;
   }, 1000);
 
-  return timer;
+  // return timer;
 };
 
 const updateTimer = () => {
-  if (timer) clearInterval(timer);
+  if (timer) {
+    clearInterval(timer);
+    timer = null;
+  };
   return startLogOutTimer();
 }
 
@@ -379,13 +383,15 @@ const deleteUser = (user, pin) => {
     const index = accounts.findIndex((acc) => acc.user === currentUser.user);
     accounts.splice(index, 1);
     resetUI();
+  }else{
+    window.alert('🚫 Wrong Credentials⁉️');
   }
 };
 
 navSubmitBtn.addEventListener("click", () => {
   if (changeCurrentUser(userIdInput.value, Number(userPinInput.value))) {
     updateUI(currentUser);
-    timer = updateTimer();
+    updateTimer();
   }
 
   clearInputs(userIdInput, userPinInput);
@@ -397,7 +403,7 @@ transferUserBtn.addEventListener("click", () => {
   transferMoney(account, amount);
   clearInputs(transferUserInput, transferUserAmt);
   updateUI(currentUser);
-  timer = updateTimer();
+  updateTimer();
 });
 
 closeUserBtn.addEventListener("click", () => {
@@ -408,7 +414,7 @@ closeUserBtn.addEventListener("click", () => {
 sortTransactionBtn.addEventListener("click", () => {
   showTransactions(currentUser, !sorted);
   sorted = !sorted;
-  timer = updateTimer();
+  updateTimer();
 });
 
 loanBtn.addEventListener("click", () => {
@@ -423,5 +429,5 @@ loanBtn.addEventListener("click", () => {
 
   updateUI(currentUser);
   loanAmtInput.value = "";
-  timer = updateTimer();
+  updateTimer();
 });
