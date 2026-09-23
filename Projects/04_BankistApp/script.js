@@ -108,9 +108,6 @@ const accounts = [account1, account2, account3, account4, account5];
 const greeting = document.querySelector(".greet");
 const currentBalanceDate = document.querySelector(".balanceDate");
 const currentBalanceTotal = document.querySelector(".totalBalance");
-const transStatus = document.querySelector(".status");
-const transStatusDate = document.querySelector(".status_date");
-const transStatusAmount = document.querySelector(".status_Amount");
 const totalAmountIN = document.querySelector(".sumAmtDeposit");
 const totalAmountOUT = document.querySelector(".sumAmtWithdraw");
 const totalAmountInterest = document.querySelector(".sumAmtInterest");
@@ -138,21 +135,13 @@ const transactionContainer = document.querySelector(".transactions");
 let currentUser, timer;
 let sorted = false;
 
-const showTransactions = function (acc, sort = false) {
-  const combinedMoves = acc.movements.map((move, i) => {
-    return { movement: move, moveDate: acc.movementsDates[i] };
-  });
-
-  const trans = sort
-    ? combinedMoves.slice().sort((a, b) => a.movement - b.movement)
-    : combinedMoves;
-
+const renderTransactions = function (acc, transactions) {
   transactionContainer.innerHTML = "";
-  trans.forEach((amount, index) => {
+  transactions.forEach((amount) => {
     let type = amount.movement > 0 ? "Deposit" : "Withdraw";
     const transElement = `<div class="trans">
                               <div class="showStatus">
-                                  <div class="status status_${type}"> ${index + 1} ${type}</div>
+                                  <div class="status status_${type}"> ${amount.transIndex} ${type}</div>
                                   <div class="status_date">${showCurrentDate(amount.moveDate, acc.locale)}</div>
                               </div>
                               <div class="status_Amount">${formatCurrency(acc.locale, amount.movement, acc.currency)}</div>
@@ -163,7 +152,26 @@ const showTransactions = function (acc, sort = false) {
   });
 };
 
-const createUserNames = function (accounts) {
+const showTransactions = function (acc, sort = false) {
+  // Here 👇 I'm combining the index of transactions, and transactions with transaction dates to an Array of Objects to sort them simultaneously.
+  const combinedMoves = acc.movements.map((move, i) => {
+    return {
+      transIndex: i + 1,
+      movement: move,
+      moveDate: acc.movementsDates[i],
+    };
+  });
+
+  // Sorting became easy here because now each date is associated with its respected transaction.
+  const trans = sort
+    ? combinedMoves.slice().sort((a, b) => a.movement - b.movement)
+    : combinedMoves;
+
+  renderTransactions(acc, trans);
+};
+
+// Made it an IIFE because I just need to run it once.
+(function (accounts) {
   for (let acc of accounts) {
     acc.user = acc.owner
       .toLowerCase()
@@ -171,17 +179,15 @@ const createUserNames = function (accounts) {
       .map((name) => name[0])
       .join("");
   }
-};
-createUserNames(accounts);
+})(accounts);
 
-const showCurrentBalance = function (account) {
-  account.balance = account.movements.reduce((acc, tran) => (acc += tran), 0);
-  // currentBalanceTotal.textContent = `${account.balance.toFixed(2)}€`;
-  currentBalanceTotal.textContent = formatCurrency(
-    account.locale,
-    account.balance,
-    account.currency,
-  );
+// Made this function for calculating real-time user balance.
+const getBalance = function (account) {
+  return account.movements.reduce((acc, tran) => (acc += tran), 0);
+};
+
+const calcCurrentBalance = function (account) {
+  return formatCurrency(account.locale, getBalance(account), account.currency);
 };
 
 const calcDays = (date1, date2) => {
@@ -194,8 +200,11 @@ const formatCurrency = (locale, amount, currency) => {
     currency: currency,
   };
   // Internationalization of Numbers(to currency)👇 - using Web API
+  // Use the account's locale so currencies appear in the user's regional format.
   return new Intl.NumberFormat(locale, options).format(amount);
 };
+
+// What is actually getting passed inside it.👇
 // console.log(formatCurrency('en-UK', 23928023, 'EUR'));
 
 // Actual Working of Difference between dates - Operation on Milliseconds.
@@ -236,7 +245,7 @@ const showCurrentDate = (str = "", locale) => {
   return Intl.DateTimeFormat(locale, str ? "" : options).format(today);
 };
 
-const showSummary = function (account) {
+const renderSummary = function (account) {
   totalAmountIN.textContent = formatCurrency(
     account.locale,
     account.movements
@@ -277,17 +286,25 @@ function changeCurrentUser(user, pin) {
   return currentUser;
 }
 
-const updateUI = (account) => {
-  if (!account) return;
+const renderAccountData = function (account) {
   showTransactions(account);
-  showCurrentBalance(account);
-  showSummary(account);
+  currentBalanceTotal.textContent = calcCurrentBalance(account);
+  renderSummary(account);
+};
+
+const renderAccountUI = function (account) {
   main.classList.remove("hideMain");
   setTimeout(() => {
     greeting.textContent = `Welcome back, ${account.owner}`;
     main.style.opacity = main.style.scale = "1";
     currentBalanceDate.textContent = showCurrentDate("", currentUser.locale);
   }, 450);
+};
+
+const updateUI = (account) => {
+  if (!account) return;
+  renderAccountData(account);
+  renderAccountUI(account);
 };
 
 const resetUI = () => {
@@ -336,12 +353,15 @@ const transferMoney = (user, amount) => {
     user &&
     user !== currentUser &&
     amount > 0 &&
-    currentUser.balance >= amount
+    getBalance(currentUser) >= amount
   ) {
     currentUser.movements.push(-amount);
     currentUser.movementsDates.push(new Date().toISOString());
     user.movements.push(amount);
     user.movementsDates.push(new Date().toISOString());
+    updateUI(currentUser);
+  } else {
+    window.alert("🚫 Wrong Credentials⁉️");
   }
 };
 
@@ -366,29 +386,32 @@ navSubmitBtn.addEventListener("click", () => {
 });
 
 transferUserBtn.addEventListener("click", () => {
+  if (!currentUser) return;
   const account = accounts.find((acc) => acc.user === transferUserInput.value);
   const amount = Number(transferUserAmt.value);
   transferMoney(account, amount);
   clearInputs(transferUserInput, transferUserAmt);
-  updateUI(currentUser);
   updateTimer();
 });
 
 closeUserBtn.addEventListener("click", () => {
+  if (!currentUser) return;
   deleteUser(closeUserIdInput.value, Number(closeUserPinInput.value));
   clearInputs(closeUserIdInput, closeUserPinInput);
 });
 
 sortTransactionBtn.addEventListener("click", () => {
+  if (!currentUser) return;
   showTransactions(currentUser, !sorted);
   sorted = !sorted;
   updateTimer();
 });
 
 loanBtn.addEventListener("click", () => {
+  if (!currentUser) return;
   const amount = Math.floor(loanAmtInput.value);
 
-  if (!(typeof amount === "number") || !(amount > 0)) {
+  if (!Number.isFinite(amount) || amount <= 0) {
     loanAmtInput.value = "";
     return window.alert("⚠️ Enter a valid amount⁉️");
   }
