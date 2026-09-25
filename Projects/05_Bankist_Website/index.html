@@ -1,37 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>BANKIST | When Banking meets Minimalist</title>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <div class="modal">
+        <button class="closeModalBtn">x</button>
+        <h2>Open your bank account <br/> in just <span class="highlighted">5 minutes</span></h2>
+        <form>
+            <label for="name">First Name</label>
+            <input id="name" type="text"/>
+            <label for="lastName">Last Name</label>
+            <input id="lastName" type="text"/>
+            <label for="email">Email Address</label>
+            <input id="email" type="text"/>
+            <button class="mainBtn" >Next step &RightArrow;</button>
+        </form>
+    </div>
+
     <header>
-        <nav>
-            <img src="./images/logo.png"/>
-            <ul>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">Operations</a></li>
-                <li><a href="#">Testimonials</a></li>
-                <li><a class="nav-btn" href="#">Open Account</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <img src="./images/logo.png" />
+        <ul>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Operations</a></li>
+          <li><a href="#">Testimonials</a></li>
+          <li><a class="mainBtn nav-btn" href="#">Open Account</a></li>
+        </ul>
+      </nav>
     </header>
-    
+
     <main>
-        <section class="section_1">
-            <div class="part1">
-                <h1>When <span class="highlighted">banking</span> meets <span class="highlighted">minimalist</span></h1>
-                <h4>A simpler banking experience for a simpler life.</h4>
-                <button class="sec1-btn">Learn more &DownArrow;</button>
-            </div>
-            <div class="part2">
-                <img src="./images/hero.png"/>
-            </div>
-        </section>
+      <section class="section_1">
+        <div class="part1">
+          <h1>
+            When <span class="highlighted">banking</span> meets
+            <span class="highlighted">minimalist</span>
+          </h1>
+          <h4>A simpler banking experience for a simpler life.</h4>
+          <button class="sec1-btn">Learn more &DownArrow;</button>
+        </div>
+        <div class="part2">
+          <img src="./images/hero.png" />
+        </div>
+      </section>
     </main>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
