@@ -37,9 +37,16 @@ body {
   color: black;
   transition: background-color 0.3s ease;
   border: none;
+  cursor: pointer;
+  text-decoration: none;
 }
 .mainBtn:hover {
   background-color: var(--color-primary-darker);
+}
+
+.mainBtn:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
 }
 
 #header {
@@ -67,6 +74,12 @@ body {
         color: rgba(0, 0, 0, 0.662);
         font-size: 1.1rem;
         font-weight: 500;
+        border-radius: 50px;
+      }
+
+      .nav-link:focus-visible {
+        outline: 3px solid grey;
+        outline-offset: 10px;
       }
     }
   }
@@ -108,13 +121,13 @@ body {
     flex-direction: column;
     gap: 1.5rem;
 
-    #sec1-mainText {
-      font-size: 4vw;
+    #sec1-title {
+      font-size: clamp(2.5rem, 4vw, 4.5rem);
       color: rgba(0, 0, 0, 0.662);
     }
 
     #sec1-text {
-      font-size: 1.7vw;
+      font-size: clamp(1rem, 1.5vw, 1.8rem);
       font-weight: 100;
     }
 
@@ -125,6 +138,12 @@ body {
       padding-bottom: 0.3rem;
       border: none;
       border-bottom: 1px solid currentColor;
+      cursor: pointer;
+    }
+
+    .sec1-btn:focus-visible {
+      outline: 3px solid var(--color-primary);
+      outline-offset: 10px;
     }
   }
 
@@ -149,22 +168,19 @@ body {
 }
 
 .overlay {
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.164);
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.333);
   backdrop-filter: blur(5px);
-  width: 100%;
-  height: 100%;
   z-index: 2;
   opacity: 0;
+  inset: 0;
 }
 
 .modal {
   padding: 3rem 4rem;
-  /* padding-bottom: 3.5rem; */
-  position: absolute;
+  position: fixed;
   z-index: 3;
-  left: 50%;
-  top: 50%;
+  inset: 50% auto auto 50%;
   transform: translate(-50%, -50%);
   width: clamp(440px, 50vw, 550px);
   background-color: var(--main-color);
@@ -181,6 +197,7 @@ body {
     font-size: 2rem;
     font-family:
       "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    cursor: pointer;
   }
 
   #modal-heading {

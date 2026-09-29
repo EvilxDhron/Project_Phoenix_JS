@@ -8,28 +8,28 @@
   </head>
   <body>
     <div class="overlay hidden"></div>
-    <div class="modal hidden">
-        <button id="closeModalBtn">x</button>
+    <div class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+        <button type="button" id="closeModalBtn" aria-label="Close Account Opening Dialog">x</button>
         <h2 id="modal-heading">Open your bank account <br/> in just <span class="highlighted">5 minutes</span></h2>
         <form id="modal-form">
             <label class="modal-label" for="name">First Name</label>
-            <input class="modal-input" id="name" type="text"/>
+            <input class="modal-input" id="name" type="text" name="firstName" autocomplete="given-name" required/>
             <label class="modal-label" for="lastName">Last Name</label>
-            <input class="modal-input" id="lastName" type="text"/>
+            <input class="modal-input" id="lastName" type="text" name="lastName" autocomplete="family-name" required/>
             <label class="modal-label" for="email">Email Address</label>
-            <input class="modal-input" id="email" type="text"/>
-            <button id="modal-btn" class="mainBtn" >Next step &RightArrow;</button>
+            <input class="modal-input" id="email" type="email" name="email" autocomplete="email" required/>
+            <button type="submit" id="modal-btn" aria-label="Account opening submit button" class="mainBtn" >Next step &RightArrow;</button>
         </form>
     </div>
 
     <header id="header">
       <nav id="nav">
-        <img id="nav-img" src="./images/logo.png" />
+        <img id="nav-img" src="./images/logo.png" alt="Bankist Logo"/>
         <ul id="nav-links">
           <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Operations</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Testimonials</a></li>
-          <li class="nav-item"><a class="nav-link mainBtn nav-btn" href="#">Open Account</a></li>
+          <li class="nav-item"><a class="mainBtn nav-btn" href="#">Open Account</a></li>
         </ul>
       </nav>
     </header>
@@ -37,15 +37,15 @@
     <main id="main">
       <section class="section_1">
         <div class="sec1-part1">
-          <h1 id="sec1-mainText">
+          <h1 id="sec1-title">
             When <span class="highlighted">banking</span> meets
             <span class="highlighted">minimalist</span>
           </h1>
-          <h4 id="sec1-text">A simpler banking experience for a simpler life.</h4>
-          <button class="sec1-btn">Learn more &DownArrow;</button>
+          <p id="sec1-text">A simpler banking experience for a simpler life.</p>
+          <button type="button" class="sec1-btn" aria-label="learn more button">Learn more &DownArrow;</button>
         </div>
         <div class="sec1-part2">
-          <img id="sec1-img" src="./images/hero.png" />
+          <img id="sec1-img" src="./images/hero.png" alt="bankist images" />
         </div>
       </section>
     </main>
