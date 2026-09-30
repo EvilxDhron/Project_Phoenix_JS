@@ -30,15 +30,22 @@ body {
   background-color: var(--main-color);
 }
 
+button,
+input {
+  font: inherit;
+}
+
 .mainBtn {
   background-color: var(--color-primary);
   padding: 0.9rem 2.1rem;
   border-radius: 50px;
-  color: black;
+  color: White;
   transition: background-color 0.3s ease;
   border: none;
   cursor: pointer;
   text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 .mainBtn:hover {
   background-color: var(--color-primary-darker);
@@ -60,7 +67,7 @@ body {
     justify-content: space-between;
     align-items: center;
 
-    #nav-img {
+    #nav-logo {
       height: 2.8rem;
     }
 
@@ -126,7 +133,7 @@ body {
       color: rgba(0, 0, 0, 0.662);
     }
 
-    #sec1-text {
+    #sec1-description {
       font-size: clamp(1rem, 1.5vw, 1.8rem);
       font-weight: 100;
     }
@@ -152,8 +159,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
     #sec1-img {
-      height: 24vw;
+      height: auto;
+      width: min(100%, 30rem);
     }
   }
 }
@@ -185,6 +194,7 @@ body {
   width: clamp(440px, 50vw, 550px);
   background-color: var(--main-color);
   box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.3);
+  border-radius: 1rem;
   opacity: 0;
 
   #closeModalBtn {
@@ -193,6 +203,7 @@ body {
     top: 0;
     padding: 0.5rem 1rem;
     border: none;
+    border-radius: 1rem;
     background-color: var(--main-color);
     font-size: 2rem;
     font-family:
@@ -235,6 +246,44 @@ body {
       grid-column: 2/3;
       font-size: 1rem;
       margin-left: -30px;
+    }
+  }
+}
+
+/* =========================
+  Mobile-Responsive
+========================= */
+
+/* Not Proper Yet */
+@media (max-width: 768px) {
+  #main {
+    padding: 0 10px;
+  }
+
+  #header {
+    #nav {
+      #nav-links {
+        display: none;
+      }
+    }
+  }
+
+  .section_1 {
+    padding: 0;
+    flex-direction: column;
+    /* text-align: center; */
+    gap: 2rem;
+  }
+
+  .sec1-part1,
+  .sec1-part2 {
+    width: 100%;
+  }
+
+  .sec1-part1 {
+    #sec1-title {
+      font-size: 1.5rem;
+      width: 100%;
     }
   }
 }
