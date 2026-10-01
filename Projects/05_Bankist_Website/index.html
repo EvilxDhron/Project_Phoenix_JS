@@ -8,28 +8,74 @@
   </head>
   <body>
     <div class="overlay hidden"></div>
-    <div class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
-        <button type="button" id="closeModalBtn" aria-label="Close Account Opening Dialog">x</button>
-        <h2 id="modal-heading">Open your bank account <br/> in just <span class="highlighted">5 minutes</span></h2>
-        <form id="modal-form">
-            <label class="modal-label" for="name">First Name</label>
-            <input class="modal-input" id="name" type="text" name="firstName" autocomplete="given-name" required/>
-            <label class="modal-label" for="lastName">Last Name</label>
-            <input class="modal-input" id="lastName" type="text" name="lastName" autocomplete="family-name" required/>
-            <label class="modal-label" for="email">Email Address</label>
-            <input class="modal-input" id="email" type="email" name="email" autocomplete="email" required/>
-            <button type="submit" id="modal-btn" aria-label="Account opening submit button" class="mainBtn" >Next step &RightArrow;</button>
-        </form>
+    <div
+      class="modal hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-heading"
+    >
+      <button
+        type="button"
+        id="closeModalBtn"
+        aria-label="Close Account Opening Dialog"
+      >
+        x
+      </button>
+      <h2 id="modal-heading">
+        Open your bank account <br />
+        in just <span class="highlighted">5 minutes</span>
+      </h2>
+      <form id="modal-form">
+        <label class="modal-label" for="name">First Name</label>
+        <input
+          class="modal-input"
+          id="name"
+          type="text"
+          name="firstName"
+          autocomplete="given-name"
+          required
+        />
+        <label class="modal-label" for="lastName">Last Name</label>
+        <input
+          class="modal-input"
+          id="lastName"
+          type="text"
+          name="lastName"
+          autocomplete="family-name"
+          required
+        />
+        <label class="modal-label" for="email">Email Address</label>
+        <input
+          class="modal-input"
+          id="email"
+          type="email"
+          name="email"
+          autocomplete="email"
+          required
+        />
+        <button
+          type="submit"
+          id="modal-btn"
+          aria-label="Account opening submit button"
+          class="mainBtn"
+        >
+          Next step &RightArrow;
+        </button>
+      </form>
     </div>
 
     <header id="header">
       <nav id="nav" aria-label="Main navigation">
-        <img id="nav-logo" src="./images/logo.png" alt="Bankist Logo"/>
+        <img id="nav-logo" src="./images/logo.png" alt="Bankist Logo" />
         <ul id="nav-links">
           <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Operations</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Testimonials</a></li>
-          <li class="nav-item"><a class="mainBtn nav-btn" href="#">Open Account</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Testimonials</a>
+          </li>
+          <li class="nav-item">
+            <a class="mainBtn nav-btn" href="#">Open Account</a>
+          </li>
         </ul>
       </nav>
     </header>
@@ -41,13 +87,52 @@
             When <span class="highlighted">banking</span> meets
             <span class="highlighted">minimalist</span>
           </h1>
-          <p id="sec1-description">A simpler banking experience for a simpler life.</p>
-          <button type="button" class="sec1-btn" aria-label="learn more button">Learn more &DownArrow;</button>
+          <p id="sec1-description">
+            A simpler banking experience for a simpler life.
+          </p>
+          <button type="button" class="sec1-btn" aria-label="learn more button">
+            Learn more &DownArrow;
+          </button>
         </div>
         <div class="sec1-part2">
           <img id="sec1-img" src="./images/hero.png" alt="bankist images" />
         </div>
       </section>
+
+      <section class="section_2" aria-labelledby="sec2_title">
+        <div class="sec2_Container">
+          <div class="sec2_header">
+            <h6 id="sec2_title">Features</h6>
+            <h2 class="sec2_description">
+              Everything you need in a modern bank <br />
+              and more
+            </h2>
+          </div>
+
+          <img class="sec2_images digital_img" src="./images/digital-lazy.jpg" alt="Digital Image" />
+          <div class="digital_card sec2_cards">
+            <div class="sec2_digitalIcon sec2_cards_icons"></div>
+            <h5 class="digital_card_title sec2_cards_title">100% Digital Bank</h5>
+            <p class="digital_card_description sec2_cards_description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia nostrum, sed iusto adipisci est nulla saepe possimus recusandae earum obcaecati doloribus quaerat corrupti eum iste eos soluta totam rerum? Vero!</p>
+          </div>
+
+          <img class="sec2_images grow_img" src="./images/grow-lazy.jpg" alt="Grow Image" />
+          <div class="grow_card sec2_cards">
+            <div class="sec2_growIcon sec2_cards_icons"></div>
+            <h5 class="grow_card_title sec2_cards_title">Watch your money grow</h5>
+            <p class="grow_card_description sec2_cards_description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia nostrum, sed iusto adipisci est nulla saepe possimus recusandae earum obcaecati doloribus quaerat corrupti eum iste eos soluta totam rerum? Vero!</p>
+          </div>
+
+          <img class="sec2_images debitCard_img" src="./images/card-lazy.jpg" alt="DebitCard Image" />
+          <div class="debitCard_card sec2_cards">
+            <div class="sec2_debitCardIcon sec2_cards_icons"></div>
+            <h5 class="debitCard_card_title sec2_cards_title">Free debit card included</h5>
+            <p class="debitCard_card_description sec2_cards_description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia nostrum, sed iusto adipisci est nulla saepe possimus recusandae earum obcaecati doloribus quaerat corrupti eum iste eos soluta totam rerum? Vero!</p>
+          </div>
+
+        </div>
+      </section>
+      
     </main>
 
     <script src="script.js"></script>
