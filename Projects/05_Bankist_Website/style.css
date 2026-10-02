@@ -246,10 +246,6 @@ input {
       width: 100%;
     }
 
-    /* .modal-input:focus {
-      outline: none;
-    } */
-
     .modal-input:focus-visible {
       outline: 2px solid rgba(0, 0, 0, 0.21);
       outline-offset: 3px;
@@ -268,6 +264,7 @@ input {
   width: 100%;
   padding: 9rem 0;
   color: var(--color-text);
+  border-bottom: 2px solid grey;
 }
 
 #section_2 .sec2_container {
@@ -331,6 +328,102 @@ input {
 
 #section_2 .sec2_container .grow_img {
   grid-column: 2;
+}
+
+#section_3 {
+  width: 100%;
+  padding: 9rem 0;
+  color: var(--color-text);
+  border-bottom: 2px solid grey;
+}
+
+#section_3 .sec3_container {
+  width: min(100%, 1200px);
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  gap: 7rem;
+  margin-inline: auto;
+}
+
+#section_3 .sec3_container .sec3_header {
+  #sec3_title {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+  }
+
+  .sec3_description {
+    font-size: 2.8rem;
+    font-weight: 400;
+  }
+}
+
+#section_3 .sec3_container .sec3_operations {
+  width: min(100%, 1000px);
+  background-color: white;
+  padding: 5rem;
+  position: relative;
+
+  .operations_tab_container {
+    position: absolute;
+    top: -1.59rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 77%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    gap: 2rem;
+    margin-inline: auto;
+
+    .op_tabs {
+      font-size: 1.1rem;
+      padding: 0.8rem 2.4rem;
+      border-radius: 50px;
+      background-color: var(--color-primary);
+      text-wrap: nowrap;
+    }
+
+    .op_tab_1 {
+      background-color: var(--color-secondary);
+    }
+
+    .op_tab_3 {
+      background-color: var(--color-tertiary);
+    }
+  }
+
+  .operations_content{
+    display: none;
+  }
+
+  .operations_content_active {
+    display: grid;
+    grid-template-columns: 10% 90%;
+    place-items: center;
+    column-gap: 2.2rem;
+
+    .op_content_imgs {
+      width: 4rem;
+    }
+
+    .op_content_title {
+      font-size: 1.6rem;
+      font-weight: 500;
+      justify-self: start;
+    }
+
+    .op_content_description {
+      grid-column: 2/3;
+      font-size: 1.11rem;
+      color: var(--color-text-light);
+      line-height: 1.7;
+      width: fit-content;
+    }
+  }
 }
 
 /* =========================
