@@ -59,9 +59,11 @@ input {
 #header {
   width: 100%;
   padding: 0 5.5rem;
+  display:flex;
+  justify-content: center;
 
   #nav {
-    width: 100%;
+    width: min(100%, 1400px);
     height: 5.6rem;
     display: flex;
     justify-content: space-between;
@@ -95,6 +97,9 @@ input {
 #main {
   width: 100%;
   padding: 0 5.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .highlighted {
@@ -116,8 +121,9 @@ input {
 
 .section_1 {
   width: 100%;
-  padding: 0 4rem;
-  height: calc(100vh - 9rem);
+  height: calc(100vh - 5.6rem);
+  max-width: 1200px;
+  border-bottom: 1px solid grey;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,7 +135,7 @@ input {
     gap: 1.5rem;
 
     #sec1-title {
-      font-size: clamp(2.5rem, 4vw, 4.5rem);
+      font-size: clamp(2.5rem, 3.8vw, 4.5rem);
       color: rgba(0, 0, 0, 0.662);
     }
 
@@ -162,7 +168,7 @@ input {
 
     #sec1-img {
       height: auto;
-      width: min(100%, 30rem);
+      width: 80%;
     }
   }
 }
@@ -237,8 +243,13 @@ input {
       width: 100%;
     }
 
-    .modal-input:focus {
+    /* .modal-input:focus {
       outline: none;
+    } */
+
+    .modal-input:focus-visible{
+      outline: 2px solid rgba(0, 0, 0, 0.21);
+      outline-offset: 3px;
     }
 
     #modal-btn {
