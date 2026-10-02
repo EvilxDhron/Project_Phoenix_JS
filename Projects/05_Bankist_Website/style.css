@@ -1,5 +1,7 @@
 :root {
   --main-color: #f3f3f3;
+  --color-text: rgba(0, 0, 0, 0.666);
+  --color-text-light: rgba(0, 0, 0, 0.366);
   --color-primary: #5ec576;
   --color-secondary: #ffcb03;
   --color-tertiary: #ff585f;
@@ -59,7 +61,7 @@ input {
 #header {
   width: 100%;
   padding: 0 5.5rem;
-  display:flex;
+  display: flex;
   justify-content: center;
 
   #nav {
@@ -136,12 +138,13 @@ input {
 
     #sec1-title {
       font-size: clamp(2.5rem, 3.8vw, 4.5rem);
-      color: rgba(0, 0, 0, 0.662);
+      color: var(--color-text);
     }
 
     #sec1-description {
       font-size: clamp(1rem, 1.5vw, 1.8rem);
       font-weight: 100;
+      color: var(--color-text);
     }
 
     .sec1-btn {
@@ -247,7 +250,7 @@ input {
       outline: none;
     } */
 
-    .modal-input:focus-visible{
+    .modal-input:focus-visible {
       outline: 2px solid rgba(0, 0, 0, 0.21);
       outline-offset: 3px;
     }
@@ -259,6 +262,75 @@ input {
       margin-left: -30px;
     }
   }
+}
+
+#section_2 {
+  width: 100%;
+  padding: 9rem 0;
+  color: var(--color-text);
+}
+
+#section_2 .sec2_container {
+  width: min(100%, 1200px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  place-items: center;
+  margin-inline: auto;
+}
+
+#section_2 .sec2_container .sec2_header {
+  grid-column: span 2;
+
+  #sec2_title {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+  }
+
+  .sec2_description {
+    font-size: 2.8rem;
+    font-weight: 400;
+  }
+}
+
+#section_2 .sec2_container .sec2_images {
+  width: 100%;
+  filter: blur(20px);
+}
+
+#section_2 .sec2_container .sec2_cards {
+  width: 70%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.4rem;
+
+  .sec2_cards_icons {
+    img {
+      width: 3.2rem;
+    }
+  }
+
+  .sec2_cards_title {
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .sec2_cards_description {
+    color: var(--color-text-light);
+    line-height: 1.7;
+  }
+}
+
+#section_2 .sec2_container .grow_card {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+#section_2 .sec2_container .grow_img {
+  grid-column: 2;
 }
 
 /* =========================
