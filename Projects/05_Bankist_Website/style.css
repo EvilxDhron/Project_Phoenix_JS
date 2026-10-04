@@ -443,7 +443,6 @@ input {
 }
 
 #section_4 .sec4_container .sec4_header {
-
   #sec4_title {
     font-size: 1.1rem;
     text-transform: uppercase;
@@ -458,51 +457,91 @@ input {
   }
 }
 
-#section_4 .sec4_container .sec4_slider{
-  width: 1000px;
-  height: 500px;
+#section_4 .sec4_container .sec4_slider {
+  width: min(100%, 1000px);
+  padding: 2rem 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  position: relative;
 }
 
+.sec4_slider_slides {
+  width: 65%;
 
+  .testimonial {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
 
+    .testimonial_title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      position: relative;
+    }
 
+    .testimonial_title::before {
+      content: ' " ';
+      font-size: 8rem;
+      color: var(--color-primary);
+      position: absolute;
+      top: -3rem;
+      left: -3.9rem;
+    }
 
+    .testimonial_description {
+      font-size: 1.11rem;
+      color: var(--color-text-light);
+      line-height: 1.7;
+      width: fit-content;
+    }
 
+    .testimonial_author {
+      display: grid;
+      grid-template-columns: 5rem 1fr;
+      /* gap: 1rem; */
+      align-items: center;
+      width: fit-content;
 
-/* =========================
-  Mobile-Responsive
-========================= */
+      .author_img {
+        width: 4rem;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        grid-row: 1/3;
+      }
 
-/* Not Proper Yet */
-@media (max-width: 768px) {
-  #main {
-    padding: 0 10px;
-  }
+      .author_name {
+        font-size: 1.1rem;
+        font-weight: 300;
+      }
 
-  #header {
-    #nav {
-      #nav-links {
-        display: none;
+      .author_location {
+        font-size: 0.9rem;
+        font-weight: 200;
+        grid-column: 2/3;
       }
     }
   }
+}
 
-  .section_1 {
-    padding: 0;
-    flex-direction: column;
-    /* text-align: center; */
-    gap: 2rem;
-  }
+.sec4_slider_btns {
+  position: absolute;
+  top: 50%;
+  background-color: white;
+  padding: 1.2rem 1.4rem;
+  border-radius: 50%;
 
-  .sec1-part1,
-  .sec1-part2 {
-    width: 100%;
+  img {
+    width: 2rem;
   }
+}
 
-  .sec1-part1 {
-    #sec1-title {
-      font-size: 1.5rem;
-      width: 100%;
-    }
-  }
+.left_btn {
+  left: 0;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.right_btn {
+  right: 0;
+  transform: translateY(-50%);
 }
