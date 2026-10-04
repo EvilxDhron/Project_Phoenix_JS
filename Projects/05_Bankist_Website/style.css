@@ -459,6 +459,7 @@ input {
 
 #section_4 .sec4_container .sec4_slider {
   width: min(100%, 1000px);
+  height: 500px;
   padding: 2rem 0;
   display: grid;
   grid-template-columns: 1fr;
@@ -467,6 +468,7 @@ input {
 }
 
 .sec4_slider_slides {
+  position: absolute;
   width: 65%;
 
   .testimonial {
