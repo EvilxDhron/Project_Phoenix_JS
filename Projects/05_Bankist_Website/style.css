@@ -41,7 +41,7 @@ input {
   background-color: var(--color-primary);
   padding: 0.9rem 2.1rem;
   border-radius: 50px;
-  color: White;
+  color: rgb(60, 60, 60);
   transition: background-color 0.3s ease;
   border: none;
   cursor: pointer;
@@ -125,7 +125,6 @@ input {
   width: 100%;
   height: calc(100vh - 5.6rem);
   max-width: 1200px;
-  border-bottom: 1px solid grey;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -264,7 +263,6 @@ input {
   width: 100%;
   padding: 9rem 0;
   color: var(--color-text);
-  border-bottom: 2px solid grey;
 }
 
 #section_2 .sec2_container {
@@ -334,7 +332,6 @@ input {
   width: 100%;
   padding: 9rem 0;
   color: var(--color-text);
-  border-bottom: 2px solid grey;
 }
 
 #section_3 .sec3_container {
@@ -430,7 +427,6 @@ input {
   width: 100%;
   padding: 9rem 0;
   color: var(--color-text);
-  border-bottom: 2px solid grey;
 }
 
 #section_4 .sec4_container {
@@ -546,4 +542,88 @@ input {
 .right_btn {
   right: 0;
   transform: translateY(-50%);
+}
+
+#footer {
+  width: 100%;
+  padding: 6.2rem 0;
+  color: var(--main-color);
+  background-color: #37383d;
+  position: relative;
+
+  .footer_center_line {
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgb(97, 97, 97);
+  }
+}
+
+#footer .footer_container {
+  width: min(100%, 1200px);
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  gap: 6rem;
+  margin-inline: auto;
+}
+
+#footer .footer_container .footer_top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.8rem;
+  place-items: center;
+  padding-bottom: 6rem;
+
+  .footer_top_title {
+    font-size: 2.6rem;
+    font-weight: 600;
+  }
+
+  .footer_top_btn {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 1.5rem 2.4rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+}
+
+#footer .footer_container .footer_bottom {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.8rem;
+  margin-inline: auto;
+  place-items: center;
+
+  .footer_nav {
+    display: grid;
+    grid-template-columns: repeat(7, min-content);
+    gap: 2.5rem;
+    margin-inline: auto;
+    place-items: center;
+
+    .footer_items {
+      list-style: none;
+      width: fit-content;
+      text-wrap: nowrap;
+      color: rgb(202, 202, 202);
+    }
+  }
+
+  .footer_logo {
+    width: 3.8rem;
+  }
+
+  .footer_copyright {
+    font-size: 0.7rem;
+    color: rgb(173, 173, 173);
+
+    .myName {
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+  }
 }
