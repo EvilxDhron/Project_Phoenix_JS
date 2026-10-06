@@ -32,7 +32,7 @@ body {
   background-color: var(--main-color);
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   display: none;
 }
 
@@ -191,10 +191,10 @@ input {
 .section {
   width: 100%;
   padding-block: 9rem;
+  color: var(--color-text);
 }
 
 .section--hero {
-  width: 100%;
   height: calc(100vh - 5.6rem);
   max-width: 1200px;
   display: flex;
@@ -209,13 +209,11 @@ input {
 
     #sec1-title {
       font-size: clamp(2.5rem, 3.8vw, 4.5rem);
-      color: var(--color-text);
     }
 
     #sec1-description {
       font-size: clamp(1rem, 1.5vw, 1.8rem);
       font-weight: 100;
-      color: var(--color-text);
     }
 
     .sec1-btn {
@@ -266,12 +264,6 @@ input {
 
 .hidden {
   display: none;
-}
-
-.section--features {
-  width: 100%;
-  padding: 9rem 0;
-  color: var(--color-text);
 }
 
 .section--features .sec2_container {
@@ -335,12 +327,6 @@ input {
 
 .section--features .sec2_container .grow_img {
   grid-column: 2;
-}
-
-.section--operations {
-  width: 100%;
-  padding: 9rem 0;
-  color: var(--color-text);
 }
 
 .section--operations .sec3_container {
@@ -430,12 +416,6 @@ input {
       width: fit-content;
     }
   }
-}
-
-.section--testimonials {
-  width: 100%;
-  padding: 9rem 0;
-  color: var(--color-text);
 }
 
 .section--testimonials .sec4_container {
