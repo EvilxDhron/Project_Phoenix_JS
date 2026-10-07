@@ -5,14 +5,19 @@ const modal = document.querySelector(".modal");
 const closeModalBtn = document.querySelector("#closeModalBtn");
 const navBtn = document.querySelector(".nav-btn");
 const modalInputs = document.querySelectorAll(".modal-input");
-const modalBtn = document.querySelector("#modal-btn");
+const modalSubmitBtn = document.querySelector("#modal-btn");
+const allInputs = document.querySelectorAll("input");
 
 let clicked = true;
 
-const handleModalInputs = ()=>{
-    modalInputs.forEach((input)=>{
-        input.value = '';
-    })
+allInputs.forEach((input) => {
+  input.autocomplete = "off";
+});
+
+const clearModalInputs = () => {
+  modalInputs.forEach((input) => {
+    input.value = "";
+  });
 };
 
 const renderModal = (value = 1) => {
@@ -26,6 +31,7 @@ const updateModalClass = () => {
 };
 
 function handleModal() {
+  clearModalInputs();
   if (clicked) {
     updateModalClass();
     setTimeout(renderModal, 100);
@@ -37,19 +43,13 @@ function handleModal() {
   }
 }
 
-modalOverlay.addEventListener("click", () => {
-  handleModal();
-});
+modalOverlay.addEventListener("click", handleModal);
 
-navBtn.addEventListener("click", () => {
-  handleModal();
-});
+navBtn.addEventListener("click", handleModal);
 
-closeModalBtn.addEventListener("click", () => {
-  handleModal();
-});
+closeModalBtn.addEventListener("click", handleModal);
 
-modalBtn.addEventListener("click", (e) => {
+modalSubmitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  handleModalInputs();
+  clearModalInputs();
 });
