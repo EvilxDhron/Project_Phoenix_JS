@@ -76,23 +76,6 @@ modalSubmitBtn.addEventListener("click", (e) => {
 // Main Events
 
 heroBtn.addEventListener("click", (e) => {
-  /*   
-  console.log(e);
-  console.log(e.target.getBoundingClientRect());
-  console.log(window.pageXOffset, window.pageYOffset);
-  console.log(featuresSection.getBoundingClientRect());
-  console.log(document.documentElement.clientHeight, document.documentElement.clientWidth); 
-*/
-
-  // Traditional way of smooth scrolling
-  /* 
-    window.scrollTo({
-    left: featuresSection.getBoundingClientRect().left,
-    top: featuresSection.getBoundingClientRect().top,
-    behavior: "smooth",
-  }); 
-*/
-
   featuresSection.scrollIntoView({ behavior: "smooth" });
 });
 
