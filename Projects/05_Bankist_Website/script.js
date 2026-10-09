@@ -73,6 +73,11 @@ navbar.addEventListener("click", (e) => {
   if (e.target.classList.contains("nav-link")) {
     document
       .querySelector(`.section--${e.target.innerText.toLowerCase()}`)
-      .scrollIntoView({ behavior: "smooth" });
+      .scrollIntoView({
+        behavior: "smooth",
+        block: e.target.classList.contains("features-link")
+          ? "start"
+          : "center",
+      });
   }
 });
