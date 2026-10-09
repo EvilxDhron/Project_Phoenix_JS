@@ -10,20 +10,12 @@ const modalSubmitBtn = document.querySelector("#modal-btn");
 // Targeting all inputs at once
 const allInputs = document.querySelectorAll("input");
 
-// Main Elements
-
-const featuresSection = document.querySelector(".section--features");
-const operationsSection = document.querySelector(".section--operations");
-const testimonialsSection = document.querySelector(".section--testimonials");
-
 // Buttons
 const navBtn = document.querySelector(".nav-btn");
 const heroBtn = document.querySelector(".sec1-btn");
 
 // Links
-const featuresLink = document.querySelector(".features-link");
-const operationsLink = document.querySelector(".operations-link");
-const testimonialsLink = document.querySelector(".testimonials-link");
+const navbar = document.querySelector("#nav");
 
 let clicked = true;
 
@@ -75,18 +67,12 @@ modalSubmitBtn.addEventListener("click", (e) => {
 
 // Main Events
 
-heroBtn.addEventListener("click", (e) => {
-  featuresSection.scrollIntoView({ behavior: "smooth" });
+// Now I'll use event Delegation to capture the events more efficiently.
+
+navbar.addEventListener("click", (e) => {
+  if (e.target.classList.contains("nav-link")) {
+    document
+      .querySelector(`.section--${e.target.innerText.toLowerCase()}`)
+      .scrollIntoView({ behavior: "smooth" });
+  }
 });
-
-featuresLink.addEventListener("click", () =>
-  featuresSection.scrollIntoView({ behavior: "smooth"}),
-);
-
-operationsLink.addEventListener("click", () =>
-  operationsSection.scrollIntoView({ behavior: "smooth", block: "center" }),
-);
-
-testimonialsLink.addEventListener("click", () =>
-  testimonialsSection.scrollIntoView({ behavior: "smooth", block: "center" }),
-);
