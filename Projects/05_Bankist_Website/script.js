@@ -17,6 +17,11 @@ const heroBtn = document.querySelector(".sec1-btn");
 // Links
 const navbar = document.querySelector("#nav");
 
+// tabbed components
+const tabsContainer = document.querySelector(".operations_tab_container");
+const allTabs = document.querySelectorAll(".op_tabs");
+const allTabsContent = document.querySelectorAll(".operations_content");
+
 let clicked = true;
 
 allInputs.forEach((input) => {
@@ -78,4 +83,24 @@ navbar.addEventListener("click", (e) => {
     behavior: "smooth",
     block: e.target.classList.contains("features-link") ? "start" : "center",
   });
+});
+
+// Tab components Events
+
+const tabsClassRemover = function () {
+  allTabs.forEach((tab) => tab.classList.remove("tab--active"));
+  allTabsContent.forEach((content) =>
+    content.classList.remove("operations_content_active"),
+  );
+};
+
+tabsContainer.addEventListener("click", (e) => {
+  const tab = e.target.closest(".op_tabs");
+  if (!tab) return;
+  tabsClassRemover();
+  tab.classList.add("tab--active");
+  const tabNumber = tab.className.split("").find((n) => n > 0);
+  document
+    .querySelector(`.op_content_${tabNumber}`)
+    .classList.add("operations_content_active");
 });

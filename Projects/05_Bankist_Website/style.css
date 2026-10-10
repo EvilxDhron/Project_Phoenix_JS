@@ -377,6 +377,7 @@ input {
       border-radius: 50px;
       background-color: var(--color-primary);
       text-wrap: nowrap;
+      transition: all 0.2s ease-in-out;
     }
 
     .op_tab_1 {
@@ -385,6 +386,11 @@ input {
 
     .op_tab_3 {
       background-color: var(--color-tertiary);
+    }
+
+    .tab--active {
+      transform: scale(1.1) translateY(-10px);
+      box-shadow: 0 4px 12px rgba(21, 21, 21, 0.184);
     }
   }
 
