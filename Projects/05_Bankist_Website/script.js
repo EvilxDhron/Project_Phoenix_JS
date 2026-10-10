@@ -70,14 +70,12 @@ modalSubmitBtn.addEventListener("click", (e) => {
 // Now I'll use event Delegation to capture the events more efficiently.
 
 navbar.addEventListener("click", (e) => {
-  if (e.target.classList.contains("nav-link")) {
-    document
-      .querySelector(`.section--${e.target.innerText.toLowerCase()}`)
-      .scrollIntoView({
-        behavior: "smooth",
-        block: e.target.classList.contains("features-link")
-          ? "start"
-          : "center",
-      });
-  }
+  e.preventDefault();
+  const link = e.target.closest(".nav-link");
+  if (!link) return;
+  const section = `${link.getAttribute("href")}`;
+  document.querySelector(section)?.scrollIntoView({
+    behavior: "smooth",
+    block: e.target.classList.contains("features-link") ? "start" : "center",
+  });
 });
