@@ -96,11 +96,10 @@ const tabsClassRemover = function () {
 
 tabsContainer.addEventListener("click", (e) => {
   const tab = e.target.closest(".op_tabs");
-  if (!tab) return;
+  const tabNumber = tab.getAttribute("data-tab");
+  const section = document.querySelector(`.op_content_${tabNumber}`);
+  if (!tab || !tabNumber || !section) return;
   tabsClassRemover();
   tab.classList.add("tab--active");
-  const tabNumber = tab.className.split("").find((n) => n > 0);
-  document
-    .querySelector(`.op_content_${tabNumber}`)
-    .classList.add("operations_content_active");
+  section.classList.add("operations_content_active");
 });
