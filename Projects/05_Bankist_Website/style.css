@@ -377,7 +377,8 @@ input {
       border-radius: 50px;
       background-color: var(--color-primary);
       text-wrap: nowrap;
-      transition: all 0.2s ease-in-out;
+      border: none;
+      transition: scale 0.1s ease-in-out, background-color 0.3s ease-in-out;
     }
 
     .op_tab_1 {
@@ -386,6 +387,33 @@ input {
 
     .op_tab_3 {
       background-color: var(--color-tertiary);
+    }
+
+    .op_tab_1:focus-visible {
+      outline: 3px solid var(--color-secondary-darker);
+      outline-offset: 3px;
+    }
+
+    .op_tab_2:focus-visible{
+      outline: 3px solid var(--color-primary-darker);
+      outline-offset: 3px;
+    }
+
+    .op_tab_3:focus-visible{
+      outline: 3px solid var(--color-tertiary-darker);
+      outline-offset: 3px;
+    }
+
+    .op_tab_1:hover{
+      background-color: var(--color-secondary-darker);
+    }
+
+    .op_tab_2:hover{
+      background-color: var(--color-primary-darker);
+    }
+
+    .op_tab_3:hover{
+      background-color: var(--color-tertiary-darker);
     }
 
     .tab--active {
