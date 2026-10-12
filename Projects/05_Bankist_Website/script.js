@@ -103,3 +103,19 @@ tabsContainer.addEventListener("click", (e) => {
   tab.classList.add("tab--active");
   section.classList.add("operations_content_active");
 });
+
+// Nav links fade animation
+
+const handleLinks = function(e) {
+  const link = e.target;
+  if (!link.classList.contains("nav-link")) return;
+  const siblings = link.closest("#nav-links").querySelectorAll(".nav-link");
+  if (!siblings) return;
+  siblings.forEach((elem) => {
+    if (elem === link) return;
+    elem.style.opacity = this;
+  });
+};
+
+navbar.addEventListener("mouseover", handleLinks.bind(0.5));
+navbar.addEventListener("mouseout", handleLinks.bind(1));
