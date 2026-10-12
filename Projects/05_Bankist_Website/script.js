@@ -94,7 +94,7 @@ const tabsClassRemover = function () {
   );
 };
 
-tabsContainer.addEventListener("click", (e) => {
+tabsContainer.addEventListener("mouseover", (e) => {
   const tab = e.target.closest(".op_tabs");
   const tabNumber = tab.getAttribute("data-tab");
   const section = document.querySelector(`.op_content_${tabNumber}`);
@@ -106,11 +106,11 @@ tabsContainer.addEventListener("click", (e) => {
 
 // Nav links fade animation
 
-const handleLinks = function(e) {
+const handleLinks = function (e) {
   const link = e.target;
   if (!link.classList.contains("nav-link")) return;
-  const siblings = link.closest("#nav-links").querySelectorAll(".nav-link");
-  if (!siblings) return;
+  const siblings = link.closest("#nav-links")?.querySelectorAll(".nav-link");
+  if (!siblings || siblings.length === 0) return;
   siblings.forEach((elem) => {
     if (elem === link) return;
     elem.style.opacity = this;
