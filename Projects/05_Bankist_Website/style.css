@@ -1,4 +1,5 @@
 :root {
+  /* I've to change the colors.... */
   --main-color: #f3f3f3;
   --color-text: rgba(0, 0, 0, 0.666);
   --color-text-light: rgba(0, 0, 0, 0.366);
@@ -30,6 +31,7 @@ body {
 
 body {
   background-color: var(--main-color);
+  position: relative;
 }
 
 ::-webkit-scrollbar {
@@ -86,7 +88,7 @@ input {
 
       .nav-link {
         text-decoration: none;
-        color: rgba(0, 0, 0, 0.662);
+        color: var(--color-text);
         font-size: 1.1rem;
         font-weight: 500;
         border-radius: 50px;
@@ -99,6 +101,13 @@ input {
       }
     }
   }
+}
+
+.sticky{
+  position: fixed;
+  opacity: 0.9;
+  background-color: var(--main-color);
+  z-index: 20;
 }
 
 .modal,

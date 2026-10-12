@@ -22,6 +22,13 @@ const tabsContainer = document.querySelector(".operations_tab_container");
 const allTabs = document.querySelectorAll(".op_tabs");
 const allTabsContent = document.querySelectorAll(".operations_content");
 
+// main Element
+const main = document.querySelector("#main");
+
+// sections
+const siteHeader = document.querySelector("#header");
+const heroSection = document.querySelector(".section--hero");
+
 let clicked = true;
 
 allInputs.forEach((input) => {
@@ -119,3 +126,25 @@ const handleLinks = function (e) {
 
 navbar.addEventListener("mouseover", handleLinks.bind(0.5));
 navbar.addEventListener("mouseout", handleLinks.bind(1));
+
+// Sticky NavBar logic
+
+const navHeight = navbar.getBoundingClientRect().height;
+
+const stickyNavHandler = ([entry]) => {
+  if (!entry.isIntersecting) {
+    siteHeader.classList.add("sticky");
+    main.style.paddingTop += `${navHeight}px`;
+  } else {
+    siteHeader.classList.remove("sticky");
+    main.style.paddingTop = "";
+  }
+};
+
+const Observer = new IntersectionObserver(stickyNavHandler, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+});
+
+Observer.observe(heroSection);
