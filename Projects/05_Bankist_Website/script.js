@@ -28,6 +28,8 @@ const main = document.querySelector("#main");
 // sections
 const siteHeader = document.querySelector("#header");
 const heroSection = document.querySelector(".section--hero");
+const allSections = document.querySelectorAll(".section");
+const footer = document.querySelector("#footer");
 
 let clicked = true;
 
@@ -148,3 +150,26 @@ const Observer = new IntersectionObserver(stickyNavHandler, {
 });
 
 Observer.observe(heroSection);
+
+// Reveal on Scroll animation
+
+const revealSection = function (entries, observer) {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.remove("section--hidden");
+    observer.unobserve(entry.target);
+  });
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+
+allSections.forEach((section) => {
+  if (section.classList.contains("section--hero")) return;
+  section.classList.add("section--hidden");
+  footer.classList.add("section--hidden");
+  sectionObserver.observe(section);
+  sectionObserver.observe(footer);
+});

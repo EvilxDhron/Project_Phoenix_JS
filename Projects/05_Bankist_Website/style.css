@@ -1,5 +1,4 @@
 :root {
-  /* I've to change the colors.... */
   --main-color: #f3f3f3;
   --color-text: rgba(0, 0, 0, 0.666);
   --color-text-light: rgba(0, 0, 0, 0.366);
@@ -103,7 +102,7 @@ input {
   }
 }
 
-.sticky{
+.sticky {
   position: fixed;
   opacity: 0.9;
   background-color: var(--main-color);
@@ -202,6 +201,7 @@ input {
   width: 100%;
   padding-block: 9rem;
   color: var(--color-text);
+  transition: all 0.4s ease-in;
 }
 
 .section--hero {
@@ -388,7 +388,9 @@ input {
       background-color: var(--color-primary);
       text-wrap: nowrap;
       border: none;
-      transition: scale 0.1s ease-in-out, background-color 0.3s ease-in-out;
+      transition:
+        scale 0.1s ease-in-out,
+        background-color 0.3s ease-in-out;
     }
 
     .op_tab_1 {
@@ -404,25 +406,25 @@ input {
       outline-offset: 3px;
     }
 
-    .op_tab_2:focus-visible{
+    .op_tab_2:focus-visible {
       outline: 3px solid var(--color-primary-darker);
       outline-offset: 3px;
     }
 
-    .op_tab_3:focus-visible{
+    .op_tab_3:focus-visible {
       outline: 3px solid var(--color-tertiary-darker);
       outline-offset: 3px;
     }
 
-    .op_tab_1:hover{
+    .op_tab_1:hover {
       background-color: var(--color-secondary-darker);
     }
 
-    .op_tab_2:hover{
+    .op_tab_2:hover {
       background-color: var(--color-primary-darker);
     }
 
-    .op_tab_3:hover{
+    .op_tab_3:hover {
       background-color: var(--color-tertiary-darker);
     }
 
@@ -583,6 +585,7 @@ input {
   color: var(--main-color);
   background-color: #37383d;
   position: relative;
+  transition: all 0.4s ease-in;
 
   .footer_center_line {
     height: 1px;
@@ -592,6 +595,11 @@ input {
     transform: translateY(-50%);
     background-color: rgb(97, 97, 97);
   }
+}
+
+.section--hidden {
+  opacity: 0;
+  transform: translateY(6rem);
 }
 
 #footer .footer_container {
