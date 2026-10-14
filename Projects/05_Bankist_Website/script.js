@@ -177,21 +177,28 @@ allSections.forEach((section) => {
   sectionObserver.observe(footer);
 });
 
-const loadImages = function ([entry], observer) {
-  if (!entry.isIntersecting) return;
-  entry.target.src = entry.target.dataset.src;
+// Lazy loading animation
 
-  entry.target.addEventListener("load", () => {
-    entry.target.classList.remove("lazy-img");
+const loadImages = function (entries, observer) {
+  entries.forEach((entry) => {
+    console.log("event is called...");
+    if (!entry.isIntersecting) return;
+    entry.target.src = entry.target.dataset.src;
+    console.log(`Image url changed...`);
+
+    entry.target.addEventListener("load", () => {
+      entry.target.classList.remove("lazy-img");
+      console.log(`lazy loading complete of -> ${entry.target.src}`);
+    });
+
+    observer.unobserve(entry.target);
   });
-
-  observer.unobserve(entry.target);
 };
 
 const imageObserver = new IntersectionObserver(loadImages, {
   root: null,
   threshold: 0,
-  rootMargin: "200px",
+  rootMargin: '200px',
 });
 
 lazyImages.forEach((img) => imageObserver.observe(img));
