@@ -201,7 +201,7 @@ input {
   width: 100%;
   padding-block: 9rem;
   color: var(--color-text);
-  transition: all 0.4s ease-in;
+  transition: all 0.3s ease-in;
 }
 
 .section--hero {
@@ -304,6 +304,9 @@ input {
 
 .section--features .sec2_container .sec2_images {
   width: 100%;
+}
+
+.lazy-img {
   filter: blur(20px);
 }
 
@@ -585,7 +588,7 @@ input {
   color: var(--main-color);
   background-color: #37383d;
   position: relative;
-  transition: all 0.4s ease-in;
+  transition: all 0.3s ease-in;
 
   .footer_center_line {
     height: 1px;

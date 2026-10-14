@@ -31,6 +31,9 @@ const heroSection = document.querySelector(".section--hero");
 const allSections = document.querySelectorAll(".section");
 const footer = document.querySelector("#footer");
 
+// Lazy images
+const lazyImages = document.querySelectorAll("img[data-src]");
+
 let clicked = true;
 
 allInputs.forEach((input) => {
@@ -173,3 +176,22 @@ allSections.forEach((section) => {
   sectionObserver.observe(section);
   sectionObserver.observe(footer);
 });
+
+const loadImages = function ([entry], observer) {
+  if (!entry.isIntersecting) return;
+  entry.target.src = entry.target.dataset.src;
+
+  entry.target.addEventListener("load", () => {
+    entry.target.classList.remove("lazy-img");
+  });
+
+  observer.unobserve(entry.target);
+};
+
+const imageObserver = new IntersectionObserver(loadImages, {
+  root: null,
+  threshold: 0,
+  rootMargin: "200px",
+});
+
+lazyImages.forEach((img) => imageObserver.observe(img));
