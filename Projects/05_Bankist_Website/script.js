@@ -34,6 +34,12 @@ const footer = document.querySelector("#footer");
 // Lazy images
 const lazyImages = document.querySelectorAll("img[data-src]");
 
+// Testimonials Slides
+const testimonial = document.querySelector('.section--testimonials');
+const allSlides = document.querySelectorAll(".sec4_slider_slides");
+const leftSlideBtn = document.querySelector(".left_btn");
+const rightSlideBtn = document.querySelector(".right_btn");
+
 let clicked = true;
 
 allInputs.forEach((input) => {
@@ -181,16 +187,12 @@ allSections.forEach((section) => {
 
 const loadImages = function (entries, observer) {
   entries.forEach((entry) => {
-    console.log("event is called...");
     if (!entry.isIntersecting) return;
     entry.target.src = entry.target.dataset.src;
-    console.log(`Image url changed...`);
 
     entry.target.addEventListener("load", () => {
       entry.target.classList.remove("lazy-img");
-      console.log(`lazy loading complete of -> ${entry.target.src}`);
     });
-
     observer.unobserve(entry.target);
   });
 };
@@ -198,7 +200,58 @@ const loadImages = function (entries, observer) {
 const imageObserver = new IntersectionObserver(loadImages, {
   root: null,
   threshold: 0,
-  rootMargin: '200px',
+  rootMargin: "200px",
 });
 
 lazyImages.forEach((img) => imageObserver.observe(img));
+
+// Testimonial Slider
+
+const goToSlide = function (slide) {
+  allSlides.forEach((slide, index) => {
+    slide.style.transform = `translateX(${100 * (index - slide)}%)`;
+  });
+};
+goToSlide(0);
+
+const nextSlide = function () {
+  if (currentSlide === maxLength - 1) {
+    currentSlide = 0;
+  } else {
+    currentSlide++;
+  }
+  goToSlide(currentSlide);
+};
+
+const prevSlide = function () {
+  if (currentSlide === 0) {
+    currentSlide = maxLength - 1;
+  } else {
+    currentSlide--;
+  }
+  goToSlide(currentSlide);
+};
+
+let currentSlide = 0;
+const maxLength = allSlides.length;
+
+rightSlideBtn.addEventListener("click", nextSlide);
+
+leftSlideBtn.addEventListener("click", prevSlide);
+
+/* 
+const checkSlide = function([entry],observer){
+  if(!entry.target.isIntersecting) return;
+  document.addEventListener('keydown', (e)=>{
+    console.log(e.key);
+  })
+}
+
+const slidesObserver = new IntersectionObserver(checkSlide, {
+  root: null,
+  threshold: 0,
+  rootMargin: '150px',
+})
+
+slidesObserver.observe(testimonial); 
+*/
