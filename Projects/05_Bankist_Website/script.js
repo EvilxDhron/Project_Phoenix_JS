@@ -35,7 +35,7 @@ const footer = document.querySelector("#footer");
 const lazyImages = document.querySelectorAll("img[data-src]");
 
 // Testimonials Slides
-const testimonial = document.querySelector('.section--testimonials');
+const Slider = document.querySelector(".sec4_slider");
 const allSlides = document.querySelectorAll(".sec4_slider_slides");
 const leftSlideBtn = document.querySelector(".left_btn");
 const rightSlideBtn = document.querySelector(".right_btn");
@@ -207,9 +207,9 @@ lazyImages.forEach((img) => imageObserver.observe(img));
 
 // Testimonial Slider
 
-const goToSlide = function (slide) {
+const goToSlide = function (slideNum) {
   allSlides.forEach((slide, index) => {
-    slide.style.transform = `translateX(${100 * (index - slide)}%)`;
+    slide.style.transform = `translateX(${100 * (index - slideNum)}%)`;
   });
 };
 goToSlide(0);
@@ -239,19 +239,33 @@ rightSlideBtn.addEventListener("click", nextSlide);
 
 leftSlideBtn.addEventListener("click", prevSlide);
 
-/* 
-const checkSlide = function([entry],observer){
-  if(!entry.target.isIntersecting) return;
-  document.addEventListener('keydown', (e)=>{
-    console.log(e.key);
-  })
-}
+const handleKey = function (e) {
+  if(e.key === 'ArrowRight'){
+    nextSlide();
+  }else if(e.key === 'ArrowLeft'){
+    prevSlide();
+  }
+};
+
+const activateListener = function (state) {
+  if (state) {
+    document.addEventListener("keydown", handleKey);
+  } else {
+    document.removeEventListener("keydown", handleKey);
+  }
+};
+
+const checkSlide = function ([entry]) {
+  if (!entry.isIntersecting) {
+    activateListener(false);
+    return;
+  }
+  activateListener(true);
+};
 
 const slidesObserver = new IntersectionObserver(checkSlide, {
   root: null,
-  threshold: 0,
-  rootMargin: '150px',
-})
+  threshold: 0.6,
+});
 
-slidesObserver.observe(testimonial); 
-*/
+slidesObserver.observe(Slider);
