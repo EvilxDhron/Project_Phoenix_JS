@@ -40,6 +40,17 @@ const allSlides = document.querySelectorAll(".sec4_slider_slides");
 const leftSlideBtn = document.querySelector(".left_btn");
 const rightSlideBtn = document.querySelector(".right_btn");
 
+// Testimonials Dots
+const dotsContainer = document.querySelector(".dots__container");
+allSlides.forEach((s, i) => {
+  dotsContainer.insertAdjacentHTML(
+    "beforeend",
+    `<button class="dots__dot" data-slide="${i}"></button>`,
+  );
+});
+
+const allDots = document.querySelectorAll(".dots__dot");
+
 let clicked = true;
 
 allInputs.forEach((input) => {
@@ -207,9 +218,21 @@ lazyImages.forEach((img) => imageObserver.observe(img));
 
 // Testimonial Slider
 
+const removeDotsClass = () => {
+  allDots.forEach((dot) => {
+    dot.classList.remove("dots__dot--active");
+  });
+};
+
 const goToSlide = function (slideNum) {
   allSlides.forEach((slide, index) => {
     slide.style.transform = `translateX(${100 * (index - slideNum)}%)`;
+  });
+  removeDotsClass();
+  allDots.forEach((dot) => {
+    if (+dot.dataset.slide === slideNum) {
+      dot.classList.add("dots__dot--active");
+    }
   });
 };
 goToSlide(0);
@@ -239,10 +262,12 @@ rightSlideBtn.addEventListener("click", nextSlide);
 
 leftSlideBtn.addEventListener("click", prevSlide);
 
+// Keyboard events for slider
+
 const handleKey = function (e) {
-  if(e.key === 'ArrowRight'){
+  if (e.key === "ArrowRight") {
     nextSlide();
-  }else if(e.key === 'ArrowLeft'){
+  } else if (e.key === "ArrowLeft") {
     prevSlide();
   }
 };
@@ -269,3 +294,12 @@ const slidesObserver = new IntersectionObserver(checkSlide, {
 });
 
 slidesObserver.observe(Slider);
+
+// Slider Dots functionality
+
+dotsContainer.addEventListener("click", (e) => {
+  const dot = e.target.closest(".dots__dot");
+  if (!dot) return;
+  currentSlide = +dot.dataset.slide;
+  goToSlide(currentSlide);
+});

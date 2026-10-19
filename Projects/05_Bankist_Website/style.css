@@ -502,6 +502,27 @@ input {
   overflow: hidden;
 }
 
+.sec4_slider .dots__container{
+  width: fit-content;
+  height: 20px;
+  align-self: end;
+  display: flex;
+  gap: 10px;
+
+  .dots__dot{
+    width: 8px;
+    height: 8px;
+    border: none;
+    border-radius: 50%;
+    background-color: lightgrey;
+    cursor: pointer;
+  }
+
+  .dots__dot--active{
+    background-color: grey;
+  }
+}
+
 .sec4_slider_slides {
   position: absolute;
   width: 100%;
