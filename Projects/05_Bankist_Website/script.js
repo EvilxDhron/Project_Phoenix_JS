@@ -61,11 +61,6 @@ const clearModalInputs = () => {
   });
 };
 
-const renderModal = (value = 1) => {
-  modal.style.opacity = value;
-  modalOverlay.style.opacity = value;
-};
-
 const updateModalClass = () => {
   modal.classList.toggle("hidden");
   modalOverlay.classList.toggle("hidden");
@@ -146,7 +141,7 @@ const navHeight = navbar.getBoundingClientRect().height;
 const stickyNavHandler = ([entry]) => {
   if (!entry.isIntersecting) {
     siteHeader.classList.add("sticky");
-    main.style.paddingTop += `${navHeight}px`;
+    main.style.paddingTop = `${navHeight}px`;
   } else {
     siteHeader.classList.remove("sticky");
     main.style.paddingTop = "";
@@ -173,16 +168,18 @@ const revealSection = function (entries, observer) {
 
 const sectionObserver = new IntersectionObserver(revealSection, {
   root: null,
-  threshold: 0.15,
+  threshold: 0.01,
+  rootMargin: "-150px",
 });
 
 allSections.forEach((section) => {
   if (section.classList.contains("section--hero")) return;
   section.classList.add("section--hidden");
-  footer.classList.add("section--hidden");
   sectionObserver.observe(section);
-  sectionObserver.observe(footer);
 });
+
+footer.classList.add("section--hidden");
+sectionObserver.observe(footer);
 
 // Lazy loading animation
 
@@ -207,6 +204,9 @@ const imageObserver = new IntersectionObserver(loadImages, {
 lazyImages.forEach((img) => imageObserver.observe(img));
 
 // Testimonial Slider
+
+let currentSlide = 0;
+const maxLength = allSlides.length;
 
 const removeDotsClass = () => {
   allDots.forEach((dot) => {
@@ -244,9 +244,6 @@ const prevSlide = function () {
   }
   goToSlide(currentSlide);
 };
-
-let currentSlide = 0;
-const maxLength = allSlides.length;
 
 rightSlideBtn.addEventListener("click", nextSlide);
 
