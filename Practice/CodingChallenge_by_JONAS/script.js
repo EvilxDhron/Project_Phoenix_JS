@@ -510,7 +510,7 @@ console.log(DogsSorted);
 
 // ---------------------------------------- //
 
-/* Coding Challenge - OOPS in JavaScript */
+/* Coding Challenge 01 - OOPS in JavaScript */
 
 /* 1. Use a constructor function to implement a Car. Car has a make and a speed property. Thc speed property is the current speed of the car in km/h;
 
@@ -548,3 +548,53 @@ car1.break();
 car2.accelerate();
 car2.accelerate();
 car2.accelerate();
+
+/* Coding Challenge 02 */
+
+/* 
+
+1. Re-create challenge 1, but this time using an ES6 class;
+
+2. Add a getter called "speedUS" which returns the current speed in mi/h (divide by 1.6);
+
+3. Add a setter called "speedUS" which sets the current speed in mi/h (but convert it to km/h before storing the value, by multiplying the input by 1.6);
+
+4. Create a new Car and experiment with the accelerate and break methods, and with the getter and setter;
+
+DATA CAR 1: "Ford" going at 120 km/h;
+
+GOOD LUCK 
+
+*/
+
+class Cars {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = `${speed} km/h`;
+  }
+
+  accelerate() {
+    this.speed = `${parseInt(this.speed) + 10} km/h`;
+    console.log(`'${this.make}' going at ${this.speed}`);
+  }
+
+  break() {
+    this.speed = `${parseInt(this.speed) - 5} km/h`;
+    console.log(`'${this.make}' going at ${this.speed}`);
+  }
+
+  get speedUS() {
+    return `${parseInt(this.speed) / 1.6} mi/h`;
+  }
+
+  set speedUS(curSpeed) {
+    this.speed = `${curSpeed * 1.6} km/h`;
+  }
+}
+
+const BMW = new Cars("BMW", 150);
+BMW.accelerate();
+BMW.speedUS;            // get method
+BMW.speedUS = 200;      // set method
+BMW.break();
+console.log(BMW);
