@@ -51,8 +51,6 @@ allSlides.forEach((s, i) => {
 
 const allDots = document.querySelectorAll(".dots__dot");
 
-let clicked = true;
-
 allInputs.forEach((input) => {
   input.autocomplete = "off";
 });
@@ -75,15 +73,7 @@ const updateModalClass = () => {
 
 function handleModal() {
   clearModalInputs();
-  if (clicked) {
-    updateModalClass();
-    setTimeout(renderModal, 100);
-    clicked = !clicked;
-  } else {
-    renderModal(0);
-    setTimeout(updateModalClass, 250);
-    clicked = !clicked;
-  }
+  updateModalClass();
 }
 
 // Modal Events
