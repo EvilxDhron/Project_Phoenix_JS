@@ -106,11 +106,11 @@ modalSubmitBtn.addEventListener("click", (e) => {
 navbar.addEventListener("click", (e) => {
   e.preventDefault();
   const link = e.target.closest(".nav-link");
-  if (!link) return;
+  if (!link || link.classList.contains("nav-btn")) return;
   const section = `${link.getAttribute("href")}`;
   document.querySelector(section)?.scrollIntoView({
     behavior: "smooth",
-    block: e.target.classList.contains("features-link") ? "start" : "center",
+    block: link.classList.contains("features-link") ? "start" : "center",
   });
 });
 
@@ -125,9 +125,9 @@ const tabsClassRemover = function () {
 
 tabsContainer.addEventListener("mouseover", (e) => {
   const tab = e.target.closest(".op_tabs");
+  if (!tab) return;
   const tabNumber = tab.getAttribute("data-tab");
   const section = document.querySelector(`.op_content_${tabNumber}`);
-  if (!tab || !tabNumber || !section) return;
   tabsClassRemover();
   tab.classList.add("tab--active");
   section.classList.add("operations_content_active");
@@ -265,6 +265,15 @@ leftSlideBtn.addEventListener("click", prevSlide);
 // Keyboard events for slider
 
 const handleKey = function (e) {
+  const target = e.target;
+
+  if (
+    target instanceof Element &&
+    target.closest('input, textarea, select, [contenteditable="true"]')
+  ) {
+    return;
+  }
+
   if (e.key === "ArrowRight") {
     nextSlide();
   } else if (e.key === "ArrowLeft") {
