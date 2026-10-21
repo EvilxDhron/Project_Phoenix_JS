@@ -486,21 +486,65 @@ console.log(
 );
 
 // Solution No.7
-const okayDogs = dogs.filter(dog => dog.curFood < dog.recFood * 1.1 && dog.curFood > dog.recFood * 0.9);
+const okayDogs = dogs.filter(
+  (dog) => dog.curFood < dog.recFood * 1.1 && dog.curFood > dog.recFood * 0.9,
+);
 console.log(okayDogs);
 
 // Solution No.8
-const dogsGroup = Object.groupBy(dogs, dog => {
-  if(dog.curFood < dog.recFood * 1.1 && dog.curFood > dog.recFood * 0.9) return 'exact';
-  if(dog.curFood < dog.recFood) return 'too little';
-  if(dog.curFood > dog.recFood) return 'too much';
+const dogsGroup = Object.groupBy(dogs, (dog) => {
+  if (dog.curFood < dog.recFood * 1.1 && dog.curFood > dog.recFood * 0.9)
+    return "exact";
+  if (dog.curFood < dog.recFood) return "too little";
+  if (dog.curFood > dog.recFood) return "too much";
 });
 console.log(dogsGroup);
 
 // Solution No.9
-const groupByOwners = Object.groupBy(dogs, dog => `${dog.owners.length}`);
+const groupByOwners = Object.groupBy(dogs, (dog) => `${dog.owners.length}`);
 console.log(groupByOwners);
 
 // Solution No.10
-const DogsSorted = dogs.toSorted((a,b) => a.recFood - b.recFood);
+const DogsSorted = dogs.toSorted((a, b) => a.recFood - b.recFood);
 console.log(DogsSorted);
+
+// ---------------------------------------- //
+
+/* Coding Challenge - OOPS in JavaScript */
+
+/* 1. Use a constructor function to implement a Car. Car has a make and a speed property. Thc speed property is the current speed of the car in km/h;
+
+2. Implement an 'accelerate' method that will increase thc car's speed by 1O, and log the new speed to the console;
+
+3. Implement a 'brake' method that will decrease the car's speed by 5, and log the new speed to the console;
+
+4. Create 2 car objects and experiment with calling 'accelerate' and 'brake' multiple times on each of them.
+
+DATA CAR 1: 'BMW' going at 120 km/h
+DATA CAR 2: 'Mercedes' going at 95 km/h
+
+Good Luck 
+*/
+
+function Car(make, speed) {
+  this.make = make;
+  this.speed = `${speed} km/h`;
+}
+
+Car.prototype.accelerate = function () {
+  this.speed = `${parseInt(this.speed) + 10} km/h`;
+  console.log(`'${this.make}' going at ${this.speed}`);
+};
+
+Car.prototype.break = function () {
+  this.speed = `${parseInt(this.speed) - 5} km/h`;
+  console.log(`'${this.make}' going at ${this.speed}`);
+};
+
+const car1 = new Car("BMW", 120);
+const car2 = new Car("Mercedes", 95);
+
+car1.break();
+car2.accelerate();
+car2.accelerate();
+car2.accelerate();
