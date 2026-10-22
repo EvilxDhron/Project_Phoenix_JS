@@ -594,7 +594,52 @@ class Cars {
 
 const BMW = new Cars("BMW", 150);
 BMW.accelerate();
-BMW.speedUS;            // get method
-BMW.speedUS = 200;      // set method
+BMW.speedUS; // get method
+BMW.speedUS = 200; // set method
 BMW.break();
 console.log(BMW);
+
+/* Coding Challenge 03 */
+
+/* 
+
+1. Use a constructor function to implement an Electric Car (called EV) as a CHILD "class" of Car. Besides a make and current speed, the EV also the current battery charge in % ('charge' property);
+
+2. Implement a 'chargeBattery' method which takes an argument 'chargeTo' and sets the battery charge to 'chargeTo';
+
+3. Implement an 'accelerate' method that will increase the car's speed by 20, and decrease the charge by 1%. Then log a message like this: 'Tesla going at 140 km/h, with a charge of 22%';
+
+4. Create an electric car object and experiment with calling 'accelerate', 'brake' and 'chargeBattery' (charge to 90%). Notice what happens when you 'accelerate'! HINT: Review the definition of polymorphism.
+
+DATA CAR 1: 'Tesla' going at 120 km/h, with a charge of 23%;
+
+GOOD LUCK
+*/
+
+function EV(make, speed, charge) {
+  Car.call(this, make, speed);
+  this.charge = `${charge}%`;
+}
+
+EV.prototype = Object.create(Car.prototype);
+EV.prototype.constructor = EV;
+
+EV.prototype.chargeBattery = function (chargeTo) {
+  this.charge = `${chargeTo}%`;
+};
+
+EV.prototype.accelerate = function () {
+  this.speed = `${parseInt(this.speed) + 20} km/h`;
+  this.charge = `${parseInt(this.charge) - 1}%`;
+  console.log(
+    `${this.make} is going at ${this.speed}, with the charge of ${this.charge}`,
+  );
+};
+
+const tesla = new EV("Tesla", 120, 50);
+tesla.chargeBattery(24);
+tesla.break();
+tesla.break();
+tesla.break();
+tesla.break();
+tesla.accelerate();
