@@ -33,6 +33,10 @@ GOOD LUCK 😀
 
 */
 
+// -------------------------- Solution --------------------------//
+
+/* 
+
 document.body.append(document.createElement("textarea"));
 document.body.append(document.createElement("button"));
 const btn = document.querySelector("button");
@@ -71,6 +75,10 @@ function toCamelCase2() {
   }
   textArea.value = "";
 }
+  
+*/
+
+// -------------------------- Solution Finished -----------------------------//
 
 //------ Now This button is being used for next challenge ---------//
 // btn.addEventListener("click", toCamelCase2);
@@ -145,6 +153,8 @@ GOOD LUCK 😀
 
 */
 
+/* 
+
 const poll = {
   question: "What is your favorite programming language?",
   options: ["0: JavaScript", "1: Python", "2: Rust", "3: C++"],
@@ -170,7 +180,9 @@ const poll = {
 
 btn.addEventListener("click", poll.registerNewAnswer.bind(poll));
 poll.displayResults.call({ answers: [5, 2, 3] });
-poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, "string");
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, "string"); 
+
+*/
 
 // Coding Challenge #1 --- Arrays ---
 

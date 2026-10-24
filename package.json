@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "arr-methods": "node ./Practice/Array_Methods/script.js",
+    "arr-destruct": "node ./Practice/Arrays_Destructuring/script.js",
+    "jonas": "node ./Practice/CodingChallenge_by_JONAS/script.js",
+    "conditions": "node ./Practice/Conditional_Statements_Practice/script.js",
+    "data-types": "node ./Practice/Data_Types_Practice/script.js",
+    "functions": "node ./Practice/Functions_Practice/script.js",
+    "oops": "node ./Practice/JS_OOPS_Practice/script.js",
+    "js-html": "node ./Practice/Linking_JS_with_HTML/script.js",
+    "loops": "node ./Practice/Loops_Practice/script.js",
+    "modern-data": "node ./Practice/Modern_JS_DataStructures/script.js",
+    "modern-ops": "node ./Practice/Modern_JS_Operators/script.js",
+    "objects": "node ./Practice/Objects_Practice/script.js",
+    "obj-destruct": "node ./Practice/Ojects_Destructuring/script.js",
+    "ops-strings": "node ./Practice/Operators_&_Strings_Practice/script.js",
+    "switch": "node ./Practice/Switch_Statement_Practice/script.js",
+    "vars": "node ./Practice/Values_and_Variables_Practice/script.js"
+  }
+}
