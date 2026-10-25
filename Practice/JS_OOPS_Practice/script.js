@@ -173,3 +173,78 @@ cart2.removeItem("Power Cable");
 console.log(cart2.getTotalPrice());
 console.log(cart2.getItemCount());
 console.log(cart2);
+
+/* 
+
+Question 3: Employee Salary Calculator
+
+Context: Payroll and employee management software.
+
+You're developing a basic employee management module.
+
+Every employee has a name and a monthly salary.
+
+Your task:
+
+Create an Employee class with these requirements:
+  1. The constructor accepts name and monthlySalary.
+  2. getAnnualSalary() returns the employee's annual salary.
+  3. giveRaise(percentage) increases the monthly salary by the specified percentage.
+  4. getEmployeeDetails() returns the employee's name and current monthly salary.
+
+
+Example Usage:
+
+  const employee = new Employee("Amit", 30000);
+
+  console.log(employee.getAnnualSalary()); // 360000
+
+  employee.giveRaise(10);
+
+  console.log(employee.getAnnualSalary()); // 396000
+
+  After a 10% raise, the monthly salary becomes ₹33,000.
+
+Your challenge:
+
+  Implement the class without hardcoding the salary or the percentage into its methods.
+
+*/
+
+class Employee {
+  constructor(name, salary) {
+    this.name = name;
+    this.salary = salary;
+  }
+
+  getAnnualSalary() {
+    return this.monthlySalary * 12;
+  }
+
+  giveRaise(percentage) {
+    if (percentage <= 0) return;
+    this.monthlySalary += this.monthlySalary * (percentage / 100);
+  }
+
+  getEmployeeDetails() {
+    return { name: this.name, salary: `₹${this.monthlySalary}` };
+  }
+
+  set salary(salary) {
+    if (salary <= 0) {
+      this.monthlySalary = 0;
+      return;
+    }
+    this.monthlySalary = salary;
+  }
+
+  get salary() {
+    return this.monthlySalary;
+  }
+}
+
+const employee = new Employee("Ram", 55000);
+employee.giveRaise(100);
+console.log(employee);
+console.log(employee.getEmployeeDetails());
+console.log(employee.salary);
