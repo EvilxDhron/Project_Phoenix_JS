@@ -256,7 +256,7 @@ console.log(employee.salary);
 /* 
 
 Question 4: Bank Account
-Industry context: Banking and financial applications.
+Context: Banking and financial applications.
 
 You're building a simplified bank account module.
 
@@ -364,3 +364,97 @@ console.log(account1);
 account1.deposit(75000);
 account1.withdraw(50000);
 console.log(account1.getBalance());
+
+/* 
+
+Question 5: Product Inventory System
+Context: Inventory management in retail applications.
+
+You're building a system that tracks the stock of products in a warehouse.
+
+Every product has a name, price, and quantity in stock.
+
+Your task:
+
+Create a Product class with these requirements:
+  1. The constructor accepts name, price, and stock.
+  2. Store the stock quantity in a private field called #stock.
+  3. Provide a getter named stock to read the current quantity.
+  4. Implement restock(quantity) to increase the stock.
+  5. Implement sell(quantity) to decrease the stock.
+  6. A sale must fail when the requested quantity exceeds available stock.
+  7. Invalid stock updates must not modify the stock.
+
+Example:
+  const product = new Product("Monitor", 12000, 10);
+
+  console.log(product.stock); // 10
+
+  product.sell(3);
+
+  console.log(product.stock); // 7
+
+  product.sell(10);
+
+  // Sale should fail.
+  // Stock should remain 7.
+
+  product.restock(5);
+
+  console.log(product.stock); // 12
+
+Your challenge:
+  Make sure external code can read the stock but cannot directly change it.
+
+Think about these questions:
+  - What is the difference between product.stock and product.#stock?
+  - Why is a getter useful here?
+  - Why is a method such as sell() safer than directly decrementing the stock property?
+
+*/
+
+class Product {
+  #stock;
+  constructor(name, price, quantity) {
+    this.name = name;
+    this.price = price;
+    this.#stock = quantity;
+  }
+
+  get stock() {
+    return this.#stock;
+  }
+
+  restock(quantity) {
+    if (
+      typeof quantity !== "number" ||
+      !Number.isFinite(quantity) ||
+      quantity <= 0
+    ) {
+      console.error("Not a valid quantity!");
+      return;
+    }
+    this.#stock += quantity;
+  }
+
+  sell(quantity) {
+    if (
+      typeof quantity !== "number" ||
+      !Number.isFinite(quantity) ||
+      quantity > this.#stock ||
+      quantity <= 0
+    ) {
+      console.error("Required quantity does not exist!");
+      return;
+    }
+    this.#stock -= quantity;
+  }
+}
+
+const product = new Product("Monitor", 12000, 10);
+console.log(product);
+console.log(product.stock); // 10
+product.sell(3);
+console.log(product.stock); // 7
+product.restock(5);
+console.log(product.stock); // 12
