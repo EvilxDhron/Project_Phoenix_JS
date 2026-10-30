@@ -248,3 +248,119 @@ employee.giveRaise(100);
 console.log(employee);
 console.log(employee.getEmployeeDetails());
 console.log(employee.salary);
+
+//----------------------------------------------//
+
+// Level 2 — Encapsulation, Getters, Setters, and Static Methods
+
+/* 
+
+Question 4: Bank Account
+Industry context: Banking and financial applications.
+
+You're building a simplified bank account module.
+
+Each account has an account holder's name and an account balance.
+
+The balance must not be changed arbitrarily by other parts of the program.
+
+Your task:
+Create a BankAccount class.
+
+Implement the following:
+  1. The constructor accepts accountHolder and initialBalance.
+  2. A deposit(amount) method adds money to the balance.
+  3. A withdraw(amount) method subtracts money only when sufficient funds are available.
+  4. A getBalance() method returns the current balance.
+  5. Deposits and withdrawals must reject invalid amounts.
+
+Rules:
+  - Deposits must be greater than zero.
+  - Withdrawals must be greater than zero.
+  - Withdrawals must not exceed the available balance.
+  - An invalid transaction must not change the balance.
+
+Example:
+  const account = new BankAccount("Rahul", 5000);
+
+  account.deposit(2000);
+
+  console.log(account.getBalance()); // 7000
+
+  account.withdraw(3000);
+
+  console.log(account.getBalance()); // 4000
+
+  account.withdraw(10000);
+
+// The withdrawal should fail.
+// The balance must remain 4000.
+
+Important OOP requirement:
+Use a private class field, such as #balance, to prevent external code from directly modifying the balance.
+
+For example:
+account.#balance = 1000000;
+
+This should fail when attempted outside the class.
+
+Think about these questions:
+  - Why is making balance private useful?
+  - Why should deposits and withdrawals be controlled through methods?
+  - What is the difference between preventing direct access and validating a transaction?
+
+*/
+
+class BankAccount {
+  #balance;
+  constructor(accountHolder, initialBalance) {
+    if (typeof accountHolder !== "string" || accountHolder.trim() === "") {
+      throw new TypeError("Invalid account holder name!");
+    }
+    if (
+      typeof initialBalance !== "number" ||
+      !Number.isFinite(initialBalance) ||
+      initialBalance < 0
+    ) {
+      throw new RangeError("Invalid initial account balance!");
+    }
+
+    this.accountHolder = accountHolder;
+    this.#balance = initialBalance;
+  }
+
+  deposit(amount) {
+    if (typeof amount !== "number" || !Number.isFinite(amount) || amount <= 0) {
+      console.error(
+        `${amount} is not a valid amount to be deposited in the bank!`,
+      );
+      return;
+    }
+    this.#balance += amount;
+    console.log(this.#balance);
+  }
+
+  withdraw(amount) {
+    if (typeof amount !== "number" || !Number.isFinite(amount) || amount <= 0) {
+      console.error(
+        `${amount} is not a valid amount to be withdrawn from the bank!`,
+      );
+      return;
+    } else if (amount > this.#balance) {
+      console.error(`Your account balance is less than the required amount!`);
+      return;
+    }
+    this.#balance -= amount;
+    console.log(this.#balance);
+  }
+
+  getBalance() {
+    return this.#balance;
+  }
+}
+
+const account1 = new BankAccount("Karan", 1_20_000);
+console.log(account1);
+account1.deposit(75000);
+account1.withdraw(50000);
+console.log(account1.getBalance());
