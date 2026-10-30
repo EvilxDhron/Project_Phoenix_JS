@@ -458,3 +458,73 @@ product.sell(3);
 console.log(product.stock); // 7
 product.restock(5);
 console.log(product.stock); // 12
+
+/* 
+
+Question 6: Application Configuration
+
+Context: Configuration management in backend applications.
+
+Suppose an application has a configuration system that stores information such as the application name, environment, and maximum number of login attempts.
+
+For this exercise, each application instance should have its own configuration, but the application should also expose a static method for creating a summary.
+
+Your task:
+
+Create an AppConfig class with these requirements:
+  1. The constructor accepts appName, environment, and maxLoginAttempts.
+  2. Implement an instance method called getConfig() that returns the configuration of that object.
+  3. Implement a static method called isProduction(config) that returns true when the supplied configuration has the environment "production" and false otherwise.
+
+Example:
+  const config1 = new AppConfig("Store API", "production", 5);
+
+  const config2 = new AppConfig("Store API", "development", 3);
+
+  console.log(config1.getConfig());
+
+  console.log(AppConfig.isProduction(config1)); // true
+
+  console.log(AppConfig.isProduction(config2)); // false
+
+Your challenge:
+
+Try calling:
+  config1.isProduction(config1);
+
+Think about these questions:
+  - What is the difference between an instance method and a static method?
+  - Why is isProduction() called on the class rather than an instance?
+  - Does a static method automatically receive the current instance as this?
+
+*/
+
+class AppConfig {
+  constructor(appName, environment, maxLoginAttempts) {
+    this.appName = appName;
+    this.environment = environment;
+    this.maxLoginAttempts = maxLoginAttempts;
+  }
+
+  getConfig() {
+    return {
+      appName: this.appName,
+      environment: this.environment,
+      maxLoginAttempts: this.maxLoginAttempts,
+    };
+  }
+
+  static isProduction(config) {
+    return config.environment === "production";
+  }
+}
+
+const config1 = new AppConfig("Store API", "production", 5);
+
+const config2 = new AppConfig("Store API", "development", 3);
+
+console.log(config1.getConfig());
+
+console.log(AppConfig.isProduction(config1)); // true
+
+console.log(AppConfig.isProduction(config2)); // false
