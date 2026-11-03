@@ -528,3 +528,127 @@ console.log(config1.getConfig());
 console.log(AppConfig.isProduction(config1)); // true
 
 console.log(AppConfig.isProduction(config2)); // false
+
+//----------------------------------------------//
+
+// Level 3 — Inheritance, Method Overriding, and Polymorphism
+
+/* 
+
+Question 7: Employee Management System
+
+Context: Human resources software.
+
+A company has multiple employee types.
+
+All employees have a name and employee ID, but different employee types have different ways of calculating their compensation.
+
+Your task:
+
+  Create a base class called Employee.
+
+  It should contain:
+  - name
+  - employeeId
+  - getDetails()
+  - calculateSalary()
+  For the base class, calculateSalary() can throw an error indicating that the method must be implemented by a subclass.
+
+Now create two subclasses.
+
+  1. FullTimeEmployee
+
+  Additional properties:
+  - monthlySalary
+  - bonus
+  Its calculateSalary() method should return:
+
+  monthlySalary + bonus
+
+  2. ContractEmployee
+
+  Additional properties:
+  - hourlyRate
+  - hoursWorked
+  Its calculateSalary() method should return:
+
+  hourlyRate × hoursWorked
+
+Example:
+  const fullTime = new FullTimeEmployee(
+    "Rahul",
+    "EMP101",
+    40000,
+    5000
+  );
+
+  const contract = new ContractEmployee(
+    "Priya",
+    "EMP102",
+    500,
+    80
+  );
+
+  console.log(fullTime.calculateSalary()); // 45000
+
+  console.log(contract.calculateSalary()); // 40000
+
+Additional requirement:
+
+  Use super() correctly inside each subclass constructor.
+
+  Think about these questions:
+  - Why do we need a base Employee class?
+  - What does super() do inside a subclass constructor?
+  - Why can two objects respond differently to the same method call?
+  - Why should FullTimeEmployee and ContractEmployee not have to duplicate all common employee functionality?
+
+*/
+
+class EmployeeCl {
+  constructor(name, employeeId) {
+    this.name = name;
+    this.employeeId = employeeId;
+  }
+
+  getDetails() {
+    return {
+      name: this.name,
+      employeeId: this.employeeId,
+    };
+  }
+
+  calculateSalary() {
+    throw new Error("This method must be implemented by a subclass!");
+  }
+}
+
+class FullTimeEmployee extends EmployeeCl {
+  constructor(name, employeeId, monthlySalary, bonus) {
+    super(name, employeeId);
+    this.monthlySalary = monthlySalary;
+    this.bonus = bonus;
+  }
+
+  calculateSalary() {
+    return this.monthlySalary + this.bonus;
+  }
+}
+
+class ContractEmployee extends EmployeeCl {
+  constructor(name, employeeId, hourlyRate, hoursWorked) {
+    super(name, employeeId);
+    this.hourlyRate = hourlyRate;
+    this.hoursWorked = hoursWorked;
+  }
+
+  calculateSalary() {
+    return this.hourlyRate * this.hoursWorked;
+  }
+}
+
+const fullTime = new FullTimeEmployee("Rahul", "EMP101", 40000, 5000);
+
+const contract = new ContractEmployee("Priya", "EMP102", 500, 80);
+
+console.log(fullTime.calculateSalary(), contract.calculateSalary());
