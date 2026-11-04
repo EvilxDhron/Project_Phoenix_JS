@@ -760,3 +760,107 @@ function sendNotification(notification, message) {
 notifications.forEach((notification) =>
   sendNotification(notification, "Your password has been changed."),
 );
+
+/* 
+
+Question 9: Payment Processing System
+
+Context: Payment integration in e-commerce applications.
+
+An online store supports different payment methods.
+
+For this exercise, you will implement a simplified payment-processing system.
+
+Your task:
+
+  Create a base class called PaymentMethod with a method named pay(amount).
+
+  Now create these subclasses:
+
+  1. CardPayment
+
+    Its pay(amount) method should return a message indicating that the specified amount is being paid by card.
+
+  2. UpiPayment
+
+    Its pay(amount) method should return a message indicating that the specified amount is being paid using UPI.
+
+  3. WalletPayment
+
+    Its pay(amount) method should return a message indicating that the specified amount is being paid using a wallet.
+
+Example usage:
+  const payments = [
+    new CardPayment(),
+    new UpiPayment(),
+    new WalletPayment()
+  ];
+
+  payments.forEach(payment => {
+    console.log(payment.pay(1500));
+  });
+
+Additional requirements:
+  1. Reject payment amounts that are not positive finite numbers.
+  2. Ensure every payment method uses the same pay(amount) interface.
+  3. Avoid duplicating the payment amount validation logic in all three subclasses.
+  4. Add a new NetBankingPayment subclass without modifying the existing payment-processing loop.
+
+*/
+
+class PaymentMethod {
+  pay(amount) {
+    if (!Number.isFinite(amount) || amount <= 0 || typeof amount !== "number") {
+      throw new Error("Please enter a valid amount!");
+    }
+    return this.processPayment(amount);
+  }
+  processPayment(amount) {
+    return `${amount} is being paid...`;
+  }
+}
+
+class CardPayment extends PaymentMethod {
+  constructor() {
+    super();
+  }
+  processPayment(amount) {
+    return `${amount} is being paid by the card...`;
+  }
+}
+
+class UpiPayment extends PaymentMethod {
+  constructor() {
+    super();
+  }
+  processPayment(amount) {
+    return `${amount} is being paid using UPI...`;
+  }
+}
+
+class WalletPayment extends PaymentMethod {
+  constructor() {
+    super();
+  }
+  processPayment(amount) {
+    return `${amount} is being paid using a Wallet...`;
+  }
+}
+
+class NetBankingPayment extends PaymentMethod {
+  constructor() {
+    super();
+  }
+  processPayment(amount) {
+    return `${amount} is being paid through Net Banking...`;
+  }
+}
+
+const payments = [
+  new CardPayment(),
+  new UpiPayment(),
+  new WalletPayment(),
+  new NetBankingPayment(),
+];
+
+payments.forEach((payment) => console.log(payment.pay(1_10_99_600)));
