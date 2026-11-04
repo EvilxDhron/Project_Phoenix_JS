@@ -652,3 +652,111 @@ const fullTime = new FullTimeEmployee("Rahul", "EMP101", 40000, 5000);
 const contract = new ContractEmployee("Priya", "EMP102", 500, 80);
 
 console.log(fullTime.calculateSalary(), contract.calculateSalary());
+
+/* 
+
+Question 8: Notification System
+
+Context: Notification systems used in web applications.
+
+An application sends notifications through different channels:
+  - Email
+  - SMS
+  - Push notifications
+
+All notification types expose a common method called send(message).
+However, each type sends the message differently.
+
+Your task:
+
+  Create a base class called Notification.
+
+  Then create these subclasses:
+
+  1. EmailNotification
+
+  Its send(message) method should produce a message such as:
+  Sending email: Your password has been changed.
+
+  2. SMSNotification
+
+  Its send(message) method should produce:
+  Sending SMS: Your password has been changed.
+
+  3. PushNotification
+
+  Its send(message) method should produce:
+  Sending push notification: Your password has been changed.
+
+  Next, create a function called sendNotification(notification, message) that calls the notification object's send() method.
+
+Example:
+  const notifications = [
+    new EmailNotification(),
+    new SMSNotification(),
+    new PushNotification()
+  ];
+
+  notifications.forEach(notification => {
+    sendNotification(
+      notification,
+      "Your password has been changed."
+    );
+  });
+
+Each object should produce the appropriate output.
+
+Critical requirement:
+
+  Your sendNotification() function must not contain separate if...else blocks for email, SMS, and push notifications.
+
+It should work through the common interface provided by the objects.
+
+*/
+
+class Notification {
+  send(message) {
+    return message;
+  }
+}
+
+class EmailNotification extends Notification {
+  constructor() {
+    super();
+  }
+  send(message) {
+    return `Sending email: ${message}`;
+  }
+}
+
+class SMSNotification extends Notification {
+  constructor() {
+    super();
+  }
+  send(message) {
+    return `Sending sms: ${message}`;
+  }
+}
+
+class PushNotification extends Notification {
+  constructor() {
+    super();
+  }
+  send(message) {
+    return `Sending push notification: ${message}`;
+  }
+}
+
+const notifications = [
+  new EmailNotification(),
+  new SMSNotification(),
+  new PushNotification(),
+];
+
+function sendNotification(notification, message) {
+  return notification.send(message);
+}
+
+notifications.forEach((notification) =>
+  sendNotification(notification, "Your password has been changed."),
+);
