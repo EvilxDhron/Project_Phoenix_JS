@@ -13,7 +13,24 @@
 
     <link rel="stylesheet" href="./style.css" />
 
-    <script defer src="./script.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/leaflet@2.0.0-beta.4/dist/leaflet.css"
+      integrity="sha256-AWTc12F4bU4GqRtfkaV/Tgn6ZxlRNjBJnTsXVNtP4XM="
+      crossorigin="anonymous"
+    />
+    <script type="importmap">
+      {
+        "imports": {
+          "leaflet": "https://cdn.jsdelivr.net/npm/leaflet@2.0.0-beta.4/dist/leaflet.js"
+        },
+        "integrity": {
+          "https://cdn.jsdelivr.net/npm/leaflet@2.0.0-beta.4/dist/leaflet.js": "sha256-fRxwnl7F1oxlc3UchsWMQTaexLgt14hIMYKEjoeSdZ8="
+        }
+      }
+    </script>
+
+    <script defer type="module" src="./script.js"></script>
     <title>mapty // Map your workouts</title>
   </head>
   <body>
